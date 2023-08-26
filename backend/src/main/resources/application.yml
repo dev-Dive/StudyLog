@@ -1,3 +1,9 @@
 spring:
   profiles:
      default: dev
+
+  mail:
+    host: smtp.naver.com
+    port: 465
+    username: {YOUR_NAVER_EMAIL}
+    password: {YOUR_NAVER_PASSWORD}
