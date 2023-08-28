@@ -2,6 +2,8 @@ package com.devdive.backend.auth.application.service;
 
 import groovy.util.logging.Slf4j;
 import jakarta.mail.MessagingException;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
