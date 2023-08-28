@@ -29,8 +29,9 @@ public class SendMailService implements SendMailUseCase {
         MimeMessageHelper helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
         helper.setFrom(fromAddress);
         helper.setSubject(generator.generateSubject());
-        helper.setText(generator.generateContent(), true);
         helper.setTo(toMail);
+        setMailContent(toMail, helper);
+
         sender.send(message);
     }
 
