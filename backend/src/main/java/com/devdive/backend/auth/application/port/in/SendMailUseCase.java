@@ -4,5 +4,5 @@ import jakarta.mail.MessagingException;
 
 public interface SendMailUseCase {
 
-    void sendEmail(String email) throws MessagingException;
+    void sendMail(String email) throws MessagingException;
 }
