@@ -1,6 +1,5 @@
 package com.devdive.backend.auth.application.service;
 
-import com.devdive.backend.auth.application.service.jwt.JwtProperties;
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -14,12 +13,13 @@ public class MailContentGenerator {
 
     private final String subject = "StudyLog 운영팀";
 
+    private final JwtProvider jwtProvider;
+
     public String generateSubject() {
         return subject;
     }
 
     public String generateAuthContent(String mail, String request) {
-        JwtProvider jwtProvider = new JwtProvider(new JwtProperties(1));
         String jwt = jwtProvider.createJwtToken(mail);
 
         String uri = UriComponentsBuilder.newInstance()
