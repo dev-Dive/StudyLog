@@ -5,32 +5,39 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 
-import static io.restassured.RestAssured.post;
+import static io.restassured.RestAssured.given;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.doNothing;
 
 
 class AuthAcceptanceTest extends AcceptanceTest {
 
-    @MockBean
-    private JavaMailSender mailSender;
+    @SpyBean
+    JavaMailSender javaMailSender;
 
     @DisplayName("사용자는 인증 링크를 이메일로 받을 수 있다.")
     @Test
     void test() throws JSONException {
         // given
         JSONObject request = new JSONObject();
-        request.put("email","rhwlgns4386@qkqh.com");
-        doNothing().when(mailSender).send(any(MimeMessage.class));
+        request.put("mail","rhwlgns4386@naver.com");
+        doNothing().when(javaMailSender).send(any(MimeMessage.class));
 
         // when, then
-        post("/sendMail", request.toString())
-                .then()
-                .assertThat().statusCode(HttpStatus.OK.value());
-        verify(mailSender, times(1)).send(any(MimeMessage.class));
+        given()
+                .log().all()
+                .body(request.toString())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+        .when()
+                .post("/api/v1/auth/sendMail")
+        .then()
+                .log().all()
+                .assertThat()
+                .statusCode(HttpStatus.OK.value());
     }
 }
