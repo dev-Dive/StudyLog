@@ -1,6 +1,5 @@
 package com.devdive.backend.auth.application.service;
 
-import com.devdive.backend.auth.application.service.jwt.JwtProperties;
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -16,31 +15,29 @@ public class JwtTest {
     @DisplayName("Jwt 생성")
     void jwtCreate(){
         String mail = "rhwlgns@naver.com";
+        String key = "test";
 
-        JwtProperties jwtProperties = new JwtProperties(1);
-
-        JwtProvider jwtProvider = new JwtProvider(jwtProperties);
+        JwtProvider jwtProvider = new JwtProvider(key, 1);
         String jwt = jwtProvider.createJwtToken(mail);
 
         Claims jwtData = Jwts.parser()
-                .setSigningKey(jwtProperties.secret)
+                .setSigningKey(key)
                 .parseClaimsJws(jwt).getBody();
 
         assertTrue(jwtProvider.isValid(jwt));
-        assertEquals(mail, jwtData.get("mail"));
+        assertEquals(mail, jwtData.getSubject());
     }
 
     @Test
     @DisplayName("토큰만료")
     void jwtExpiration(){
         String mail = "rhwlgns@naver.com";
+        String key = "test";
 
-        JwtProperties jwtProperties = new JwtProperties(0);
-
-        JwtProvider jwtProvider = new JwtProvider(jwtProperties);
+        JwtProvider jwtProvider = new JwtProvider(key, 0);
         String jwt = jwtProvider.createJwtToken(mail);
 
         assertThrows(ExpiredJwtException.class,()->jwtProvider.isValid(jwt));
-
     }
+
 }
