@@ -20,19 +20,25 @@ public class SendMailService implements SendMailUseCase {
     private final MailContentGenerator generator;
     private final LoadMemberPort loadMemberPort;
 
+    private final String LOGIN = "login";
+    private final String REGISTER = "register";
+
     @Value("${spring.mail.username}")
     private String fromAddress;
 
     @Override
-    public void sendEmail(String toMail) throws MessagingException {
-        MimeMessage message = sender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
-        helper.setFrom(fromAddress);
-        helper.setSubject(generator.generateSubject());
-        helper.setTo(toMail);
-        setMailContent(toMail, helper);
+    public void sendMail(String toMail) throws MessagingException {
 
-        sender.send(message);
+            MimeMessage message = sender.createMimeMessage();
+
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+            helper.setFrom(fromAddress);
+            helper.setSubject(generator.generateSubject());
+            helper.setTo(toMail);
+            setMailContent(toMail, helper);
+
+            sender.send(message);
+
     }
 
     private void setMailContent(String toMail, MimeMessageHelper helper) throws MessagingException {
@@ -44,10 +50,14 @@ public class SendMailService implements SendMailUseCase {
     }
 
     private void setLoginMail(String toMail, MimeMessageHelper helper) throws MessagingException {
-        helper.setText(generator.generateAuthContent(toMail, "register"), true);
+
+            helper.setText(generator.generateAuthContent(toMail, REGISTER), true);
+
     }
 
     private void setRegisterMail(String toMail, MimeMessageHelper helper) throws MessagingException {
-        helper.setText(generator.generateAuthContent(toMail, "login"), true);
+
+        helper.setText(generator.generateAuthContent(toMail, LOGIN), true);
+
     }
 }

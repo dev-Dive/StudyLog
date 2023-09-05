@@ -33,7 +33,7 @@ class SendMailServiceTest {
 
         when(loadMemberPort.isRegisteredMail(mail)).thenReturn(true);
 
-        sendMailService.sendEmail(mail);
+        sendMailService.sendMail(mail);
     }
 
     @Test
@@ -44,6 +44,6 @@ class SendMailServiceTest {
 
         when(loadMemberPort.isRegisteredMail(mail)).thenReturn(false);
 
-        sendMailService.sendEmail(mail);
+        sendMailService.sendMail(mail);
     }
 }

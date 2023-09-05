@@ -9,11 +9,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class MailAuthController {
 
@@ -22,15 +21,22 @@ public class MailAuthController {
     @PostMapping("/sendMail")
     ResponseEntity<Void> sendMail(@RequestBody @Valid final SendAuthenticationLinkRequest request) throws MessagingException {
 
-        sendEmailUseCase.sendEmail(request.getMail());
+        sendEmailUseCase.sendMail(request.getMail());
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @ExceptionHandler(MessagingException.class)
+    ResponseEntity<Void> messagingException() {
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .build();
+    }
+
     @Data
     static class SendAuthenticationLinkRequest{
-        @NotNull
         @Email
+        @NotNull
         String mail;
     }
 }

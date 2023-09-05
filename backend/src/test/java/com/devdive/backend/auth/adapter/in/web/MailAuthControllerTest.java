@@ -31,7 +31,7 @@ public class MailAuthControllerTest {
     public void sendEmail() throws Exception {
         String email = "rhwlgns@rheodms.com";
 
-        doNothing().when(sendMailUseCase).sendEmail(anyString());
+        doNothing().when(sendMailUseCase).sendMail(anyString());
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mail", email);
@@ -50,7 +50,7 @@ public class MailAuthControllerTest {
     public void sendEmailFault() throws Exception {
         String mail = "rkdtjdqja";
 
-        doNothing().when(sendMailUseCase).sendEmail(anyString());
+        doNothing().when(sendMailUseCase).sendMail(anyString());
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("mail", mail);
