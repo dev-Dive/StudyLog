@@ -1,0 +1,18 @@
+post:
+  summary: 이메일로 로그인
+  description: 전송받은 이메일 링크로 로그인 요청
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: './components.yaml/#/components/schemas/MailToken'
+  responses:
+    '200':
+      description: 로그인 성공 및 인증 토큰 발행
+      content:
+        application/json:
+          schema:
+            $ref: './components.yaml/#/components/schemas/AuthToken'
+    '401':
+      description: 토큰 인증 실패
+  

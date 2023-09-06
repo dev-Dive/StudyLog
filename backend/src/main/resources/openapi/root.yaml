@@ -1,0 +1,14 @@
+openapi: 3.0.3
+info:
+  title: StudyLog
+  description: StudyLog
+  version: 1.0.0
+servers:
+  - url: 'https://localhost:8080/api'
+paths:
+  /v1/auth/sendMail:
+    $ref: './paths/v1/auth/send-mail.yaml'
+  /v1/auth/mail/register:
+    $ref: './paths/v1/auth/register.yaml'
+  /v1/auth/mail/login:
+    $ref: './paths/v1/auth/login.yaml'

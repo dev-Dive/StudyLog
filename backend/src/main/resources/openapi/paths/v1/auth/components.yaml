@@ -1,0 +1,14 @@
+components:
+  schemas:
+    MailToken:
+      type: object
+      properties:
+        token:
+          type: string
+    AuthToken:
+      type: object
+      properties:
+        access-token:
+          type: string
+        refresh-token:
+          type: string
