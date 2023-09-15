@@ -5,13 +5,21 @@ post:
     content:
       application/json:
         schema:
-          $ref: './components.yaml/#/components/schemas/MailToken'
+          type: object
+          properties:
+            token:
+              type: string
   responses:
     '200':
       description: 회원가입 성공 및 인증 토큰 발행
       content:
         application/json:
           schema:
-            $ref: './components.yaml/#/components/schemas/AuthToken'
+            type: object
+            properties:
+              access-token:
+                type: string
+              refresh-token:
+                type: string
     '401':
       description: 토큰 인증 실패
