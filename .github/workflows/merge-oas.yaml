@@ -22,7 +22,7 @@ jobs:
       run: npm install -g swagger-cli
 
     - name: Merge Swagger Files
-      run: swagger-cli bundle -r -t yaml backend/src/main/resources/openapi/root.yaml -o docs/output.yaml
+      run: swagger-cli bundle -r -y backend/src/main/resources/openapi/root.yaml -o docs/output.yaml
 
     - name: Commit and Push Merged Swagger
       run: |
