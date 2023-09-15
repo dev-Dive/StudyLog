@@ -1,0 +1,321 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "StudyLog",
+    "description": "StudyLog",
+    "version": "0.1.1"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:8080/api"
+    }
+  ],
+  "paths": {
+    "/v1/auth/sendMail": {
+      "post": {
+        "summary": "인증 메일 전송",
+        "description": "회원가입 혹은 로그인 인증 메일 이메일로 전송.\n만약 스터디 초대 링크를 통한 로그인 요청에서 이 API가 요청되었다면 study_invitation_token이 필요하다.\n",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "study_invitation_token",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "스터디 초대 인증 토큰"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "성공 - 인증 링크 이메일로 전송"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/auth/mail/register": {
+      "post": {
+        "summary": "이메일로 회원가입",
+        "description": "전송받은 이메일 링크로 회원가입 요청",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "회원가입 성공 및 인증 토큰 발행",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access-token": {
+                      "type": "string"
+                    },
+                    "refresh-token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 인증 실패"
+          }
+        }
+      }
+    },
+    "/v1/auth/mail/login": {
+      "post": {
+        "summary": "이메일로 로그인",
+        "description": "전송받은 이메일 링크로 로그인 요청",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "로그인 성공 및 인증 토큰 발행",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access-token": {
+                      "type": "string"
+                    },
+                    "refresh-token": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "토큰 인증 실패"
+          }
+        }
+      }
+    },
+    "/v1/posts": {
+      "post": {
+        "summary": "글 작성",
+        "description": "스터디 글 작성",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string",
+              "description": "Bearer 인증 토큰 (access-token)"
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "studyId": {
+                    "type": "number",
+                    "description": "스터디 식별자"
+                  },
+                  "thumbnail_url": {
+                    "type": "string",
+                    "description": "썸네일 이미지 URL"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "제목"
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "description": "부제"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "내용"
+                  },
+                  "tags": {
+                    "type": "array",
+                    "description": "태그명 리스트",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "글 작성 성공"
+          },
+          "401": {
+            "description": "로그인 필요 - 인증"
+          },
+          "403": {
+            "description": "글 작성 권한 없음 - 인가"
+          }
+        }
+      }
+    },
+    "/v1/posts/{id}": {
+      "get": {
+        "summary": "글 읽기",
+        "description": "스터디 글 하나 읽기",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "description": "스터디 글 식별자",
+              "required": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "글 읽기 성공",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "글 내용",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "description": "제목"
+                    },
+                    "subtitle": {
+                      "type": "string",
+                      "description": "부제"
+                    },
+                    "content": {
+                      "type": "string",
+                      "description": "내용"
+                    },
+                    "date": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "작성일"
+                    },
+                    "authors": {
+                      "type": "array",
+                      "description": "작성자 리스트",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "number",
+                            "description": "작성자 식별자"
+                          },
+                          "name": {
+                            "type": "string",
+                            "description": "작성자명"
+                          }
+                        }
+                      }
+                    },
+                    "thumbnail_image_url": {
+                      "type": "string",
+                      "description": "대표 이미지 URL"
+                    },
+                    "study": {
+                      "type": "object",
+                      "description": "스터디 정보",
+                      "properties": {
+                        "id": {
+                          "type": "number",
+                          "description": "스터디 식별자"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "스터디 이름"
+                        },
+                        "profile_image_url": {
+                          "type": "string",
+                          "description": "스터디 프로필 이미지 URL"
+                        },
+                        "description": {
+                          "type": "string",
+                          "description": "스터디 소개글"
+                        }
+                      }
+                    },
+                    "_links": {
+                      "type": "object",
+                      "description": "이전, 다음 글 링크",
+                      "properties": {
+                        "next": {
+                          "type": "object",
+                          "description": "다음 글",
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "description": "다음 글 링크"
+                            }
+                          }
+                        },
+                        "prev": {
+                          "type": "object",
+                          "description": "이전 글",
+                          "properties": {
+                            "href": {
+                              "type": "string",
+                              "description": "이전 글 링크"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
