@@ -1,0 +1,21 @@
+name: GitHub Pages Deployment
+
+# This workflow is triggered by the completion of the "Build Workflow"
+on:
+  workflow_run:
+    workflows: [""Merge Swagger Files]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Ensure that the 'build' job from 'build.yml' was successful
+    if: github.event.workflow_run.conclusion == 'success'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      # ... (your GitHub Pages deployment steps)
+
