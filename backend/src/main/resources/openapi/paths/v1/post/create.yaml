@@ -1,0 +1,43 @@
+post:
+  summary: 글 작성
+  description: 스터디 글 작성
+  parameters:
+    - in: header
+      name: Authorization
+      schema:
+        type: string
+        description: Bearer 인증 토큰 (access-token)
+      required: true
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            studyId:
+              type: number
+              description: 스터디 식별자
+            thumbnail_url:
+              type: string
+              description: 썸네일 이미지 URL
+            title:
+              type: string
+              description: 제목
+            subtitle:
+              type: string
+              description: 부제
+            content:
+              type: string
+              description: 내용
+            tags:
+              type: array
+              description: 태그명 리스트
+              items:
+                type: string
+  responses:
+    '200':
+      description: 글 작성 성공
+    '401':
+      description: 로그인 필요 - 인증
+    '403':
+      description: 글 작성 권한 없음 - 인가

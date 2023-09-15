@@ -1,0 +1,81 @@
+get:
+  summary: 글 읽기
+  description: 스터디 글 하나 읽기
+  parameters:
+    - in: path
+      name: id
+      schema:
+        type: number
+        description: 스터디 글 식별자
+        required: true
+  responses:
+    '200':
+      description: 글 읽기 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            description: 글 내용
+            properties:
+              title:
+                type: string
+                description: 제목
+              subtitle:
+                type: string
+                description: 부제
+              content:
+                type: string
+                description: 내용
+              date:
+                type: string
+                format: date
+                description: 작성일
+              authors:
+                type: array
+                description: 작성자 리스트
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: 작성자 식별자
+                    name:
+                      type: string
+                      description: 작성자명
+              thumbnail_image_url:
+                type: string
+                description: 대표 이미지 URL
+              study:
+                type: object
+                description: 스터디 정보
+                properties:
+                  id:
+                    type: number
+                    description: 스터디 식별자
+                  name:
+                    type: string
+                    description: 스터디 이름
+                  profile_image_url:
+                    type: string
+                    description: 스터디 프로필 이미지 URL
+                  description:
+                    type: string
+                    description: 스터디 소개글
+              _links:
+                type: object
+                description: 이전, 다음 글 링크
+                properties:
+                  next:
+                    type: object
+                    description: 다음 글
+                    properties:
+                      href:
+                        type: string
+                        description: 다음 글 링크
+                  prev:
+                    type: object
+                    description: 이전 글
+                    properties:
+                      href:
+                        type: string
+                        description: 이전 글 링크
