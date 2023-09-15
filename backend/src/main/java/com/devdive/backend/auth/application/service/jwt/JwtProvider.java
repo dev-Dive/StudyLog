@@ -1,25 +1,24 @@
 package com.devdive.backend.auth.application.service.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 
+import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
-@Component
+@Slf4j
 public class JwtProvider {
+
+    private static final int DAY = 1_000 * 60 * 60;
 
     private final String secret;
     private final int expireJwtTime;
 
-    public JwtProvider(@Value("${auth.jwt.secret}") String secret,
-                       @Value("${auth.jwt.hour}") int expireJwtHour) {
+    public JwtProvider(String secret, int expireJwtHour) {
         this.secret = secret;
-        this.expireJwtTime = 1_000 * 60 * 60 * expireJwtHour;
+        this.expireJwtTime = DAY * expireJwtHour;
     }
 
     public String createJwtToken(String subject) {
@@ -27,25 +26,42 @@ public class JwtProvider {
 
         return Jwts.builder()
                 .setSubject(subject)
-                .setHeader(createHeader())
                 .setIssuedAt(iat)
                 .setExpiration(new Date(iat.getTime() + expireJwtTime))
-                .signWith(SignatureAlgorithm.HS256, secret)
+                .signWith(getSigninKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    private Map<String, Object> createHeader() {
-        Map<String, Object> header = new HashMap<>();
-        header.put("typ", "JWT");
-        header.put("alg", "HS256");
-        return header;
+    public boolean isValid(String jwt) {
+        try {
+            Jwts.parserBuilder()
+                    .setSigningKey(getSigninKey())
+                    .build()
+                    .parseClaimsJws(jwt);
+            return true;
+        } catch (ExpiredJwtException e) {
+            log.warn("JWT is Expired");
+            return false;
+        } catch (JwtException e) {
+            log.warn("ex", e);
+            return false;
+        }
     }
 
-    public boolean isValid(String jwt) {
-        Claims jwtData = Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(jwt).getBody();
+    public String extractSubject(String jwt) {
+        return extractClaims(jwt).getSubject();
+    }
 
-        return jwtData.getSubject() != null;
+    private Claims extractClaims(String jwt) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigninKey())
+                .build()
+                .parseClaimsJws(jwt)
+                .getBody();
+    }
+
+    private Key getSigninKey() {
+        byte[] keyByte = Decoders.BASE64.decode(secret);
+        return Keys.hmacShaKeyFor(keyByte);
     }
 }
