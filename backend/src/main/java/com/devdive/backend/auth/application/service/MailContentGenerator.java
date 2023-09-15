@@ -13,19 +13,18 @@ public class MailContentGenerator {
 
     private final String subject = "StudyLog 운영팀";
 
-    private final JwtProvider jwtProvider;
+    private final JwtProvider mailJwtProvider;
 
     public String generateSubject() {
         return subject;
     }
 
     public String generateAuthContent(String mail, String request) {
-        String jwt = jwtProvider.createJwtToken(mail);
+        String jwt = mailJwtProvider.createJwtToken(mail);
 
         String uri = UriComponentsBuilder.newInstance()
                 .scheme("http")
                 .host("www.dev-dive.com")
-                .path("/api/v1/")
                 .path(request)
                 .queryParam("token", jwt)
                 .build(true)
