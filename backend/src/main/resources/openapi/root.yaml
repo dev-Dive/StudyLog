@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: StudyLog
   description: StudyLog
-  version: 1.0.0
+  version: 0.0.1
 servers:
   - url: 'https://localhost:8080/api'
 paths:
