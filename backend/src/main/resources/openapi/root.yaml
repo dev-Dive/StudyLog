@@ -12,3 +12,7 @@ paths:
     $ref: './paths/v1/auth/register.yaml'
   /v1/auth/mail/login:
     $ref: './paths/v1/auth/login.yaml'
+  /v1/posts:
+    $ref: './paths/v1/post/create.yaml'
+  /v1/posts/{id}:
+    $ref: './paths/v1/post/read.yaml'
