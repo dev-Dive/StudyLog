@@ -3,7 +3,7 @@ name: GitHub Pages Deployment
 # This workflow is triggered by the completion of the "Build Workflow"
 on:
   workflow_run:
-    workflows: [""Merge Swagger Files]
+    workflows: ["Merge Swagger Files"]
     types:
       - completed
 
