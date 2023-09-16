@@ -1,5 +1,6 @@
 package com.devdive.backend.auth.adapter.in.web;
 
+import com.devdive.backend.auth.application.port.in.LoginUseCase;
 import com.devdive.backend.auth.application.port.in.RegisterUseCase;
 import com.devdive.backend.auth.application.port.in.SendMailUseCase;
 import jakarta.mail.MessagingException;
@@ -22,6 +23,7 @@ class MailAuthController {
 
     private final SendMailUseCase sendEmailUseCase;
     private final RegisterUseCase registerUseCase;
+    private final LoginUseCase loginUseCase;
 
     @PostMapping("/sendMail")
     ResponseEntity<Void> sendMail(@RequestBody @Valid final SendAuthenticationLinkRequest request) throws MessagingException {
@@ -37,6 +39,20 @@ class MailAuthController {
     ) {
         log.info("Auth token: {}", request.getToken());
         RegisterUseCase.AuthToken authToken = registerUseCase.register(request.getToken());
+        String accessToken = authToken.getAccessToken();
+        String refreshToken = authToken.getRefreshToken();
+
+        AuthenticateResponse response = new AuthenticateResponse(accessToken, refreshToken);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/login")
+    ResponseEntity<AuthenticateResponse> login(
+            @RequestBody @Valid AuthenticateRequest request
+    ) {
+        log.info("Auth token: {}", request.getToken());
+        LoginUseCase.AuthToken authToken = loginUseCase.login(request.getToken());
         String accessToken = authToken.getAccessToken();
         String refreshToken = authToken.getRefreshToken();
 
