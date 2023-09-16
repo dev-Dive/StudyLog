@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,4 +20,9 @@ class MemberJpaEntity {
 
     @Column(name = "mail")
     private String mail;
+
+    @Builder
+    public MemberJpaEntity(String mail) {
+        this.mail = mail;
+    }
 }
