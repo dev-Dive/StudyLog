@@ -73,8 +73,8 @@ class AuthAcceptanceTest extends AcceptanceTest {
                 .assertThat()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
-                .body("$", hasKey("access-token"))
-                .body("$", hasKey("refresh-token"));
+                .body("$", hasKey("accessToken"))
+                .body("$", hasKey("refreshToken"));
     }
 
     @Test
@@ -101,8 +101,8 @@ class AuthAcceptanceTest extends AcceptanceTest {
                 .assertThat()
                 .statusCode(HttpStatus.OK.value())
                 .contentType(ContentType.JSON)
-                .body("$", hasKey("access-token"))
-                .body("$", hasKey("refresh-token"));
+                .body("$", hasKey("accessToken"))
+                .body("$", hasKey("refreshToken"));
     }
 
     @Test
