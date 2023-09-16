@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class MemberPersistenceAdapter implements LoadMemberPort {
+class MemberPersistenceAdapter implements LoadMemberPort, UpdateMemberPort {
 
     private final MemberRepository memberRepository;
 
