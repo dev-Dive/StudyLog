@@ -118,7 +118,7 @@ class AuthAcceptanceTest extends AcceptanceTest {
         // when, then
         given()
                 .log().all()
-                .basePath("/api/v1/auth/mail/login")
+                .basePath("/api/v1/auth/mail/register")
                 .body(requestBody.toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
@@ -143,7 +143,7 @@ class AuthAcceptanceTest extends AcceptanceTest {
         // when, then
         given()
                 .log().all()
-                .basePath("/api/v1/auth/mail/login")
+                .basePath("/api/v1/auth/mail/register")
                 .body(requestBody.toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .accept(MediaType.APPLICATION_JSON_VALUE)
