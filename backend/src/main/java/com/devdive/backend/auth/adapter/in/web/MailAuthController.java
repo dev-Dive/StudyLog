@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class MailAuthController {
+class MailAuthController {
 
     private final SendMailUseCase sendEmailUseCase;
 
