@@ -1,6 +1,5 @@
 package com.devdive.backend.acceptance;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
