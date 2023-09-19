@@ -17,7 +17,7 @@ post:
             studyId:
               type: number
               description: 스터디 식별자
-            thumbnail_url:
+            thumbnailUrl:
               type: string
               description: 썸네일 이미지 URL
             title:

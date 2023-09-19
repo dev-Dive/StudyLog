@@ -42,7 +42,7 @@ get:
                     name:
                       type: string
                       description: 작성자명
-              thumbnail_image_url:
+              thumbnailImageUrl:
                 type: string
                 description: 대표 이미지 URL
               study:

@@ -17,9 +17,9 @@ post:
           schema:
             type: object
             properties:
-              access-token:
+              accessToken:
                 type: string
-              refresh-token:
+              refreshToken:
                 type: string
     '401':
       description: 토큰 인증 실패
