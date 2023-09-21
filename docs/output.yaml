@@ -9,19 +9,7 @@ paths:
   /v1/auth/sendMail:
     post:
       summary: 인증 메일 전송
-      description: |
-        회원가입 혹은 로그인 인증 메일 이메일로 전송.
-        만약 스터디 초대 링크를 통한 로그인 요청에서 이 API가 요청되었다면 study_invitation_token이 필요하다.
-      parameters:
-        - in: query
-          name: study_invitation_token
-          required: false
-          schema:
-            type: string
-          description: 스터디 초대 인증 토큰
-      responses:
-        '200':
-          description: 성공 - 인증 링크 이메일로 전송
+      description: 회원가입 혹은 로그인 인증 메일 이메일로 전송
       requestBody:
         content:
           application/json:
@@ -30,6 +18,9 @@ paths:
               properties:
                 email:
                   type: string
+      responses:
+        '200':
+          description: 성공 - 인증 링크 이메일로 전송
   /v1/auth/mail/register:
     post:
       summary: 이메일로 회원가입
@@ -50,9 +41,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  access-token:
+                  accessToken:
                     type: string
-                  refresh-token:
+                  refreshToken:
                     type: string
         '401':
           description: 토큰 인증 실패
@@ -76,9 +67,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  access-token:
+                  accessToken:
                     type: string
-                  refresh-token:
+                  refreshToken:
                     type: string
         '401':
           description: 토큰 인증 실패
@@ -91,7 +82,7 @@ paths:
           name: Authorization
           schema:
             type: string
-            description: Bearer 인증 토큰 (access-token)
+          description: Bearer 인증 토큰 (access-token)
           required: true
       requestBody:
         content:
@@ -102,7 +93,7 @@ paths:
                 studyId:
                   type: number
                   description: 스터디 식별자
-                thumbnail_url:
+                thumbnailUrl:
                   type: string
                   description: 썸네일 이미지 URL
                 title:
@@ -171,7 +162,7 @@ paths:
                         name:
                           type: string
                           description: 작성자명
-                  thumbnail_image_url:
+                  thumbnailImageUrl:
                     type: string
                     description: 대표 이미지 URL
                   study:
