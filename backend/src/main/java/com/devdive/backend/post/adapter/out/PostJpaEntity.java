@@ -13,24 +13,24 @@ public class PostJpaEntity {
 
     @Id
     @GeneratedValue
-    Long id;
+    private Long id;
 
     @Column
-    Long studyId;
+    private Long studyId;
 
     @Column
-    String thumbnail_url;
+    private String thumbnail_url;
 
     @Column
-    String title;
+    private String title;
 
     @Column
-    String subtitle;
+    private String subtitle;
 
     @Column
-    String content;
+    private String content;
 
     @Column
     @ElementCollection
-    List<String> tag;
+    private List<String> tag;
 }
