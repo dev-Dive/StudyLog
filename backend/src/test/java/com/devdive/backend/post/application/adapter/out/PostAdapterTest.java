@@ -4,16 +4,13 @@ import com.devdive.backend.post.adapter.out.PostJpaEntity;
 import com.devdive.backend.post.adapter.out.PostPersistenceAdapter;
 import com.devdive.backend.post.adapter.out.PostRepository;
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.Propagation;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -41,12 +38,9 @@ public class PostAdapterTest {
 
 
         List<PostJpaEntity> d = repository.findAll();
-        System.out.println("11111111111");
         for(int i=0; i<d.size(); i++){
             System.out.println(d.get(i).getId());
         }
-        System.out.println("11111111111");
-
         // when
         PostJpaEntity saved = repository.findAll().get(0);
 
