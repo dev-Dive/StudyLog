@@ -6,9 +6,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,8 +15,14 @@ public class PostController {
     private final PostUseCase useCase;
 
     @PostMapping("/v1/posts")
-    ResponseEntity<Void> sendMail(@RequestBody @Valid PostCreateRequestDto dto) {
+    ResponseEntity<Void> createPost(@RequestBody @Valid PostCreateRequestDto dto) {
         useCase.createPost(dto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/v1/posts/{postId}")
+    ResponseEntity<Void> viewPost(@PathVariable Long postId) {
+        useCase.viewPost(postId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
