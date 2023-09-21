@@ -3,7 +3,7 @@ name: Merge Swagger Files
 on:
   push:
     paths:
-      - 'backend/src/main/resources/openapi/root.yaml'
+      - 'backend/src/main/resources/openapi/**'
 
 jobs:
   merge:
@@ -22,7 +22,7 @@ jobs:
       run: npm install -g swagger-cli
 
     - name: Merge Swagger Files
-      run: swagger-cli bundle -r -y backend/src/main/resources/openapi/root.yaml -o docs/output.yaml
+      run: swagger-cli bundle backend/src/main/resources/openapi/root.yaml -o docs/output.yaml -r -t yaml
 
     - name: Commit and Push Merged Swagger
       run: |
