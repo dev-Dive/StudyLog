@@ -1,6 +1,7 @@
 package com.devdive.backend.post.application.service;
 
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
+import com.devdive.backend.post.application.dto.PostViewDto;
 import com.devdive.backend.post.application.port.in.PostUseCase;
 import com.devdive.backend.post.application.port.out.persistence.LoadPostPort;
 import jakarta.transaction.Transactional;
@@ -16,5 +17,10 @@ public class PostService implements PostUseCase {
 
     public void createPost(PostCreateRequestDto dto) {
         loadPostPort.createPost(dto);
+    }
+
+    @Override
+    public PostViewDto viewPost(Long postId) {
+        return loadPostPort.viewPost(postId);
     }
 }
