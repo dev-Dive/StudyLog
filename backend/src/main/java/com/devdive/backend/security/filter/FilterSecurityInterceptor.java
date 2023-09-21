@@ -8,6 +8,7 @@ import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
+import javax.security.sasl.AuthenticationException;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.List;
@@ -27,6 +28,9 @@ public class FilterSecurityInterceptor implements Filter {
         }
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication==null){
+            throw new AuthenticationException("인증 되지 않음");
+        }
 
         try{
             this.accessDecisionManagerImp.decide(authentication,roles);
