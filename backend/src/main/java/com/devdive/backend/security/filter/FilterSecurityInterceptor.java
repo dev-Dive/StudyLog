@@ -18,12 +18,13 @@ public class FilterSecurityInterceptor implements Filter {
 
     private SecurityMetaDataSource metaDataSource;
 
-    private AccessDecisionManager accessDecisionManagerImp;
+    private AccessDecisionManager accessDecisionManager;
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         List<String> roles = metaDataSource.getRoles((HttpServletRequest)request);
         if(roles.isEmpty()){
+            chain.doFilter(request,response);
             return;
         }
 
@@ -33,7 +34,7 @@ public class FilterSecurityInterceptor implements Filter {
         }
 
         try{
-            this.accessDecisionManagerImp.decide(authentication,roles);
+            this.accessDecisionManager.decide(authentication,roles);
         }catch (AccessDeniedException accessDeniedException){
             accessDeniedException.printStackTrace();
             throw accessDeniedException;
@@ -47,7 +48,7 @@ public class FilterSecurityInterceptor implements Filter {
     }
 
     public void setAccessDecisionManager(AccessDecisionManager accessDecisionManagerImp) {
-        this.accessDecisionManagerImp = accessDecisionManagerImp;
+        this.accessDecisionManager = accessDecisionManagerImp;
     }
 
     @Override
