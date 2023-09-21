@@ -4,7 +4,7 @@ public interface SecurityContextHolderStrategy {
 
     SecurityContext getContext();
 
-    void setContext(SecurityContextImp context);
+    void setContext(SecurityContext context);
 
     SecurityContext createEmptyContext();
     void clearContext();

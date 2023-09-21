@@ -8,7 +8,7 @@ import java.util.List;
 public class RoleVoter implements AccessDecisionVoter {
 
     public int vote(Authentication authentication, List<String> roles) {
-        String credentials = (String) authentication.getCredentials();
+        String credentials = authentication.getAuthorities();
         for(String role:roles){
             if(credentials.equals(role)){
                 return ACCESS_GRANTED;

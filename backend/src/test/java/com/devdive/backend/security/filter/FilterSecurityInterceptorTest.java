@@ -38,24 +38,28 @@ class FilterSecurityInterceptorTest {
         ServletRequest request = new MockHttpServletRequest("GET", "/read");
         ServletResponse response = new MockHttpServletResponse();
         FilterChain filterChain = mock(FilterChain.class);
-        MockedStatic<SecurityContextHolder> securityContextHolderMocked = mockStatic(SecurityContextHolder.class);
-        securityContextHolderMocked.when(SecurityContextHolder::getContext).thenReturn(new SecurityContext() {
-            @Override
-            public Authentication getAuthentication() {
-                return mock(Authentication.class);
-            }
 
-            @Override
-            public void setAuthentication(Authentication authentication) {
+        try(MockedStatic<SecurityContextHolder> securityContextHolderMocked = mockStatic(SecurityContextHolder.class)) {
+            securityContextHolderMocked.when(SecurityContextHolder::getContext).thenReturn(new SecurityContext() {
+                @Override
+                public Authentication getAuthentication() {
+                    return mock(Authentication.class);
+                }
 
-            }
-        });
+                @Override
+                public void setAuthentication(Authentication authentication) {
 
-        SecurityMetaDataSource mockMetaDataSource = mock(SecurityMetaDataSource.class);
-        when(mockMetaDataSource.getRoles(eq((HttpServletRequest)request))).thenReturn(List.of("READ"));
-        filterSecurityInterceptor.setMetaDataSource(mockMetaDataSource);
+                }
+            });
 
-        filterSecurityInterceptor.doFilter(request, response, filterChain);
+            SecurityMetaDataSource mockMetaDataSource = mock(SecurityMetaDataSource.class);
+            when(mockMetaDataSource.getRoles(eq((HttpServletRequest)request))).thenReturn(List.of("READ"));
+            filterSecurityInterceptor.setMetaDataSource(mockMetaDataSource);
+
+            filterSecurityInterceptor.doFilter(request, response, filterChain);
+        }
+
+
     }
 
     @Test
@@ -70,25 +74,26 @@ class FilterSecurityInterceptorTest {
         ServletRequest request = new MockHttpServletRequest("GET", "/read");
         ServletResponse response = new MockHttpServletResponse();
         FilterChain filterChain = mock(FilterChain.class);
-        MockedStatic<SecurityContextHolder> securityContextHolderMocked = mockStatic(SecurityContextHolder.class);
-        securityContextHolderMocked.when(SecurityContextHolder::getContext).thenReturn(new SecurityContext() {
-            @Override
-            public Authentication getAuthentication() {
-                return mock(Authentication.class);
-            }
+        try(MockedStatic<SecurityContextHolder> securityContextHolderMocked = mockStatic(SecurityContextHolder.class)) {
+            securityContextHolderMocked.when(SecurityContextHolder::getContext).thenReturn(new SecurityContext() {
+                @Override
+                public Authentication getAuthentication() {
+                    return mock(Authentication.class);
+                }
 
-            @Override
-            public void setAuthentication(Authentication authentication) {
+                @Override
+                public void setAuthentication(Authentication authentication) {
 
-            }
-        });
+                }
+            });
 
-        SecurityMetaDataSource mockMetaDataSource = mock(SecurityMetaDataSource.class);
-        when(mockMetaDataSource.getRoles(eq((HttpServletRequest)request))).thenReturn(List.of("READ"));
-        filterSecurityInterceptor.setMetaDataSource(mockMetaDataSource);
+            SecurityMetaDataSource mockMetaDataSource = mock(SecurityMetaDataSource.class);
+            when(mockMetaDataSource.getRoles(eq((HttpServletRequest)request))).thenReturn(List.of("READ"));
+            filterSecurityInterceptor.setMetaDataSource(mockMetaDataSource);
 
-        Assertions.assertThatThrownBy(() -> filterSecurityInterceptor.doFilter(request, response, filterChain))
-                .isInstanceOf(AccessDeniedException.class);
+            Assertions.assertThatThrownBy(() -> filterSecurityInterceptor.doFilter(request, response, filterChain))
+                    .isInstanceOf(AccessDeniedException.class);
+        }
     }
 
     @Test

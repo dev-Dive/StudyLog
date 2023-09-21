@@ -18,7 +18,7 @@ public class RoleHierarchyVoter implements AccessDecisionVoter {
 
     @Override
     public int vote(Authentication authentication, List<String> roles) {
-        int userHierarchyIndex=findHierarchyIndex((String) authentication.getCredentials());
+        int userHierarchyIndex=findHierarchyIndex(authentication.getAuthorities());
         if(isNonExistent(userHierarchyIndex)){
             return ACCESS_DENIED;
         }
