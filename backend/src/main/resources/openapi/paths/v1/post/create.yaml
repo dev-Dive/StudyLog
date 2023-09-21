@@ -6,7 +6,7 @@ post:
       name: Authorization
       schema:
         type: string
-        description: Bearer 인증 토큰 (access-token)
+      description: Bearer 인증 토큰 (access-token)
       required: true
   requestBody:
     content:
