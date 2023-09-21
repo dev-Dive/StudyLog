@@ -18,14 +18,14 @@ class AccessDecisionManagerImpTest {
 
         AccessDecisionManagerImp accessDecisionManager =
                 new AccessDecisionManagerImp(List.of((authentication, roles) -> {
-                    String credentials = (String)authentication.getCredentials();
+                    String credentials = authentication.getAuthorities();
                     return credentials.equals(roles.get(0))?AccessDecisionVoter.ACCESS_GRANTED:AccessDecisionVoter.ACCESS_DENIED;
                 }));
 
         accessDecisionManager.decide(new Authentication() {
             @Override
             public Object getCredentials() {
-                return "ADMIN";
+                return null;
             }
 
             @Override
@@ -36,6 +36,11 @@ class AccessDecisionManagerImpTest {
             @Override
             public Object getPrincipal() {
                 return null;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return "ADMIN";
             }
         },List.of("ADMIN"));
     }
@@ -46,14 +51,14 @@ class AccessDecisionManagerImpTest {
 
         AccessDecisionManagerImp accessDecisionManager =
                 new AccessDecisionManagerImp(List.of((authentication, roles) -> {
-                    String credentials = (String)authentication.getCredentials();
+                    String credentials = authentication.getAuthorities();
                     return credentials.equals(roles.get(0))?AccessDecisionVoter.ACCESS_GRANTED:AccessDecisionVoter.ACCESS_DENIED;
                 }));
 
         Authentication authentication = new Authentication() {
             @Override
             public Object getCredentials() {
-                return "USER";
+                return null;
             }
 
             @Override
@@ -64,6 +69,11 @@ class AccessDecisionManagerImpTest {
             @Override
             public Object getPrincipal() {
                 return null;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return "USER";
             }
         };
 
