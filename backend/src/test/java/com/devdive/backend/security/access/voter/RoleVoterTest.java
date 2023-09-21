@@ -17,7 +17,7 @@ class RoleVoterTest {
         Authentication authentication=new Authentication() {
             @Override
             public Object getCredentials() {
-                return "USER";
+                return null;
             }
 
             @Override
@@ -28,6 +28,11 @@ class RoleVoterTest {
             @Override
             public Object getPrincipal() {
                 return null;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return "USER";
             }
         };
 
@@ -41,7 +46,7 @@ class RoleVoterTest {
         Authentication authentication=new Authentication() {
             @Override
             public Object getCredentials() {
-                return "USER";
+                return null;
             }
 
             @Override
@@ -52,6 +57,11 @@ class RoleVoterTest {
             @Override
             public Object getPrincipal() {
                 return null;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return "USER";
             }
         };
 
