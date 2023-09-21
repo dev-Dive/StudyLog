@@ -15,16 +15,21 @@ import java.util.List;
 @NoArgsConstructor
 public class PostCreateRequestDto {
     @NotNull
-    Long studyId;
+    private Long studyId;
+
     @Nullable
-    String thumbnailUrl;
+    private String thumbnailUrl;
+
     @NotNull
-    String title;
+    private String title;
+
     @NotNull
-    String subtitle;
+    private String subtitle;
+
     @NotNull
-    String content;
+    private String content;
+
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     @NotNull
-    List<String> tags;
+    private List<String> tags;
 }
