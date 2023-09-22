@@ -18,7 +18,9 @@ export default function RootLayout({
     <html lang="ko">
       {/* <body className={inter.className}>{children}</body> */}
       {/* <body suppressHydrationWarning={true}> {children}</body> */}
-      <body> {children} </body>
+      <body>
+        {children} <div id="portal"></div>
+      </body>
     </html>
   )
 }
