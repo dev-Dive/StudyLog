@@ -23,7 +23,7 @@ public class FilterSecurityInterceptor implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         List<String> roles = metaDataSource.getRoles((HttpServletRequest)request);
-        if(roles.isEmpty()){
+        if(roles==null||roles.isEmpty()){
             chain.doFilter(request,response);
             return;
         }
