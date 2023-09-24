@@ -12,7 +12,7 @@ public class HttpConfig {
     @Scope(scopeName = "prototype")
     public HttpSecurity httpSecurity(){
         HttpSecurity http = new HttpSecurity();
-        http.anonymous().and()
+        http.cors().anonymous().and()
                 .securityContext().and()
                 .exceptionHandling();
         return http;

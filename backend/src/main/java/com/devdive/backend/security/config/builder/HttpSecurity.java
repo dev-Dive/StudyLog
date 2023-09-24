@@ -26,6 +26,11 @@ public class HttpSecurity {
         return (ExceptionHandlingConfigurer) getOrApply(new ExceptionHandlingConfigurer());
     }
 
+    public HttpSecurity cors(){
+        getOrApply(new CorsConfigurer());
+        return this;
+    }
+
     public ExpressionUrlAuthorizationConfigurer authorizeRequests(){
         return (ExpressionUrlAuthorizationConfigurer) getOrApply(new ExpressionUrlAuthorizationConfigurer());
     }
