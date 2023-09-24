@@ -6,7 +6,7 @@ info:
 servers:
   - url: 'https://localhost:8080/api'
 paths:
-  /v1/auth/sendMail:
+  /v1/auth/mail/send:
     post:
       summary: 인증 메일 전송
       description: 회원가입 혹은 로그인 인증 메일 이메일로 전송
@@ -16,7 +16,7 @@ paths:
             schema:
               type: object
               properties:
-                email:
+                mail:
                   type: string
       responses:
         '200':
