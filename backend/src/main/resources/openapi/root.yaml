@@ -4,15 +4,15 @@ info:
   description: StudyLog
   version: 0.1.0
 servers:
-  - url: 'https://localhost:8080/api'
+  - url: "https://localhost:8080/api"
 paths:
-  /v1/auth/sendMail:
-    $ref: './paths/v1/auth/send-mail.yaml'
+  /v1/auth/mail/send:
+    $ref: "./paths/v1/auth/send-mail.yaml"
   /v1/auth/mail/register:
-    $ref: './paths/v1/auth/register.yaml'
+    $ref: "./paths/v1/auth/register.yaml"
   /v1/auth/mail/login:
-    $ref: './paths/v1/auth/login.yaml'
+    $ref: "./paths/v1/auth/login.yaml"
   /v1/posts:
-    $ref: './paths/v1/post/create.yaml'
+    $ref: "./paths/v1/post/create.yaml"
   /v1/posts/{id}:
-    $ref: './paths/v1/post/read.yaml'
+    $ref: "./paths/v1/post/read.yaml"
