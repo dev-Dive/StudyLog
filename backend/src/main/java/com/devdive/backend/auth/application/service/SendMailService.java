@@ -51,13 +51,13 @@ public class SendMailService implements SendMailUseCase {
 
     private void setLoginMail(String toMail, MimeMessageHelper helper) throws MessagingException {
 
-            helper.setText(generator.generateAuthContent(toMail, REGISTER), true);
+        helper.setText(generator.generateAuthContent(toMail, LOGIN), true);
 
     }
 
     private void setRegisterMail(String toMail, MimeMessageHelper helper) throws MessagingException {
 
-        helper.setText(generator.generateAuthContent(toMail, LOGIN), true);
+        helper.setText(generator.generateAuthContent(toMail, REGISTER), true);
 
     }
 }
