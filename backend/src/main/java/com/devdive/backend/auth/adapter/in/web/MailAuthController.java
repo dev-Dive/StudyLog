@@ -25,7 +25,7 @@ class MailAuthController {
     private final RegisterUseCase registerUseCase;
     private final LoginUseCase loginUseCase;
 
-    @PostMapping("/sendMail")
+    @PostMapping("/send")
     ResponseEntity<Void> sendMail(@RequestBody @Valid final SendAuthenticationLinkRequest request) throws MessagingException {
 
         sendEmailUseCase.sendMail(request.getMail());
