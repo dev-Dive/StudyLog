@@ -1,7 +1,7 @@
 package com.devdive.backend.security.core;
 
 public class SecurityContextHolder {
-    private static SecurityContextHolderStrategyImp strategy;
+    private static SecurityContextHolderStrategy strategy;
 
     static {
         strategy=new SecurityContextHolderStrategyImp();
@@ -16,5 +16,9 @@ public class SecurityContextHolder {
 
     public static void clearContext(){
         strategy.clearContext();
+    }
+
+    public  static SecurityContext  createEmptyContext(){
+        return strategy.createEmptyContext();
     }
 }
