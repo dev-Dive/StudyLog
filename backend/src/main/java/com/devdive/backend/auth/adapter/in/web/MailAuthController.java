@@ -77,6 +77,13 @@ class MailAuthController {
                 .build();
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    ResponseEntity<Void> dsa(IllegalStateException e) {
+        log.info(e.getMessage(), e);
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .build();
+    }
 
     @Data
     static class SendAuthenticationLinkRequest{
