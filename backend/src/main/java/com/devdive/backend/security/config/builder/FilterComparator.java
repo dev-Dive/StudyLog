@@ -1,9 +1,6 @@
 package com.devdive.backend.security.config.builder;
 
-import com.devdive.backend.security.filter.AnonymousAuthenticationFilter;
-import com.devdive.backend.security.filter.ExceptionTranslationFilter;
-import com.devdive.backend.security.filter.FilterSecurityInterceptor;
-import com.devdive.backend.security.filter.SecurityContextPersistenceFilter;
+import com.devdive.backend.security.filter.*;
 import jakarta.servlet.Filter;
 
 import java.util.Comparator;
@@ -19,6 +16,7 @@ public class FilterComparator implements Comparator<Filter> {
     public FilterComparator() {
         Step step = new Step(INITIAL_ORDER, ORDER_STEP);
         filterToOrder.put(SecurityContextPersistenceFilter.class.getName(),step.next());
+        filterToOrder.put(CorsFilter.class.getName(),step.next());
         filterToOrder.put(AnonymousAuthenticationFilter.class.getName(),step.next());
         filterToOrder.put(ExceptionTranslationFilter.class.getName(),step.next());
         filterToOrder.put(FilterSecurityInterceptor.class.getName(),step.next());
