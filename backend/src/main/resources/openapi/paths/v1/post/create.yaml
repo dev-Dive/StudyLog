@@ -41,3 +41,71 @@ post:
       description: 로그인 필요 - 인증
     '403':
       description: 글 작성 권한 없음 - 인가
+get:
+  summary: 최신 글 목록 불러오기
+  description: 최신 글 목록 불러오기, 무한 스크롤
+  parameters:
+    - in: query
+      name: cursor
+      schema:
+        type: number
+      required: true
+      description: 다음 포스트 아이디, 초기값은 Long의 최댓값
+    - in: query
+      name: limit
+      schema:
+        type: number
+      required: true
+      description: 청크 단위
+  responses:
+    '200':
+      description: 성공
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                description: 포스트 정보 리스트
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: number
+                      description: 포스트 식별자
+                    thumbnailUrl:
+                      type: string
+                      description: 포스트 썸네일 URL
+                    title:
+                      type: string
+                      description: 제목
+                    subtitle:
+                      type: string
+                      description: 부제
+                    createdAt:
+                      type: string
+                      description: 포스트 생성일
+                    studies:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 스터디 식별자
+                        name:
+                          type: string
+                          description: 스터디 이름
+                        profileImageUrl:
+                          type: string
+                          description: 스터디 대표 이미지 URL
+
+              paging:
+                type: object
+                description: 페이징 정보
+                properties:
+                  previousCursor:
+                    type: number
+                    description: 이전 포스트 커서
+                  nextCursor:
+                    type: number
+                    description: 다음 포스트 커서

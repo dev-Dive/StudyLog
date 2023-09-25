@@ -1,0 +1,20 @@
+post:
+  summary: 스터디 생성
+  description: 스터디 생성
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+            description:
+              type: string
+  responses:
+    '200':
+      description: 성공
+    '401':
+      description: 로그인 필요 - 인증
+    '403':
+      description: 스터디 생성 권한 없음 - 인가
