@@ -53,11 +53,25 @@ CREATE TABLE `post_tags`
     `tag_id`  BIGINT NOT NULL
 );
 
-ALTER TABLE `study_members` ADD FOREIGN KEY (`member_id`) REFERENCES members(id);
-ALTER TABLE `study_members` ADD FOREIGN KEY (`study_id`) REFERENCES studies(id);
+ALTER TABLE `study_members`
+    ADD FOREIGN KEY (`member_id`) REFERENCES members (id)
+        ON DELETE CASCADE;
+ALTER TABLE `study_members`
+    ADD FOREIGN KEY (`study_id`) REFERENCES studies (id)
+        ON DELETE CASCADE;
 
-ALTER TABLE `post_authors` ADD FOREIGN KEY (`member_id`) REFERENCES members(id);
-ALTER TABLE `post_authors` ADD FOREIGN KEY (`post_id`) REFERENCES posts(id);
+ALTER TABLE `post_authors`
+    ADD FOREIGN KEY (`member_id`) REFERENCES members (id)
+        ON DELETE CASCADE;
 
-ALTER TABLE `post_tags` ADD FOREIGN KEY (`post_id`) REFERENCES posts(id);
-ALTER TABLE `post_tags` ADD FOREIGN KEY (`tag_id`) REFERENCES tags(id);
+ALTER TABLE `post_authors`
+    ADD FOREIGN KEY (`post_id`) REFERENCES posts (id)
+        ON DELETE CASCADE;
+
+ALTER TABLE `post_tags`
+    ADD FOREIGN KEY (`post_id`) REFERENCES posts (id)
+        ON DELETE CASCADE;
+
+ALTER TABLE `post_tags`
+    ADD FOREIGN KEY (`tag_id`) REFERENCES tags (id)
+        ON DELETE CASCADE;
