@@ -4,9 +4,9 @@ info:
   description: StudyLog
   version: 0.1.0
 servers:
-  - url: 'https://localhost:8080/api'
+  - url: 'https://localhost:8080'
 paths:
-  /v1/auth/mail/send:
+  /api/v1/auth/mail/send:
     post:
       summary: 인증 메일 전송
       description: 회원가입 혹은 로그인 인증 메일 이메일로 전송
@@ -21,7 +21,7 @@ paths:
       responses:
         '200':
           description: 성공 - 인증 링크 이메일로 전송
-  /v1/auth/mail/register:
+  /api/v1/auth/mail/register:
     post:
       summary: 이메일로 회원가입
       description: 전송받은 이메일 링크로 회원가입 요청
@@ -47,7 +47,7 @@ paths:
                     type: string
         '401':
           description: 토큰 인증 실패
-  /v1/auth/mail/login:
+  /api/v1/auth/mail/login:
     post:
       summary: 이메일로 로그인
       description: 전송받은 이메일 링크로 로그인 요청
@@ -73,7 +73,7 @@ paths:
                     type: string
         '401':
           description: 토큰 인증 실패
-  /v1/posts:
+  /api/v1/posts:
     post:
       summary: 글 작성
       description: 스터디 글 작성
@@ -117,7 +117,74 @@ paths:
           description: 로그인 필요 - 인증
         '403':
           description: 글 작성 권한 없음 - 인가
-  '/v1/posts/{id}':
+    get:
+      summary: 최신 글 목록 불러오기
+      description: '최신 글 목록 불러오기, 무한 스크롤'
+      parameters:
+        - in: query
+          name: cursor
+          schema:
+            type: number
+          required: true
+          description: '다음 포스트 아이디, 초기값은 Long의 최댓값'
+        - in: query
+          name: limit
+          schema:
+            type: number
+          required: true
+          description: 청크 단위
+      responses:
+        '200':
+          description: 성공
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    description: 포스트 정보 리스트
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: 포스트 식별자
+                        thumbnailUrl:
+                          type: string
+                          description: 포스트 썸네일 URL
+                        title:
+                          type: string
+                          description: 제목
+                        subtitle:
+                          type: string
+                          description: 부제
+                        createdAt:
+                          type: string
+                          description: 포스트 생성일
+                        studies:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              description: 스터디 식별자
+                            name:
+                              type: string
+                              description: 스터디 이름
+                            profileImageUrl:
+                              type: string
+                              description: 스터디 대표 이미지 URL
+                  paging:
+                    type: object
+                    description: 페이징 정보
+                    properties:
+                      previousCursor:
+                        type: number
+                        description: 이전 포스트 커서
+                      nextCursor:
+                        type: number
+                        description: 다음 포스트 커서
+  '/api/v1/posts/{id}':
     get:
       summary: 글 읽기
       description: 스터디 글 하나 읽기
@@ -199,3 +266,24 @@ paths:
                           href:
                             type: string
                             description: 이전 글 링크
+  /api/v1/studies:
+    post:
+      summary: 스터디 생성
+      description: 스터디 생성
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '200':
+          description: 성공
+        '401':
+          description: 로그인 필요 - 인증
+        '403':
+          description: 스터디 생성 권한 없음 - 인가
