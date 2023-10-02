@@ -36,6 +36,7 @@ class PostControllerTest {
         // given
         PostCreateRequestDto dto = new PostCreateRequestDto(
                 1L,
+                1L,
                 "http://",
                 "title",
                 "sub",
