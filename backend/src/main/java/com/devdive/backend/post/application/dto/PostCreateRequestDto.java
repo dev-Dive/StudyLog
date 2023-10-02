@@ -14,6 +14,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostCreateRequestDto {
+
+    private Long memberId;
+
     @NotNull
     private Long studyId;
 

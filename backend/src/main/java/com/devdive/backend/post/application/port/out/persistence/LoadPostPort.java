@@ -10,4 +10,6 @@ public interface LoadPostPort {
     void createPost(PostCreateRequestDto dto);
 
     PostViewDto viewPost(Long postId);
+
+    void deletePost(long postId);
 }

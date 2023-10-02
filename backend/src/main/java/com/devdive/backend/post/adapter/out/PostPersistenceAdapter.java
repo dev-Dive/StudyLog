@@ -6,25 +6,36 @@ import com.devdive.backend.post.application.port.out.persistence.LoadPostPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 @RequiredArgsConstructor
 public class PostPersistenceAdapter implements LoadPostPort {
 
+    private final MemberPostRepository memberPostRepository;
+
     private final PostRepository postRepository;
+
+    private final PostAuthorsRepository postAuthorsRepository;
 
     @Override
     public void createPost(PostCreateRequestDto dto) {
-        PostJpaEntity entity = new PostJpaEntity();
-        entity.setContent(dto.getContent());
-        entity.setSubtitle(dto.getSubtitle());
-        entity.setTitle(dto.getTitle());
-        entity.setThumbnail_url(dto.getThumbnailUrl());
-        entity.setTag(dto.getTags());
-        entity.setStudyId(dto.getStudyId());
 
-        postRepository.save(entity);
+        MemberPostJpaEntity member = memberPostRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
+
+        PostJpaEntity post = new PostJpaEntity();
+        post.setContent(dto.getContent());
+        post.setSubtitle(dto.getSubtitle());
+        post.setTitle(dto.getTitle());
+        post.setThumbnail_url(dto.getThumbnailUrl());
+        post.setTag(dto.getTags());
+        post.setStudyId(dto.getStudyId());
+
+        postRepository.save(post);
+
+        PostAuthorsEntity mappingTable = new PostAuthorsEntity();
+        mappingTable.setMember(member);
+        mappingTable.setPost(post);
+
+        postAuthorsRepository.save(mappingTable);
     }
 
     @Override
@@ -41,5 +52,10 @@ public class PostPersistenceAdapter implements LoadPostPort {
                 entity.getContent(),
                 entity.getTag()
         );
+    }
+
+    @Override
+    public void deletePost(long postId) {
+        postRepository.deleteById(postId);
     }
 }
