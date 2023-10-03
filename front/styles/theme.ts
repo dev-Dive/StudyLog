@@ -15,4 +15,37 @@ const color = {
   red: '#FF0000',
 }
 
-export default color
+const text = {
+  h1: {
+    'font-size': '2rem',
+    'font-weight': 600,
+    'line-height': 1.4,
+  },
+  h2: {
+    ' font-size': '1.625rem',
+    'font-weight': 600,
+    'line-height': 1.4,
+  },
+  h3: {
+    'font-size': '1.25rem',
+    'font-weight': 600,
+    'line-height': 1.4,
+  },
+  h4: {
+    'font-size': '1.125rem',
+    'font-weight': 600,
+    'line-height': 1.4,
+  },
+  normal: {
+    'font-size': '1rem',
+    'font-weight': 400,
+    'line-height': 1.4,
+  },
+  small: {
+    'font-size': '0.75rem',
+    'font-weight': 400,
+    'line-height': 1.4,
+  },
+}
+
+export { color, text }
