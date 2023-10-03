@@ -12,13 +12,19 @@ export const Title = styled.div`
   font-size: large;
 `
 
-export const Inputs = styled.div`
-  width: 50%;
+export const LeftSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+`
 
+export const Inputs = styled.div`
   padding: 1.5rem;
 
   display: flex;
   flex-direction: column;
+  flex: 1;
 
   > input {
     width: 100%;
@@ -66,7 +72,8 @@ export const Tags = styled.div`
 `
 
 export const MarkDownView = styled.div`
-  width: 50%;
+  /* width: 50%; */
+  flex: 1;
   height: calc(100 * var(--vh));
   padding-left: 1rem;
   overflow: auto;
