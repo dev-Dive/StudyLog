@@ -8,10 +8,12 @@ import {
   TagInput,
   TagContainer,
   Tags,
+  LeftSide,
 } from './write.styles'
 import Tag from '@/components/Commmon/Tag'
 import { useRecoilState } from 'recoil'
 import { postState } from '@/states/postAtom'
+import Footer from './Footer'
 
 type TagItem = {
   id: number
@@ -63,39 +65,42 @@ export default function WriteContainer() {
 
   return (
     <WriteWrapper>
-      <Inputs>
-        <input
-          type="text"
-          placeholder="제목을 입력하세요"
-          onChange={onChangeTitle}
-        />
-        <hr />
-        <TagContainer>
-          <TagInput
+      <LeftSide>
+        <Inputs>
+          <input
             type="text"
-            value={tagInput}
-            placeholder="태그를 입력하세요"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setTagInput(e.target.value)
-            }
-            onKeyPress={onPressTagInput}
+            placeholder="제목을 입력하세요"
+            onChange={onChangeTitle}
           />
-          <Tags>
-            {post.tags?.map((tag) => (
-              <Tag
-                key={tag.id}
-                text={tag.text}
-                canRemove={true}
-                onRemove={() => removeTag(tag.id)}
-              />
-            ))}
-          </Tags>
-        </TagContainer>
-        <InputContextTextArea
-          content={post.content}
-          onChange={onChangeContent}
-        />
-      </Inputs>
+          <hr />
+          <TagContainer>
+            <TagInput
+              type="text"
+              value={tagInput}
+              placeholder="태그를 입력하세요"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setTagInput(e.target.value)
+              }
+              onKeyPress={onPressTagInput}
+            />
+            <Tags>
+              {post.tags?.map((tag) => (
+                <Tag
+                  key={tag.id}
+                  text={tag.text}
+                  canRemove={true}
+                  onRemove={() => removeTag(tag.id)}
+                />
+              ))}
+            </Tags>
+          </TagContainer>
+          <InputContextTextArea
+            content={post.content}
+            onChange={onChangeContent}
+          />
+        </Inputs>
+        <Footer />
+      </LeftSide>
       <MarkDownView>
         <MarkDownPost content={post.content} />
       </MarkDownView>
