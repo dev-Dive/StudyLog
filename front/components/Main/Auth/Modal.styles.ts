@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import color from '../../../styles/theme'
+import { color } from '../../../styles/theme'
 
 export const Modal = styled.div`
   padding: 1.5rem;
