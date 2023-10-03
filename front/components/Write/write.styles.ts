@@ -17,6 +17,9 @@ export const Inputs = styled.div`
 
   padding: 1.5rem;
 
+  display: flex;
+  flex-direction: column;
+
   > input {
     width: 100%;
 
@@ -43,7 +46,7 @@ export const Inputs = styled.div`
 
 export const TagContainer = styled.div`
   margin-bottom: 1rem;
-  border-bottom: 1px solid ${color.mainColor};
+  border-bottom: 1px solid ${color.gray4};
 `
 
 export const TagInput = styled.input`
@@ -64,6 +67,21 @@ export const Tags = styled.div`
 
 export const MarkDownView = styled.div`
   width: 50%;
+  height: calc(100 * var(--vh));
+  padding-left: 1rem;
+  overflow: auto;
 
   background-color: ${color.gray2};
+
+  ::-webkit-scrollbar-track {
+    background-color: none;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    background-color: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: ${color.mainColor};
+    border-radius: 1rem;
+  }
 `
