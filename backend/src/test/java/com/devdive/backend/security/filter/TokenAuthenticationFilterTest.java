@@ -3,6 +3,7 @@ package com.devdive.backend.security.filter;
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.security.core.AuthenticationCache;
 import com.devdive.backend.security.core.UserDetails;
+import com.devdive.backend.security.core.UserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import org.apache.http.entity.ContentType;

@@ -4,6 +4,7 @@ import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.security.core.AuthenticationCache;
 import com.devdive.backend.security.core.JwtTokenAuthenticationToken;
 import com.devdive.backend.security.core.UserDetails;
+import com.devdive.backend.security.core.UserDetailsService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
