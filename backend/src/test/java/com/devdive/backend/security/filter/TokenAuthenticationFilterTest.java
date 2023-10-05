@@ -122,7 +122,7 @@ class TokenAuthenticationFilterTest {
     }
 
     @Test
-    @DisplayName("토큰 비 전송시 400로 에러를 전송한다.")
+    @DisplayName("바디 비 전송시 400로 에러를 전송한다.")
     void whenNotTransmitToken_thenSend400HttpStatus() throws ServletException, IOException {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
@@ -177,8 +177,8 @@ class TokenAuthenticationFilterTest {
     }
 
     @Test
-    @DisplayName("ContentType이 Json이 아니라면 405로 에러를 전송한다.")
-    void whenContentTypeIsNotJson_thenReturns405HttpStatus() throws ServletException, IOException, JSONException {
+    @DisplayName("ContentType이 Json이 아니라면 415로 에러를 전송한다.")
+    void whenContentTypeIsNotJson_thenReturns415HttpStatus() throws ServletException, IOException, JSONException {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
