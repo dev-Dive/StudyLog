@@ -1,11 +1,8 @@
 package com.devdive.backend.security.filter;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
-import com.devdive.backend.security.core.AuthenticationCache;
-import com.devdive.backend.security.core.JwtTokenAuthenticationToken;
-import com.devdive.backend.security.core.UserDetails;
-import com.devdive.backend.security.core.UserDetailsService;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.devdive.backend.security.core.*;
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import jakarta.servlet.*;
@@ -20,7 +17,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Map;
 
 
 @Slf4j
@@ -36,6 +32,7 @@ public class TokenAuthenticationFilter implements Filter {
     private final String patternUrl;
 
     private final AuthenticationCache authenticationCache;
+    private final JsonHandler jsonHandler = new JsonHandler();
 
     public TokenAuthenticationFilter(
             UserDetailsService<String, UserDetails> userDetailsService, JwtProvider mailJwtProvider,
@@ -59,36 +56,61 @@ public class TokenAuthenticationFilter implements Filter {
             return;
         }
 
-        String token = getJsonValue(req, "token");
+        UserDetails member;
+        try {
+            member = attemptAuthentication(req);
+            if(member==null){
+                failedAuthentication(res);
+                return;
+            }
 
-        if(token==null){
-            failedAuthentication(res);
+            JwtTokenAuthenticationToken authentication = new JwtTokenAuthenticationToken(member);
+            authentication.setAuthenticated("MEMBERS");
+
+            authenticationCache.addAuthentication(authentication);
+
+        } catch (IllegalArgumentException e) {
+            res.sendError(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(), HttpStatus.UNSUPPORTED_MEDIA_TYPE.getReasonPhrase());
+            return;
+        } catch (MismatchedInputException e) {
+            res.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
+            return;
+        }catch (JsonParseException e){
+            res.sendError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase());
             return;
         }
 
-        if (!mailJwtProvider.isValid(token)) {
-            failedAuthentication(res);
-            return;
+        successAuthentication(res,member.getUsername());
+    }
+
+    private UserDetails attemptAuthentication(HttpServletRequest req) throws IOException {
+        if (req.getContentType() == null || !req.getContentType().equals("application/json")) {
+            throw new IllegalArgumentException("잘못된 헤더 값");
+        }
+
+        String token = jsonHandler.getValue(getContent(req), "token");
+
+        if (token == null || !mailJwtProvider.isValid(token)) {
+            return null;
         }
 
         String mail = mailJwtProvider.extractSubject(token);
 
-        UserDetails member = userDetailsService.findMemberByEmail(mail);
-        if (member == null) {
-            failedAuthentication(res);
-            return;
-        }
-
-        successAuthentication(res, mail, member);
+        return userDetailsService.findMemberByEmail(mail);
     }
 
-    private void successAuthentication(HttpServletResponse res, String mail, UserDetails member) throws IOException {
-        JwtTokenAuthenticationToken authentication = new JwtTokenAuthenticationToken(member);
-        authentication.setAuthenticated("MEMBERS");
+    private static String getContent(HttpServletRequest req) throws IOException {
+        ServletInputStream inputStream = req.getInputStream();
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line = "";
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        return stringBuilder.toString();
+    }
 
-        authenticationCache.addAuthentication(authentication);
-
-        log.info("{} login success", mail);
+    private void successAuthentication(HttpServletResponse res,String mail) throws IOException {
 
         res.setContentType("application/json");
 
@@ -99,32 +121,6 @@ public class TokenAuthenticationFilter implements Filter {
 
     private static void failedAuthentication(HttpServletResponse res) throws IOException {
         res.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
-    }
-
-    private String getJsonValue(HttpServletRequest req, String key) throws IOException {
-        if(req.getContentType()==null){
-            return null;
-        }
-
-        if(!req.getContentType().equals("application/json")){
-            return null;
-        }
-        ServletInputStream inputStream = req.getInputStream();
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = "";
-        while ((line = bufferedReader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, String> jsonMap = objectMapper.readValue(stringBuilder.toString(), new TypeReference<>() {
-            });
-            return jsonMap.get(key);
-        } catch (MismatchedInputException e){
-            return null;
-        }
     }
 
     private boolean isSurpported(HttpServletRequest req) {
