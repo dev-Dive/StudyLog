@@ -28,7 +28,6 @@ class TokenAuthenticationFilterTest {
     private static final String patternUrl = "/api/v1/auth/mail/login";
     private static final String method = "POST";
 
-
     @Test
     @DisplayName("유효한 토큰으로 로그인 시 인증 토큰이 발행된다.")
     void givenValidToken_whenLogin_thenReturnAuthToken() throws ServletException, IOException, JSONException {
@@ -61,7 +60,7 @@ class TokenAuthenticationFilterTest {
         JSONObject responseContent = new JSONObject(response.getContentAsString());
         assertThat(responseContent.get("accessToken")).isEqualTo(testAccessToken);
         assertThat(responseContent.get("refreshToken")).isEqualTo(testRefreshToken);
-        verify(authenticationCache,times(1)).addAuthentication(any());
+        verify(authenticationCache, times(1)).addAuthentication(any());
     }
 
     @Test
@@ -99,7 +98,6 @@ class TokenAuthenticationFilterTest {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
-
         UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetails();
 
         JwtProvider accessTokenJwtProvider = generateJwtProvider();
@@ -124,8 +122,8 @@ class TokenAuthenticationFilterTest {
     }
 
     @Test
-    @DisplayName("토큰 비 전송시 401로 에러를 전송한다.")
-    void whenNotTransmitToken_thenSend401HttpStatus() throws ServletException, IOException {
+    @DisplayName("토큰 비 전송시 400로 에러를 전송한다.")
+    void whenNotTransmitToken_thenSend400HttpStatus() throws ServletException, IOException {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
@@ -146,7 +144,7 @@ class TokenAuthenticationFilterTest {
 
         tokenAuthenticationFilter.doFilter(request, response, filterChain);
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
     @Test
@@ -179,8 +177,8 @@ class TokenAuthenticationFilterTest {
     }
 
     @Test
-    @DisplayName("ContentType이 Json이 아니라면 401로 에러를 전송한다.")
-    void whenContentTypeIsNotJson_thenReturns401HttpStatus() throws ServletException, IOException, JSONException {
+    @DisplayName("ContentType이 Json이 아니라면 405로 에러를 전송한다.")
+    void whenContentTypeIsNotJson_thenReturns405HttpStatus() throws ServletException, IOException, JSONException {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
@@ -205,7 +203,7 @@ class TokenAuthenticationFilterTest {
 
         tokenAuthenticationFilter.doFilter(request, response, filterChain);
 
-        assertThat(response.getStatus()).isEqualTo(HttpStatus.UNAUTHORIZED.value());
+        assertThat(response.getStatus()).isEqualTo(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value());
     }
 
     @Test
@@ -237,7 +235,7 @@ class TokenAuthenticationFilterTest {
 
         tokenAuthenticationFilter.doFilter(request, response, filterChain);
 
-        verify(filterChain,times(1)).doFilter(eq(request),eq(response));
+        verify(filterChain, times(1)).doFilter(eq(request), eq(response));
     }
 
     @Test
@@ -268,7 +266,7 @@ class TokenAuthenticationFilterTest {
 
         tokenAuthenticationFilter.doFilter(request, response, filterChain);
 
-        verify(filterChain,times(1)).doFilter(eq(request),eq(response));
+        verify(filterChain, times(1)).doFilter(eq(request), eq(response));
     }
 
     private UserDetailsService<String, UserDetails> generateMockUserDetailsServiceAndDefineAct(String mail) {
@@ -278,11 +276,13 @@ class TokenAuthenticationFilterTest {
     }
 
     private void defineUserDetailsFindMemberByEmail(String mail, UserDetailsService<String, UserDetails> userDetailsService) {
-        when(userDetailsService.findMemberByEmail(eq(mail))).thenReturn(mock(UserDetails.class));
+        UserDetails userDetails = mock(UserDetails.class);
+        when(userDetails.getUsername()).thenReturn(mail);
+        when(userDetailsService.findMemberByEmail(eq(mail))).thenReturn(userDetails);
     }
 
     private UserDetailsService<String, UserDetails> generateMockUserDetails() {
-        return (UserDetailsService<String, UserDetails>)mock(UserDetailsService.class);
+        return (UserDetailsService<String, UserDetails>) mock(UserDetailsService.class);
     }
 
     private MockHttpServletRequest generateMcokRequest(String requestContent) {
@@ -300,7 +300,7 @@ class TokenAuthenticationFilterTest {
     }
 
     private JwtProvider generateJwtProvider() {
-        return  mock(JwtProvider.class);
+        return mock(JwtProvider.class);
     }
 
     private void defineJwtProviderActForCreateToken(String mail, String testAccessToken, JwtProvider accessTokenJwtProvider) {
