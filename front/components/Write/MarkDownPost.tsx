@@ -12,9 +12,8 @@ type postType = {
 export default function MarkDownPost({ content }: postType) {
   return (
     <div>
-      <style>
-        {tableStyles} {blockQuoteStyles}
-      </style>
+      <style>{tableStyles}</style>
+      <style>{blockQuoteStyles}</style>
       <Markdown
         remarkPlugins={[remarkGfm]} // Allows us to have embedded HTML tags in our markdown
         components={{
