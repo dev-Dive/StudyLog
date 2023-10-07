@@ -15,7 +15,7 @@ public class PostAuthorsEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "member_post_id")
+    @JoinColumn(name = "member_id")
     private MemberPostJpaEntity member;
 
 

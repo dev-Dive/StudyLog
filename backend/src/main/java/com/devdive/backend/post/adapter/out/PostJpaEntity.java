@@ -13,8 +13,8 @@ import java.util.List;
 public class PostJpaEntity {
 
     @Id
-    @GeneratedValue
     @Column(name = "post_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column
