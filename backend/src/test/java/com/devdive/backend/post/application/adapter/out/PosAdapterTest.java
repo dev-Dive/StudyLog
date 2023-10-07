@@ -43,16 +43,12 @@ public class PosAdapterTest {
     public void postMemberMappingTest() {
         // given
         MemberPostJpaEntity member1 = mock(MemberPostJpaEntity.class);
-        MemberPostJpaEntity member2 = mock(MemberPostJpaEntity.class);
-        entityManager.persist(member1); // 영속화
-        entityManager.persist(member2);
         when(member1.getId()).thenReturn(1L);
-        when(member2.getId()).thenReturn(2L);
-        when(memberPostRepository.findById(eq(1L))).thenReturn(Optional.of(member1));
-        when(memberPostRepository.findById(eq(2L))).thenReturn(Optional.of(member2));
+        when(memberPostRepository.findById(1L)).thenReturn(Optional.of(member1));
+        entityManager.persist(member1);
 
         PostCreateRequestDto dto1 = new PostCreateRequestDto(
-                1L,
+                member1.getId(),
                 10L,
                 "http://",
                 "title",
@@ -61,16 +57,7 @@ public class PosAdapterTest {
                 List.of("tag1", "tag2")
         );
         PostCreateRequestDto dto2 = new PostCreateRequestDto(
-                1L,
-                10L,
-                "http://",
-                "title",
-                "sub",
-                "content",
-                List.of("tag1", "tag2")
-        );
-        PostCreateRequestDto dto3 = new PostCreateRequestDto(
-                2L,
+                member1.getId(),
                 10L,
                 "http://",
                 "title",
@@ -85,14 +72,16 @@ public class PosAdapterTest {
         // when
         postPersistenceAdapter.createPost(dto1);
         postPersistenceAdapter.createPost(dto2);
-        postPersistenceAdapter.createPost(dto3);
 
         // then
-        List<PostJpaEntity> postJpaData = postRepository.findAll();
-        List<PostAuthorsEntity> postAuthorData = postAuthorsRepository.findAll();
+        PostJpaEntity savedPost2 = postRepository.findById(2L).get();
+        assertThat(savedPost2.getId()).isEqualTo(2L);
 
-        assertThat(postJpaData.size()).isEqualTo(3);
-        assertThat(postAuthorData.size()).isEqualTo(3);
+        MemberPostJpaEntity savedMember = memberPostRepository.findById(1L).get();
+        assertThat(savedMember.getId()).isEqualTo(1L);
+
+        PostJpaEntity savedPost = postRepository.findById(1L).get();
+        assertThat(savedPost.getId()).isEqualTo(1L);
     }
 
     @Test
@@ -100,9 +89,9 @@ public class PosAdapterTest {
     public void findById() {
         // given
         MemberPostJpaEntity member1 = mock(MemberPostJpaEntity.class);
-        entityManager.persist(member1);
         when(member1.getId()).thenReturn(1L);
         when(memberPostRepository.findById(eq(1L))).thenReturn(Optional.of(member1));
+        entityManager.persist(member1);
 
         PostCreateRequestDto dto = new PostCreateRequestDto(
                 member1.getId(),

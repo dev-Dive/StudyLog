@@ -9,15 +9,16 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "member_post")
+@Entity
+@Table(name = "member")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberPostJpaEntity {
 
     @Id
-    @GeneratedValue
-    @Column(name = "member_post_id")
+    @Column(name = "member_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     @Column
