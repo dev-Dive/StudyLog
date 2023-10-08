@@ -1,6 +1,9 @@
 package com.devdive.backend.post.application.adapter.out;
 
-import com.devdive.backend.post.adapter.out.*;
+import com.devdive.backend.post.adapter.out.persistence.*;
+import com.devdive.backend.post.adapter.out.persistence.repository.MemberPostRepository;
+import com.devdive.backend.post.adapter.out.persistence.repository.PostAuthorsRepository;
+import com.devdive.backend.post.adapter.out.persistence.repository.PostRepository;
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;

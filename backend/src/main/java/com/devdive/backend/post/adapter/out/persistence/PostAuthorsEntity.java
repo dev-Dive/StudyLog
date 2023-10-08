@@ -1,5 +1,6 @@
-package com.devdive.backend.post.adapter.out;
+package com.devdive.backend.post.adapter.out.persistence;
 
+import com.devdive.backend.post.adapter.out.persistence.compositekey.PostAuthorsId;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

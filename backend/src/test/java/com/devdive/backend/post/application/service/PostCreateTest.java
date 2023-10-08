@@ -2,7 +2,7 @@ package com.devdive.backend.post.application.service;
 
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
 import com.devdive.backend.post.application.dto.PostViewDto;
-import com.devdive.backend.post.application.port.out.persistence.LoadPostPort;
+import com.devdive.backend.post.application.port.out.LoadPostPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

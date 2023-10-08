@@ -1,4 +1,4 @@
-package com.devdive.backend.post.application.port.out.persistence;
+package com.devdive.backend.post.application.port.out;
 
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
 import com.devdive.backend.post.application.dto.PostViewDto;

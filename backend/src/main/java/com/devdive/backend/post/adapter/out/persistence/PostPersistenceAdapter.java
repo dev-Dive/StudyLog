@@ -1,8 +1,11 @@
-package com.devdive.backend.post.adapter.out;
+package com.devdive.backend.post.adapter.out.persistence;
 
+import com.devdive.backend.post.adapter.out.persistence.repository.MemberPostRepository;
+import com.devdive.backend.post.adapter.out.persistence.repository.PostAuthorsRepository;
+import com.devdive.backend.post.adapter.out.persistence.repository.PostRepository;
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
 import com.devdive.backend.post.application.dto.PostViewDto;
-import com.devdive.backend.post.application.port.out.persistence.LoadPostPort;
+import com.devdive.backend.post.application.port.out.LoadPostPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
