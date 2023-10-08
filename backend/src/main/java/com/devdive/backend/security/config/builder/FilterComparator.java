@@ -16,7 +16,9 @@ public class FilterComparator implements Comparator<Filter> {
     public FilterComparator() {
         Step step = new Step(INITIAL_ORDER, ORDER_STEP);
         filterToOrder.put(SecurityContextPersistenceFilter.class.getName(),step.next());
+        filterToOrder.put(AccessTokenValidationAndRevocationFilter.class.getName(),step.next());
         filterToOrder.put(CorsFilter.class.getName(),step.next());
+        filterToOrder.put(TokenAuthenticationFilter.class.getName(),step.next());
         filterToOrder.put(AnonymousAuthenticationFilter.class.getName(),step.next());
         filterToOrder.put(ExceptionTranslationFilter.class.getName(),step.next());
         filterToOrder.put(FilterSecurityInterceptor.class.getName(),step.next());
