@@ -1,14 +1,16 @@
 package com.devdive.backend.security.filter;
 
+import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.security.core.Authentication;
 import com.devdive.backend.security.core.AuthenticationCache;
 import com.devdive.backend.security.core.SecurityContext;
 import com.devdive.backend.security.core.SecurityContextHolder;
-import io.jsonwebtoken.Jwts;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 
@@ -16,28 +18,41 @@ import java.io.IOException;
 public class AccessTokenValidationAndRevocationFilter implements Filter {
     private static final String HEADER = "bearer";
     private final AuthenticationCache authenticationCache;
-    private final String secret;
+    private final JwtProvider jwtProvider;
 
 
-    public AccessTokenValidationAndRevocationFilter(String secret, AuthenticationCache authenticationCache) {
-        this.secret = secret;
+    public AccessTokenValidationAndRevocationFilter(JwtProvider jwtProvider, AuthenticationCache authenticationCache) {
+        this.jwtProvider = jwtProvider;
         this.authenticationCache=authenticationCache;
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+
         String header = req.getHeader(HttpHeaders.AUTHORIZATION);
+        if(header==null){
+            chain.doFilter(request,response);
+            return;
+        }
 
+        String substring = header.substring(0, HEADER.length());
 
-        if(!header.startsWith(HEADER)){
+        if(!substring.equalsIgnoreCase(HEADER)){
             chain.doFilter(request,response);
             return;
         }
 
         String token = header.substring(HEADER.length()+1, header.length());
-        String email = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getSubject();
-        Authentication authentication =authenticationCache.findAuthentication(email);
+
+        if(!jwtProvider.isValid(token)){
+            HttpServletResponse res = (HttpServletResponse) response;
+            res.sendError(HttpStatus.UNAUTHORIZED.value(),HttpStatus.UNAUTHORIZED.getReasonPhrase());
+            return;
+        }
+
+        String mail = jwtProvider.extractSubject(token);
+        Authentication authentication =authenticationCache.findAuthentication(mail);
         if(authentication!=null){
             SecurityContext context = SecurityContextHolder.getContext();
             context.setAuthentication(authentication);
