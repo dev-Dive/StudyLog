@@ -6,10 +6,10 @@ import static org.assertj.core.api.Assertions.*;
 
 class SecurityContextHolderStrategyImpTest {
 
-    private final SecurityContextHolderStrategy strategy=new SecurityContextHolderStrategyImp();
+    private final SecurityContextHolderStrategy strategy = new SecurityContextHolderStrategyImp();
 
     @BeforeEach
-    void before(){
+    void before() {
         strategy.clearContext();
     }
 
