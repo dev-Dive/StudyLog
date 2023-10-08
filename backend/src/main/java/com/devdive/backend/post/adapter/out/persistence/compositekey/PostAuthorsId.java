@@ -1,5 +1,7 @@
-package com.devdive.backend.post.adapter.out;
+package com.devdive.backend.post.adapter.out.persistence.compositekey;
 
+import com.devdive.backend.post.adapter.out.persistence.MemberPostJpaEntity;
+import com.devdive.backend.post.adapter.out.persistence.PostJpaEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
