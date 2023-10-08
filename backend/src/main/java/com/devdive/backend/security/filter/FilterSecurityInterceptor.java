@@ -1,8 +1,8 @@
 package com.devdive.backend.security.filter;
 
 import com.devdive.backend.security.access.AccessDecisionManager;
-import com.devdive.backend.security.core.Authentication;
-import com.devdive.backend.security.core.SecurityContextHolder;
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.core.securitycontext.SecurityContextHolder;
 import com.devdive.backend.security.access.SecurityMetaDataSource;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

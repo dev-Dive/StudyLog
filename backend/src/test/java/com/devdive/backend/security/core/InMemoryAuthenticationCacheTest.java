@@ -1,5 +1,7 @@
 package com.devdive.backend.security.core;
 
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -1,4 +1,7 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.core.securitycontext;
+
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.core.securitycontext.SecurityContext;
 
 public class SecurityContextImp implements SecurityContext {
 

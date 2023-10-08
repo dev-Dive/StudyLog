@@ -1,6 +1,6 @@
 package com.devdive.backend.security.access;
 
-import com.devdive.backend.security.core.Authentication;
+import com.devdive.backend.security.authentication.Authentication;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;

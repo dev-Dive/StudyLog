@@ -1,12 +1,13 @@
 package com.devdive.backend.security.core;
 
+import com.devdive.backend.security.authentication.adaptor.out.persistent.UserDataRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import static com.devdive.backend.security.core.LoadMemberPort.*;
+import static com.devdive.backend.security.authentication.application.port.out.LoadMemberPort.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest

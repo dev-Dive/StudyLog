@@ -2,7 +2,7 @@ package com.devdive.backend.hello.adaptor.in.web;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.security.config.builder.HttpSecurity;
-import com.devdive.backend.security.filter.DefaultChainFilter;
+import com.devdive.backend.security.core.DefaultChainFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

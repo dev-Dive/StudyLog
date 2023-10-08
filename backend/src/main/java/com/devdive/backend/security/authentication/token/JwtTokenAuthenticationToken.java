@@ -1,4 +1,7 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.authentication.token;
+
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.authentication.domain.UserDetails;
 
 public class JwtTokenAuthenticationToken implements Authentication {
 

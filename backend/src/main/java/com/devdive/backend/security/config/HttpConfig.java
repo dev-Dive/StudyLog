@@ -1,8 +1,12 @@
 package com.devdive.backend.security.config;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
+import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort;
+import com.devdive.backend.security.authentication.adaptor.out.persistent.LoadMemberPortImpl;
+import com.devdive.backend.security.authentication.application.service.DefaultUserDetailsService;
+import com.devdive.backend.security.authentication.adaptor.out.persistent.UserDataRepository;
+import com.devdive.backend.security.authentication.application.port.in.UserDetailsService;
 import com.devdive.backend.security.config.builder.HttpSecurity;
-import com.devdive.backend.security.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

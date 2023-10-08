@@ -1,7 +1,11 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.authentication.application.service;
 
 
-import com.devdive.backend.security.core.LoadMemberPort.UserData;
+import com.devdive.backend.security.authentication.domain.User;
+import com.devdive.backend.security.authentication.domain.UserDetails;
+import com.devdive.backend.security.authentication.application.port.in.UserDetailsService;
+import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort;
+import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort.UserData;
 
 public class DefaultUserDetailsService<I> implements UserDetailsService<I> {
 

@@ -1,6 +1,6 @@
-package com.devdive.backend.security.authentication;
+package com.devdive.backend.security.authentication.token;
 
-import com.devdive.backend.security.core.Authentication;
+import com.devdive.backend.security.authentication.Authentication;
 
 public class AnonymousAuthenticationToken implements Authentication {
     private Object principal;

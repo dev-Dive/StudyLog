@@ -1,7 +1,7 @@
 package com.devdive.backend.security.access.voter;
 
 import com.devdive.backend.security.access.AccessDecisionVoter;
-import com.devdive.backend.security.core.Authentication;
+import com.devdive.backend.security.authentication.Authentication;
 
 import java.util.List;
 

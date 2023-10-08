@@ -2,7 +2,12 @@ package com.devdive.backend.acceptance;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.hello.adaptor.in.web.HelloSecurityConfig;
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort;
+import com.devdive.backend.security.authentication.adaptor.out.persistent.UserDataRepository;
+import com.devdive.backend.security.authentication.domain.UserDetails;
 import com.devdive.backend.security.core.*;
+import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,10 +1,10 @@
 package com.devdive.backend.security.filter;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
-import com.devdive.backend.security.core.Authentication;
+import com.devdive.backend.security.authentication.Authentication;
 import com.devdive.backend.security.core.AuthenticationCache;
-import com.devdive.backend.security.core.SecurityContext;
-import com.devdive.backend.security.core.SecurityContextHolder;
+import com.devdive.backend.security.core.securitycontext.SecurityContext;
+import com.devdive.backend.security.core.securitycontext.SecurityContextHolder;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

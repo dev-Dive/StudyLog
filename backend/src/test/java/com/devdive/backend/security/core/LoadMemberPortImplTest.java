@@ -1,9 +1,11 @@
 package com.devdive.backend.security.core;
 
+import com.devdive.backend.security.authentication.adaptor.out.persistent.LoadMemberPortImpl;
+import com.devdive.backend.security.authentication.adaptor.out.persistent.UserDataRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.devdive.backend.security.core.LoadMemberPort.*;
+import static com.devdive.backend.security.authentication.application.port.out.LoadMemberPort.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;

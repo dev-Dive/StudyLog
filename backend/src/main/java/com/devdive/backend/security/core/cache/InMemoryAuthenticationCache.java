@@ -1,4 +1,7 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.core.cache;
+
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.core.AuthenticationCache;
 
 import java.util.concurrent.ConcurrentHashMap;
 

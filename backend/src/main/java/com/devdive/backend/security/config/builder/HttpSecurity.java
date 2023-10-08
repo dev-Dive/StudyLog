@@ -1,8 +1,8 @@
 package com.devdive.backend.security.config.builder;
 
 import com.devdive.backend.security.config.builder.configur.*;
-import com.devdive.backend.security.core.UserDetailsService;
-import com.devdive.backend.security.filter.DefaultChainFilter;
+import com.devdive.backend.security.authentication.application.port.in.UserDetailsService;
+import com.devdive.backend.security.core.DefaultChainFilter;
 import jakarta.servlet.Filter;
 
 import java.util.ArrayList;

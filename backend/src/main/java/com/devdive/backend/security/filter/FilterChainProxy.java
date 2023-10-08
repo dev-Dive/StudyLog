@@ -1,5 +1,6 @@
 package com.devdive.backend.security.filter;
 
+import com.devdive.backend.security.core.SecurityFilterChain;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

@@ -3,7 +3,7 @@ package com.devdive.backend.security.config.builder.configur;
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.security.config.builder.HttpSecurity;
 import com.devdive.backend.security.core.AuthenticationCache;
-import com.devdive.backend.security.core.InMemoryAuthenticationCache;
+import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import com.devdive.backend.security.filter.AccessTokenValidationAndRevocationFilter;
 
 public class AccessTokenValidConfigurer extends AbstractSecurityConfigurer {
