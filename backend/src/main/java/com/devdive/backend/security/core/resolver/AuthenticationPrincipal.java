@@ -1,4 +1,4 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.core.resolver;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

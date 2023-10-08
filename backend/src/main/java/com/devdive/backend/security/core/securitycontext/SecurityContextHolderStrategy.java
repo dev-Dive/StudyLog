@@ -1,4 +1,4 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.core.securitycontext;
 
 public interface SecurityContextHolderStrategy {
 

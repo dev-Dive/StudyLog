@@ -1,4 +1,4 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.authentication.application.port.out;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

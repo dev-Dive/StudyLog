@@ -1,4 +1,6 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.core.securitycontext;
+
+import com.devdive.backend.security.core.securitycontext.persistent.SecurityContextHolderStrategyImp;
 
 public class SecurityContextHolder {
     private static SecurityContextHolderStrategy strategy;

@@ -1,6 +1,6 @@
 package com.devdive.backend.security.filter;
 
-import com.devdive.backend.security.core.SecurityContextHolder;
+import com.devdive.backend.security.core.securitycontext.SecurityContextHolder;
 import jakarta.servlet.*;
 
 import java.io.IOException;

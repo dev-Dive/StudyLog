@@ -1,5 +1,7 @@
 package com.devdive.backend.security.core;
 
+import com.devdive.backend.security.authentication.Authentication;
+
 public interface AuthenticationCache {
     Authentication findAuthentication(String email);
 

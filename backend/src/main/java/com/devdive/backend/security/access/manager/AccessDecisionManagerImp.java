@@ -3,7 +3,7 @@ package com.devdive.backend.security.access.manager;
 import com.devdive.backend.security.access.AccessDecisionManager;
 import com.devdive.backend.security.access.AccessDecisionVoter;
 import com.devdive.backend.security.access.voter.RoleVoter;
-import com.devdive.backend.security.core.Authentication;
+import com.devdive.backend.security.authentication.Authentication;
 
 import java.nio.file.AccessDeniedException;
 import java.util.List;

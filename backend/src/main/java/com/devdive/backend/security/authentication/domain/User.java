@@ -1,4 +1,4 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.authentication.domain;
 
 public class User implements UserDetails {
 

@@ -1,4 +1,4 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.authentication;
 
 public interface Authentication {
     Object getCredentials();

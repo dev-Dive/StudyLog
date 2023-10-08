@@ -1,4 +1,8 @@
-package com.devdive.backend.security.core;
+package com.devdive.backend.security.core.securitycontext.persistent;
+
+import com.devdive.backend.security.core.securitycontext.SecurityContext;
+import com.devdive.backend.security.core.securitycontext.SecurityContextHolderStrategy;
+import com.devdive.backend.security.core.securitycontext.SecurityContextImp;
 
 public class SecurityContextHolderStrategyImp implements SecurityContextHolderStrategy {
     private static final ThreadLocal<SecurityContext> contextHolder = new ThreadLocal<>();

@@ -1,4 +1,4 @@
-package com.devdive.backend.security.filter;
+package com.devdive.backend.security.core;
 
 import jakarta.servlet.Filter;
 import jakarta.servlet.http.HttpServletRequest;

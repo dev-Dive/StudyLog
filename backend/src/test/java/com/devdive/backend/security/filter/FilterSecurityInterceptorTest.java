@@ -1,9 +1,9 @@
 package com.devdive.backend.security.filter;
 
 import com.devdive.backend.security.access.SecurityMetaDataSource;
-import com.devdive.backend.security.core.Authentication;
-import com.devdive.backend.security.core.SecurityContext;
-import com.devdive.backend.security.core.SecurityContextHolder;
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.core.securitycontext.SecurityContext;
+import com.devdive.backend.security.core.securitycontext.SecurityContextHolder;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;

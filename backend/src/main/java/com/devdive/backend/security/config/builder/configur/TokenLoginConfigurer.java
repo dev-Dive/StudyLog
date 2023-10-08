@@ -1,8 +1,10 @@
 package com.devdive.backend.security.config.builder.configur;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
+import com.devdive.backend.security.authentication.application.port.in.UserDetailsService;
 import com.devdive.backend.security.config.builder.HttpSecurity;
 import com.devdive.backend.security.core.*;
+import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import com.devdive.backend.security.filter.TokenAuthenticationFilter;
 
 public class TokenLoginConfigurer extends AbstractSecurityConfigurer {

@@ -1,8 +1,12 @@
 package com.devdive.backend.security.filter;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
+import com.devdive.backend.security.authentication.domain.UserDetails;
+import com.devdive.backend.security.authentication.application.port.in.UserDetailsService;
+import com.devdive.backend.security.authentication.token.JwtTokenAuthenticationToken;
 import com.devdive.backend.security.core.*;
 import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import jakarta.servlet.*;
@@ -17,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.util.Map;
 
 
 @Slf4j
@@ -138,5 +143,21 @@ public class TokenAuthenticationFilter implements Filter {
     static class AuthToken {
         private final String accessToken;
         private final String refreshToken;
+    }
+
+    static class JsonHandler {
+
+        String getValue(String jsonString, String key) throws IOException {
+
+            if (jsonString.length() == 0) {
+                throw new JsonParseException("");
+            }
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, String> jsonMap = objectMapper.readValue(jsonString, new TypeReference<Map<String, String>>() {
+            });
+            return jsonMap.get(key);
+
+        }
     }
 }
