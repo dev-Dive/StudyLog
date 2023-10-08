@@ -35,7 +35,7 @@ class TokenAuthenticationFilterTest {
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
         String mail = "test@test.com";
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
+        UserDetailsService<String> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
 
         String testAccessToken = "testAccessToken";
         JwtProvider accessTokenJwtProvider = generateMockJwtProviderAndDefineAct(mail, testAccessToken);
@@ -60,7 +60,7 @@ class TokenAuthenticationFilterTest {
         JSONObject responseContent = new JSONObject(response.getContentAsString());
         assertThat(responseContent.get("accessToken")).isEqualTo(testAccessToken);
         assertThat(responseContent.get("refreshToken")).isEqualTo(testRefreshToken);
-        verify(authenticationCache, times(1)).addAuthentication(any());
+        verify(authenticationCache, times(1)).addAuthentication(anyString(),any());
     }
 
     @Test
@@ -69,7 +69,7 @@ class TokenAuthenticationFilterTest {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 0);
 
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetails();
+        UserDetailsService<String> userDetailsService = generateMockUserDetails();
 
         JwtProvider accessTokenJwtProvider = generateJwtProvider();
 
@@ -98,7 +98,7 @@ class TokenAuthenticationFilterTest {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetails();
+        UserDetailsService<String> userDetailsService = generateMockUserDetails();
 
         JwtProvider accessTokenJwtProvider = generateJwtProvider();
 
@@ -127,7 +127,7 @@ class TokenAuthenticationFilterTest {
 
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetails();
+        UserDetailsService<String> userDetailsService = generateMockUserDetails();
 
         JwtProvider accessTokenJwtProvider = generateJwtProvider();
 
@@ -154,7 +154,7 @@ class TokenAuthenticationFilterTest {
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
         String mail = "test@test.com";
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
+        UserDetailsService<String> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
 
         JwtProvider accessTokenJwtProvider = generateJwtProvider();
 
@@ -183,7 +183,7 @@ class TokenAuthenticationFilterTest {
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
         String mail = "test@test.com";
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
+        UserDetailsService<String> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
 
         JwtProvider accessTokenJwtProvider = generateJwtProvider();
 
@@ -213,7 +213,7 @@ class TokenAuthenticationFilterTest {
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
         String mail = "test@test.com";
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
+        UserDetailsService<String> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
 
         String testAccessToken = "testAccessToken";
         JwtProvider accessTokenJwtProvider = generateMockJwtProviderAndDefineAct(mail, testAccessToken);
@@ -245,7 +245,7 @@ class TokenAuthenticationFilterTest {
         JwtProvider mailJwtProvider = new JwtProvider(generateSecret(), 1);
 
         String mail = "test@test.com";
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
+        UserDetailsService<String> userDetailsService = generateMockUserDetailsServiceAndDefineAct(mail);
 
         String testAccessToken = "testAccessToken";
         JwtProvider accessTokenJwtProvider = generateMockJwtProviderAndDefineAct(mail, testAccessToken);
@@ -269,20 +269,20 @@ class TokenAuthenticationFilterTest {
         verify(filterChain, times(1)).doFilter(eq(request), eq(response));
     }
 
-    private UserDetailsService<String, UserDetails> generateMockUserDetailsServiceAndDefineAct(String mail) {
-        UserDetailsService<String, UserDetails> userDetailsService = generateMockUserDetails();
+    private UserDetailsService<String> generateMockUserDetailsServiceAndDefineAct(String mail) {
+        UserDetailsService<String> userDetailsService = generateMockUserDetails();
         defineUserDetailsFindMemberByEmail(mail, userDetailsService);
         return userDetailsService;
     }
 
-    private void defineUserDetailsFindMemberByEmail(String mail, UserDetailsService<String, UserDetails> userDetailsService) {
+    private void defineUserDetailsFindMemberByEmail(String mail, UserDetailsService<String> userDetailsService) {
         UserDetails userDetails = mock(UserDetails.class);
         when(userDetails.getUsername()).thenReturn(mail);
         when(userDetailsService.findMemberByEmail(eq(mail))).thenReturn(userDetails);
     }
 
-    private UserDetailsService<String, UserDetails> generateMockUserDetails() {
-        return (UserDetailsService<String, UserDetails>) mock(UserDetailsService.class);
+    private UserDetailsService<String> generateMockUserDetails() {
+        return (UserDetailsService<String>) mock(UserDetailsService.class);
     }
 
     private MockHttpServletRequest generateMcokRequest(String requestContent) {
