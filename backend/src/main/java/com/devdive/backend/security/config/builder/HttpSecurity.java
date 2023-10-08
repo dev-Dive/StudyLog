@@ -63,6 +63,7 @@ public class HttpSecurity {
 
     public DefaultChainFilter build(){
         for(SecurityConfigurer configurer:configurers.values()){
+            configurer.init();
             configurer.config(this);
         }
 
