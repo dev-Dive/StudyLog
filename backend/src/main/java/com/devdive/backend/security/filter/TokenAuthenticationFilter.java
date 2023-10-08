@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 @Slf4j
 public class TokenAuthenticationFilter implements Filter {
 
-    private final UserDetailsService<String, UserDetails> userDetailsService;
+    private final UserDetailsService<String> userDetailsService;
     private final JwtProvider mailJwtProvider;
     private final JwtProvider accessJwtProvider;
     private final JwtProvider refreshJwtProvider;
@@ -35,7 +35,7 @@ public class TokenAuthenticationFilter implements Filter {
     private final JsonHandler jsonHandler = new JsonHandler();
 
     public TokenAuthenticationFilter(
-            UserDetailsService<String, UserDetails> userDetailsService, JwtProvider mailJwtProvider,
+            UserDetailsService<String> userDetailsService, JwtProvider mailJwtProvider,
             JwtProvider accessJwtProvider, JwtProvider refreshJwtProvider,
             String patternUrl, AuthenticationCache authenticationCache) {
         this.userDetailsService = userDetailsService;
@@ -59,7 +59,7 @@ public class TokenAuthenticationFilter implements Filter {
         UserDetails member;
         try {
             member = attemptAuthentication(req);
-            if(member==null){
+            if (member == null) {
                 failedAuthentication(res);
                 return;
             }
@@ -67,7 +67,7 @@ public class TokenAuthenticationFilter implements Filter {
             JwtTokenAuthenticationToken authentication = new JwtTokenAuthenticationToken(member);
             authentication.setAuthenticated("MEMBERS");
 
-            authenticationCache.addAuthentication(authentication);
+            authenticationCache.addAuthentication(member.getUsername(), authentication);
 
         } catch (IllegalArgumentException e) {
             res.sendError(HttpStatus.UNSUPPORTED_MEDIA_TYPE.value(), HttpStatus.UNSUPPORTED_MEDIA_TYPE.getReasonPhrase());
@@ -75,12 +75,12 @@ public class TokenAuthenticationFilter implements Filter {
         } catch (MismatchedInputException e) {
             res.sendError(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase());
             return;
-        }catch (JsonParseException e){
+        } catch (JsonParseException e) {
             res.sendError(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase());
             return;
         }
 
-        successAuthentication(res,member.getUsername());
+        successAuthentication(res, member.getUsername());
     }
 
     private UserDetails attemptAuthentication(HttpServletRequest req) throws IOException {
@@ -110,7 +110,7 @@ public class TokenAuthenticationFilter implements Filter {
         return stringBuilder.toString();
     }
 
-    private void successAuthentication(HttpServletResponse res,String mail) throws IOException {
+    private void successAuthentication(HttpServletResponse res, String mail) throws IOException {
 
         res.setContentType("application/json");
 
