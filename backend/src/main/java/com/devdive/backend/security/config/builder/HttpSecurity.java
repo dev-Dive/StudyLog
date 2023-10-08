@@ -15,6 +15,12 @@ public class HttpSecurity {
     private final LinkedHashMap<Class<? extends SecurityConfigurer>,SecurityConfigurer> configurers= new LinkedHashMap<>();
     private FilterComparator comparator=new FilterComparator();
 
+    private UserDetailsService<String> detailsService;
+
+    public HttpSecurity(UserDetailsService<String> detailsService) {
+        this.detailsService = detailsService;
+    }
+
     public SecurityContextConfigurer securityContext(){
         return (SecurityContextConfigurer) getOrApply(new SecurityContextConfigurer());
     }
