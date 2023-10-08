@@ -1,16 +1,16 @@
-package com.devdive.backend.study.adapter.out;
+package com.devdive.backend.study.adapter.out.persistence;
 
-import com.devdive.backend.study.adapter.out.repository.MappingTableStudyMemberRepository;
-import com.devdive.backend.study.adapter.out.repository.MemberStudyRepository;
-import com.devdive.backend.study.adapter.out.repository.StudyRepository;
+import com.devdive.backend.study.adapter.out.persistence.repository.MappingTableStudyMemberRepository;
+import com.devdive.backend.study.adapter.out.persistence.repository.MemberStudyRepository;
+import com.devdive.backend.study.adapter.out.persistence.repository.StudyRepository;
 import com.devdive.backend.study.application.dto.StudyCreateDto;
-import com.devdive.backend.study.application.port.out.persistence.LoadStudyPort;
+import com.devdive.backend.study.application.port.out.LoadStudyPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class StudyPersistenceAdapter implements LoadStudyPort {
+public class StudyPersistenceAdapter implements LoadStudyPort {
 
     private final MemberStudyRepository memberStudyRepository;
     private final StudyRepository studyRepository;
