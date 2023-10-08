@@ -31,6 +31,16 @@ public class HttpSecurity {
         return this;
     }
 
+    public AccessTokenValidConfigurer accessTokenValid(){
+        return (AccessTokenValidConfigurer) getOrApply(new AccessTokenValidConfigurer());
+    }
+
+    public TokenLoginConfigurer tokenLogin(){
+        TokenLoginConfigurer tokenLoginConfigurer = new TokenLoginConfigurer();
+        tokenLoginConfigurer.setUserDetailService(detailsService);
+        return (TokenLoginConfigurer) getOrApply(tokenLoginConfigurer);
+    }
+
     public ExpressionUrlAuthorizationConfigurer authorizeRequests(){
         return (ExpressionUrlAuthorizationConfigurer) getOrApply(new ExpressionUrlAuthorizationConfigurer());
     }
