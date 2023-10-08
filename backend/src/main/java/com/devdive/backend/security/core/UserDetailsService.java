@@ -1,6 +1,6 @@
 package com.devdive.backend.security.core;
 
-public interface UserDetailsService<I,U> {
+public interface UserDetailsService<I> {
 
-    U findMemberByEmail(I mail);
+    UserDetails findMemberByEmail(I mail);
 }
