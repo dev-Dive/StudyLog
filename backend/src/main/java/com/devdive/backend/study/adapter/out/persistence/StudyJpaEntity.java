@@ -1,4 +1,4 @@
-package com.devdive.backend.study.adapter.out;
+package com.devdive.backend.study.adapter.out.persistence;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

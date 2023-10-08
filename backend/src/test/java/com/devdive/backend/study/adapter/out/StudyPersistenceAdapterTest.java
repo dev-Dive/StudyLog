@@ -1,8 +1,10 @@
 package com.devdive.backend.study.adapter.out;
 
-import com.devdive.backend.study.adapter.out.repository.MappingTableStudyMemberRepository;
-import com.devdive.backend.study.adapter.out.repository.MemberStudyRepository;
-import com.devdive.backend.study.adapter.out.repository.StudyRepository;
+import com.devdive.backend.study.adapter.out.persistence.MemberStudyJpaEntity;
+import com.devdive.backend.study.adapter.out.persistence.StudyPersistenceAdapter;
+import com.devdive.backend.study.adapter.out.persistence.repository.MappingTableStudyMemberRepository;
+import com.devdive.backend.study.adapter.out.persistence.repository.MemberStudyRepository;
+import com.devdive.backend.study.adapter.out.persistence.repository.StudyRepository;
 import com.devdive.backend.study.application.dto.StudyCreateDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
