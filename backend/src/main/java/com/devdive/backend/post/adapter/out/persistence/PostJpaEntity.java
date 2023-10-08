@@ -1,4 +1,4 @@
-package com.devdive.backend.post.adapter.out;
+package com.devdive.backend.post.adapter.out.persistence;
 
 import jakarta.persistence.*;
 import lombok.*;
