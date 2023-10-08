@@ -1,7 +1,7 @@
-package com.devdive.backend.study.adapter.out.compositekey;
+package com.devdive.backend.study.adapter.out.persistence.compositekey;
 
-import com.devdive.backend.study.adapter.out.StudyJpaEntity;
-import com.devdive.backend.study.adapter.out.MemberStudyJpaEntity;
+import com.devdive.backend.study.adapter.out.persistence.StudyJpaEntity;
+import com.devdive.backend.study.adapter.out.persistence.MemberStudyJpaEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

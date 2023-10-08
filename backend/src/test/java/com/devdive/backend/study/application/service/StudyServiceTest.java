@@ -1,7 +1,7 @@
 package com.devdive.backend.study.application.service;
 
 import com.devdive.backend.study.application.dto.StudyCreateDto;
-import com.devdive.backend.study.application.port.out.persistence.LoadStudyPort;
+import com.devdive.backend.study.application.port.out.LoadStudyPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

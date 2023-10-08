@@ -1,6 +1,6 @@
-package com.devdive.backend.study.adapter.out;
+package com.devdive.backend.study.adapter.out.persistence;
 
-import com.devdive.backend.study.adapter.out.compositekey.StudyMembersId;
+import com.devdive.backend.study.adapter.out.persistence.compositekey.StudyMembersId;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
