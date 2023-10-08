@@ -9,8 +9,11 @@ public class SecurityContextPersistenceFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        SecurityContextHolder.addContext(SecurityContextHolder.createEmptyContext());
-        chain.doFilter(request,response);
-        SecurityContextHolder.clearContext();
+        try {
+            SecurityContextHolder.addContext(SecurityContextHolder.createEmptyContext());
+            chain.doFilter(request,response);
+        }finally {
+            SecurityContextHolder.clearContext();
+        }
     }
 }
