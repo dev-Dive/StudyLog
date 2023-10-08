@@ -1,6 +1,7 @@
 package com.devdive.backend.security.config.builder;
 
 import com.devdive.backend.security.config.builder.configur.*;
+import com.devdive.backend.security.core.UserDetailsService;
 import com.devdive.backend.security.filter.DefaultChainFilter;
 import jakarta.servlet.Filter;
 
@@ -11,7 +12,7 @@ import java.util.List;
 public class HttpSecurity {
     private String pattern="/**";
     private List<Filter> filters=new ArrayList<>();
-    private LinkedHashMap<Class<? extends SecurityConfigurer>,SecurityConfigurer> configurers= new LinkedHashMap<>();
+    private final LinkedHashMap<Class<? extends SecurityConfigurer>,SecurityConfigurer> configurers= new LinkedHashMap<>();
     private FilterComparator comparator=new FilterComparator();
 
     public SecurityContextConfigurer securityContext(){
@@ -52,10 +53,13 @@ public class HttpSecurity {
 
     private SecurityConfigurer getOrApply(SecurityConfigurer securityConfigurer) {
         Class<? extends SecurityConfigurer> clz = securityConfigurer.getClass();
-        synchronized (configurers){
-            AbstractSecurityConfigurer configurer = (AbstractSecurityConfigurer)configurers.getOrDefault(clz, securityConfigurer);
-            configurer.setBuilder(this);
-            configurers.put(clz, configurer);
+
+        if(securityConfigurer instanceof AbstractSecurityConfigurer){
+            synchronized (configurers) {
+                AbstractSecurityConfigurer configurer = (AbstractSecurityConfigurer) configurers.getOrDefault(clz, securityConfigurer);
+                configurer.setBuilder(this);
+                configurers.put(clz, configurer);
+            }
         }
 
         return configurers.get(clz);
