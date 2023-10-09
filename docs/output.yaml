@@ -71,8 +71,12 @@ paths:
                     type: string
                   refreshToken:
                     type: string
+        '400':
+          description: 유효하지 않은 요청 - 요청 바디에 필요한 값이 없음
         '401':
           description: 토큰 인증 실패
+        '415':
+          description: Content-Type 헤더가 application/json이 아님
   /api/v1/posts:
     post:
       summary: 글 작성
