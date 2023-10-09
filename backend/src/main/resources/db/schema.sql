@@ -4,6 +4,8 @@ CREATE TABLE `members`
     `name`        VARCHAR(255) NOT NULL,
     `mail`        VARCHAR(255) NOT NULL,
     `profile_url` VARCHAR(255) NULL,
+    `created_at`  DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at`  DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     PRIMARY KEY (id)
 );
 
@@ -13,6 +15,8 @@ CREATE TABLE `studies`
     `name`        VARCHAR(255) NOT NULL,
     `description` VARCHAR(255) NOT NULL,
     `profile_url` VARCHAR(255) NULL,
+    `created_at`  DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at`  DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     PRIMARY KEY (id)
 );
 
@@ -24,33 +28,43 @@ CREATE TABLE `posts`
     `title`         VARCHAR(255) NOT NULL,
     `subtitle`      VARCHAR(255) NOT NULL,
     `study_id`      BIGINT       NOT NULL,
+    `created_at`    DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at`    DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE `tags`
 (
-    `id`   BIGINT       NOT NULL,
-    `name` VARCHAR(255) NOT NULL,
+    `id`         BIGINT       NOT NULL AUTO_INCREMENT,
+    `name`       VARCHAR(255) NOT NULL,
+    `created_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE `study_members`
 (
-    `member_id` BIGINT       NOT NULL,
-    `study_id`  BIGINT       NOT NULL,
-    `role`      VARCHAR(255) NOT NULL
+    `member_id`  BIGINT       NOT NULL,
+    `study_id`   BIGINT       NOT NULL,
+    `role`       VARCHAR(255) NOT NULL,
+    `created_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
 
 CREATE TABLE `post_authors`
 (
-    `member_id` BIGINT NOT NULL,
-    `post_id`   BIGINT NOT NULL
+    `member_id`  BIGINT      NOT NULL,
+    `post_id`    BIGINT      NOT NULL,
+    `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
 
 CREATE TABLE `post_tags`
 (
-    `post_id` BIGINT NOT NULL,
-    `tag_id`  BIGINT NOT NULL
+    `post_id`    BIGINT      NOT NULL,
+    `tag_id`     BIGINT      NOT NULL,
+    `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    `updated_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
 );
 
 ALTER TABLE `study_members`
