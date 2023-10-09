@@ -48,7 +48,8 @@ CREATE TABLE `study_members`
     `study_id`   BIGINT       NOT NULL,
     `role`       VARCHAR(255) NOT NULL,
     `created_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    `updated_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+    `updated_at` DATETIME(6)  NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (`member_id`, `study_id`)
 );
 
 CREATE TABLE `post_authors`
@@ -56,7 +57,8 @@ CREATE TABLE `post_authors`
     `member_id`  BIGINT      NOT NULL,
     `post_id`    BIGINT      NOT NULL,
     `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    `updated_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+    `updated_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (`member_id`, `post_id`)
 );
 
 CREATE TABLE `post_tags`
@@ -64,7 +66,8 @@ CREATE TABLE `post_tags`
     `post_id`    BIGINT      NOT NULL,
     `tag_id`     BIGINT      NOT NULL,
     `created_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-    `updated_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6)
+    `updated_at` DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    PRIMARY KEY (`post_id`, `tag_id`)
 );
 
 ALTER TABLE `study_members`
