@@ -1,3 +1,5 @@
+USE `study_log`;
+
 CREATE TABLE `members`
 (
     `id`          BIGINT       NOT NULL AUTO_INCREMENT,
