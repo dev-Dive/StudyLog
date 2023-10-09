@@ -1,6 +1,6 @@
 CREATE TABLE `members`
 (
-    `id`          BIGINT       NOT NULL,
+    `id`          BIGINT       NOT NULL AUTO_INCREMENT,
     `name`        VARCHAR(255) NOT NULL,
     `mail`        VARCHAR(255) NOT NULL,
     `profile_url` VARCHAR(255) NULL,
@@ -9,7 +9,7 @@ CREATE TABLE `members`
 
 CREATE TABLE `studies`
 (
-    `id`          BIGINT       NOT NULL,
+    `id`          BIGINT       NOT NULL AUTO_INCREMENT,
     `name`        VARCHAR(255) NOT NULL,
     `description` VARCHAR(255) NOT NULL,
     `profile_url` VARCHAR(255) NULL,
@@ -18,7 +18,7 @@ CREATE TABLE `studies`
 
 CREATE TABLE `posts`
 (
-    `id`            BIGINT       NOT NULL,
+    `id`            BIGINT       NOT NULL AUTO_INCREMENT,
     `content`       LONGTEXT     NOT NULL,
     `thumbnail_url` VARCHAR(255) NOT NULL,
     `title`         VARCHAR(255) NOT NULL,
