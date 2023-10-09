@@ -1,5 +1,13 @@
 USE `study_log`;
 
+DROP table if exists `members` CASCADE;
+DROP table if exists `studies` CASCADE;
+DROP table if exists `posts` CASCADE;
+DROP table if exists `tags` CASCADE;
+DROP table if exists `study_members` CASCADE;
+DROP table if exists `post_authors` CASCADE;
+DROP table if exists `post_tags` CASCADE;
+
 CREATE TABLE `members`
 (
     `id`          BIGINT       NOT NULL AUTO_INCREMENT,
