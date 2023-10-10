@@ -7,12 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "study_member")
+@Entity(name = "study_members")
+@Table(name = "study_members")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @IdClass(StudyMembersId.class)
-public class MappingTableStudyMemberJpaEntity {
+public class StudyMemberJpaEntity {
 
     @Id
     @ManyToOne
