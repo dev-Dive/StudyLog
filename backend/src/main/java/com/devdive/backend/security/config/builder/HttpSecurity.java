@@ -57,6 +57,10 @@ public class HttpSecurity {
         return this;
     }
 
+    public void removeConfigure(Class<? extends SecurityConfigurer> clazz){
+        configurers.remove(clazz);
+    }
+
     private SecurityConfigurer getOrApply(SecurityConfigurer securityConfigurer) {
         Class<? extends SecurityConfigurer> clz = securityConfigurer.getClass();
 

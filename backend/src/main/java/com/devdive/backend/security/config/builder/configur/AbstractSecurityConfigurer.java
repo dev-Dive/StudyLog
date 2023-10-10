@@ -17,4 +17,7 @@ public abstract class AbstractSecurityConfigurer implements SecurityConfigurer {
     public void setBuilder(HttpSecurity builder) {
         this.builder = builder;
     }
+    public void disable(){
+        getBuilder().removeConfigure(getClass());
+    }
 }
