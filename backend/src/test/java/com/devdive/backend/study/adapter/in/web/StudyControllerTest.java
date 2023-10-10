@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = StudyController.class)
 class StudyControllerTest {
 
-
     @MockBean
     StudyUseCase studyUseCase;
 
@@ -36,7 +35,7 @@ class StudyControllerTest {
 
         // when
         RequestBuilder request = MockMvcRequestBuilders
-                .post("/v1/study/create")
+                .post("/api/v1/studies")
                 .content(mapper.writeValueAsString(dto))
                 .contentType(MediaType.APPLICATION_JSON);
 

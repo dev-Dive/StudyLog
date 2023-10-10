@@ -26,7 +26,7 @@ public class StudyPersistenceAdapter implements LoadStudyPort {
 
         studyRepository.save(studyJpaEntity);
 
-        MappingTableStudyMemberJpaEntity mappingTable  = new MappingTableStudyMemberJpaEntity();
+        StudyMemberJpaEntity mappingTable  = new StudyMemberJpaEntity();
         mappingTable.setMember(member);
         mappingTable.setStudy(studyJpaEntity);
 
