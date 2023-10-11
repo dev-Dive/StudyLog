@@ -92,6 +92,5 @@ public class PostCreateTest {
         assertThrows(AssertionFailedError.class, () -> {
             assertThat(postId).isEqualTo(postViewDto.getId() + 1);
         });
-
     }
 }
