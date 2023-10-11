@@ -9,18 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 public class PostController {
 
     private final PostUseCase useCase;
 
-    @PostMapping("/v1/posts")
+    @PostMapping
     ResponseEntity<Void> createPost(@RequestBody @Valid PostCreateRequestDto dto) {
         useCase.createPost(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/v1/posts/{postId}")
+    @GetMapping("/{postId}")
     ResponseEntity<Void> viewPost(@PathVariable Long postId) {
         useCase.viewPost(postId);
         return new ResponseEntity<>(HttpStatus.OK);

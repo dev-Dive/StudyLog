@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "post_authors")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
