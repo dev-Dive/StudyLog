@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity(name = "studies")
+@Entity
+@Table(name = "studies")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
