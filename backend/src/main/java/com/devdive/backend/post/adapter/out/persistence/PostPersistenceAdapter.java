@@ -24,13 +24,14 @@ public class PostPersistenceAdapter implements LoadPostPort {
 
         MemberPostJpaEntity member = memberPostRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
 
-        PostJpaEntity post = new PostJpaEntity();
-        post.setContent(dto.getContent());
-        post.setSubtitle(dto.getSubtitle());
-        post.setTitle(dto.getTitle());
-        post.setThumbnail_url(dto.getThumbnailUrl());
-        post.setTag(dto.getTags());
-        post.setStudyId(dto.getStudyId());
+        PostJpaEntity post = new PostJpaEntity(
+                dto.getStudyId(),
+                dto.getThumbnailUrl(),
+                dto.getTitle(),
+                dto.getSubtitle(),
+                dto.getContent(),
+                dto.getTags()
+        );
 
         postRepository.save(post);
 
@@ -49,7 +50,7 @@ public class PostPersistenceAdapter implements LoadPostPort {
         return new PostViewDto(
                 entity.getId(),
                 entity.getStudyId(),
-                entity.getThumbnail_url(),
+                entity.getThumbnailUrl(),
                 entity.getTitle(),
                 entity.getSubtitle(),
                 entity.getContent(),

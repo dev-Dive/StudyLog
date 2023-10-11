@@ -30,7 +30,7 @@ public class PostAcceptanceTest extends AcceptanceTest {
                 .body(request.toString())
                .contentType(MediaType.APPLICATION_JSON_VALUE)
         .when()
-               .post("/v1/posts")
+               .post("/api/v1/posts")
         .then()
                 .log().all()
                 .assertThat()

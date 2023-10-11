@@ -26,10 +26,9 @@ import static org.mockito.Mockito.when;
 
 @DataJpaTest
 @ActiveProfiles("test")
-@Transactional
 public class PosAdapterTest {
 
-    @MockBean
+    @Autowired
     MemberPostRepository memberPostRepository;
 
     @Autowired
@@ -77,14 +76,13 @@ public class PosAdapterTest {
         postPersistenceAdapter.createPost(dto2);
 
         // then
+        PostJpaEntity savedPost = postRepository.findById(1L).get();
+        assertThat(savedPost.getId()).isEqualTo(1L);
         PostJpaEntity savedPost2 = postRepository.findById(2L).get();
         assertThat(savedPost2.getId()).isEqualTo(2L);
 
         MemberPostJpaEntity savedMember = memberPostRepository.findById(1L).get();
         assertThat(savedMember.getId()).isEqualTo(1L);
-
-        PostJpaEntity savedPost = postRepository.findById(1L).get();
-        assertThat(savedPost.getId()).isEqualTo(1L);
     }
 
     @Test
@@ -116,7 +114,7 @@ public class PosAdapterTest {
         // then
         assertEquals(1L, saved.getId());
         assertEquals(dto.getStudyId(), saved.getStudyId());
-        assertEquals(dto.getThumbnailUrl(), saved.getThumbnail_url());
+        assertEquals(dto.getThumbnailUrl(), saved.getThumbnailUrl());
         assertEquals(dto.getTitle(), saved.getTitle());
         assertEquals(dto.getSubtitle(), saved.getSubtitle());
         assertEquals(dto.getContent(), saved.getContent());
