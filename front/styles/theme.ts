@@ -41,6 +41,14 @@ export const theme = {
     '5xl': '1.5rem',
     '6xl': '1.875rem',
   },
+  grid: {
+    base: {
+      display: 'grid',
+      'grid-template-columns': 'repeat(12, 1fr)',
+      gap: '20px',
+      margin: '0 20px',
+    },
+  },
 }
 
 const text = {
