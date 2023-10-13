@@ -1,9 +1,10 @@
 'use client'
 
-import Image from 'next/image'
-import styles from './page.module.css'
 import Main from '@/components/Main/Main'
 import { useEffect } from 'react'
+import GlobalStyle from '@/styles/global'
+import { ThemeProvider } from '@emotion/react'
+import { theme } from '@/styles/theme'
 
 export default function Home() {
   useEffect(() => {
@@ -17,5 +18,10 @@ export default function Home() {
     })
   }, [])
 
-  return <Main />
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Main />
+    </ThemeProvider>
+  )
 }
