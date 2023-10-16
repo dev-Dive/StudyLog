@@ -26,7 +26,7 @@ export const theme = {
     nanumsquare: 'NanumSquare',
   },
   boxShadow: {
-    card_shadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
+    cardShadow: '0px 4px 4px 0px rgba(0,0,0,0.25)',
   },
   borderRadius: {
     none: '0',

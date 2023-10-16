@@ -1,14 +1,15 @@
 import styled from '@emotion/styled'
-import { color } from '../../../styles/theme'
 
-export const Modal = styled.div`
+// ${({ theme }) => theme.colors.black};
+
+export const ModalStyle = styled.div`
   padding: 1.5rem;
   width: 30.5625rem;
   height: 24.6875rem;
   border-radius: 0.313rem;
   display: flex;
   flex-direction: column;
-  background-color: ${color.gray2};
+  background-color: ${({ theme }) => theme.color.black};
 
   h1 {
     margin-top: 4.8rem;
@@ -43,13 +44,14 @@ export const Modal = styled.div`
     width: 70%;
   }
 `
+
 export const EmailBtn = styled.button`
-  background: ${color.lightMain1};
+  background: ${({ theme }) => theme.color.light1};
   border: 0;
   padding: 0.8rem 1rem;
   font-size: 1rem;
   height: 2.875rem;
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
   font-weight: 700;
   width: 25%;
 `
@@ -61,7 +63,7 @@ export const ToRegister = styled.div`
   button {
     background-color: transparent;
     border: 0;
-    color: ${color.mainColor};
+    color: ${({ theme }) => theme.color.primary};
 
     :hover {
       text-decoration: underline;

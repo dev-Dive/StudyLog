@@ -3,7 +3,7 @@
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
 import BackDrop from './BackDrop'
-import { Modal, EmailBtn, ToRegister } from './Modal.styles'
+import { ModalStyle, EmailBtn, ToRegister } from './Modal.styles'
 import { isValidEmail } from '@/utils/validation'
 import { ToastContainer } from 'react-toastify'
 import { notifyError } from '@/components/Toastify/error'
@@ -40,7 +40,7 @@ export default function LoginModal({ setModalHandler }: LoginModalProps) {
   return (
     <>
       <BackDrop loginModalHandler={setModalHandler}>
-        <Modal>
+        <ModalStyle>
           <div>
             <AiOutlineClose size={23} onClick={setModalHandler} />
           </div>
@@ -68,7 +68,7 @@ export default function LoginModal({ setModalHandler }: LoginModalProps) {
               </ToRegister>
             )}
           </div>
-        </Modal>
+        </ModalStyle>
         <ToastContainer
           position="top-right" // 알람 위치 지정
           autoClose={3000} // 자동 off 시간

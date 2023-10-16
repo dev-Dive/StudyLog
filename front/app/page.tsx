@@ -2,9 +2,9 @@
 
 import Main from '@/components/Main/Main'
 import { useEffect } from 'react'
-import GlobalStyle from '@/styles/global'
-import { ThemeProvider } from '@emotion/react'
+import { ThemeProvider, Global } from '@emotion/react'
 import { theme } from '@/styles/theme'
+import { globalStyle } from '@/styles/global'
 
 export default function Home() {
   useEffect(() => {
@@ -19,9 +19,11 @@ export default function Home() {
   }, [])
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Main />
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <Global styles={(theme) => globalStyle(theme)} />
+        <Main />
+      </ThemeProvider>
+    </>
   )
 }
