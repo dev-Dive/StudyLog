@@ -1,6 +1,6 @@
 package com.devdive.backend.study.application.port.out;
 
-import com.devdive.backend.study.application.dto.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateDto;
 
 public interface LoadStudyPort {
 

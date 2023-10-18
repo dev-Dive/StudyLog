@@ -4,7 +4,6 @@ import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import com.devdive.backend.persistance.entities.PostJpaEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.io.Serializable;
 import java.util.Objects;
 

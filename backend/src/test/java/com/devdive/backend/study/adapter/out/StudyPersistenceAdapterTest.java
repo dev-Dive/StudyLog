@@ -5,7 +5,7 @@ import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.study.adapter.out.persistence.StudyPersistenceAdapter;
 import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.persistance.repository.StudyRepository;
-import com.devdive.backend.study.application.dto.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
