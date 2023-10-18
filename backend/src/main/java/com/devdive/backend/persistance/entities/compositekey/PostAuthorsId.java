@@ -1,5 +1,7 @@
-package com.devdive.backend.post.adapter.out;
+package com.devdive.backend.persistance.entities.compositekey;
 
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.persistance.entities.PostJpaEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +12,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class PostAuthorsId implements Serializable {
 
-    private MemberPostJpaEntity member;
+    private MemberJpaEntity member;
     private PostJpaEntity post;
 
     @Override

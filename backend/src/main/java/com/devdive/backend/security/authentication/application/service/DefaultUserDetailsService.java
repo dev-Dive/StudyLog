@@ -4,24 +4,23 @@ package com.devdive.backend.security.authentication.application.service;
 import com.devdive.backend.security.authentication.domain.User;
 import com.devdive.backend.security.authentication.domain.UserDetails;
 import com.devdive.backend.security.authentication.application.port.in.UserDetailsService;
-import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort;
-import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort.UserData;
+import com.devdive.backend.security.authentication.application.port.out.SecurityLoadMemberPort;
 
 public class DefaultUserDetailsService<I> implements UserDetailsService<I> {
 
-    private final LoadMemberPort loadMemberPort;
+    private final SecurityLoadMemberPort securityLoadMemberPort;
 
-    public DefaultUserDetailsService(LoadMemberPort loadMemberPort) {
-        this.loadMemberPort = loadMemberPort;
+    public DefaultUserDetailsService(SecurityLoadMemberPort securityLoadMemberPort) {
+        this.securityLoadMemberPort = securityLoadMemberPort;
     }
 
     @Override
     public UserDetails findMemberByEmail(I mail) {
-        UserData userData = loadMemberPort.findByEmail((String) mail);
+        User userData = securityLoadMemberPort.findByMail((String) mail);
         if (userData == null) {
             return null;
         }
 
-        return new User(userData.getMail(), userData.getId());
+        return userData;
     }
 }

@@ -1,5 +1,6 @@
 package com.devdive.backend.auth.adapter.in.web;
 
+import com.devdive.backend.auth.application.port.in.RegisterUseCase;
 import com.devdive.backend.auth.application.port.in.SendMailUseCase;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -23,6 +24,9 @@ public class MailAuthControllerTest {
     @MockBean
     private SendMailUseCase sendMailUseCase;
 
+    @MockBean
+    private RegisterUseCase registerUseCase;
+
     @Autowired
     private MockMvc mockMvc;
 
@@ -37,7 +41,7 @@ public class MailAuthControllerTest {
         jsonObject.put("mail", email);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post("/sendMail")
+                .post("/api/v1/auth/mail/send")
                 .content(jsonObject.toString())
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -56,7 +60,7 @@ public class MailAuthControllerTest {
         jsonObject.put("mail", mail);
 
         RequestBuilder requestBuilder = MockMvcRequestBuilders
-                .post("/sendMail")
+                .post("/api/v1/auth/mail/send")
                 .content(jsonObject.toString())
                 .contentType(MediaType.APPLICATION_JSON);
 

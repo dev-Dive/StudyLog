@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,7 +49,7 @@ class PostControllerTest {
 
         // when
         RequestBuilder request = MockMvcRequestBuilders
-                .post("/v1/posts")
+                .post("/api/v1/posts")
                 .content(mapper.writeValueAsString(dto))
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -71,10 +72,10 @@ class PostControllerTest {
                 "sub",
                 "content",
                 List.of("tag1", "tag2"));
-        when(useCase.viewPost(postId)).thenReturn(postViewDto);
+        when(useCase.viewPost(eq(postId))).thenReturn(postViewDto);
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/v1/posts/" + postId)
+                .get("/api/v1/posts/" + postId)
                 .contentType(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(request)

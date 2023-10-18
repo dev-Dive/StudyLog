@@ -1,8 +1,7 @@
-package com.devdive.backend.post.adapter.out.persistence;
+package com.devdive.backend.persistance.entities;
 
-import com.devdive.backend.post.adapter.out.persistence.compositekey.PostAuthorsId;
+import com.devdive.backend.persistance.entities.compositekey.PostAuthorsId;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,14 +10,14 @@ import lombok.Setter;
 @Table(name = "post_authors")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @IdClass(PostAuthorsId.class)
-public class PostAuthorsEntity {
+public class PostMemberJpaEntity {
 
     @Id
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private MemberPostJpaEntity member;
+    private MemberJpaEntity member;
 
 
     @Id

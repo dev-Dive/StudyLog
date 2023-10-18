@@ -1,6 +1,7 @@
 package com.devdive.backend.auth.adapter.out;
 
 import com.devdive.backend.auth.domain.Member;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import org.springframework.stereotype.Component;
 
 @Component

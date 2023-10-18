@@ -2,8 +2,8 @@ package com.devdive.backend.acceptance;
 
 import com.devdive.backend.auth.application.service.jwt.JwtProvider;
 import com.devdive.backend.hello.adaptor.in.web.HelloSecurityConfig;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import com.devdive.backend.security.authentication.Authentication;
-import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort;
 import com.devdive.backend.security.authentication.adaptor.out.persistent.UserDataRepository;
 import com.devdive.backend.security.authentication.domain.UserDetails;
 import com.devdive.backend.security.core.*;
@@ -36,7 +36,8 @@ public class SecurityAcceptanceTest extends AcceptanceTest {
     @BeforeEach
     @Transactional
     void init() {
-        userDataRepository.save(new LoadMemberPort.UserData(1L, "email@email.com"));
+
+        userDataRepository.save(new MemberJpaEntity(1L,"name","email@email.com","profileUrl"));
     }
 
     @DisplayName("사용자는 로그인 인증 링크로 로그인을 할 수 있다.")

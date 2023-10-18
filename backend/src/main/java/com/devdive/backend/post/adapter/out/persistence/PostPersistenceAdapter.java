@@ -1,8 +1,11 @@
 package com.devdive.backend.post.adapter.out.persistence;
 
-import com.devdive.backend.post.adapter.out.persistence.repository.MemberPostRepository;
-import com.devdive.backend.post.adapter.out.persistence.repository.PostAuthorsRepository;
-import com.devdive.backend.post.adapter.out.persistence.repository.PostRepository;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.persistance.entities.PostJpaEntity;
+import com.devdive.backend.persistance.entities.PostMemberJpaEntity;
+import com.devdive.backend.persistance.repository.MemberRepository;
+import com.devdive.backend.persistance.repository.PostMemberRepository;
+import com.devdive.backend.persistance.repository.PostRepository;
 import com.devdive.backend.post.application.dto.PostCreateRequestDto;
 import com.devdive.backend.post.application.dto.PostViewDto;
 import com.devdive.backend.post.application.port.out.LoadPostPort;
@@ -13,16 +16,16 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class PostPersistenceAdapter implements LoadPostPort {
 
-    private final MemberPostRepository memberPostRepository;
+    private final MemberRepository memberPostRepository;
 
     private final PostRepository postRepository;
 
-    private final PostAuthorsRepository postAuthorsRepository;
+    private final PostMemberRepository postMemberRepository;
 
     @Override
     public void createPost(PostCreateRequestDto dto) {
 
-        MemberPostJpaEntity member = memberPostRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
+        MemberJpaEntity member = memberPostRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
 
         PostJpaEntity post = new PostJpaEntity(
                 dto.getStudyId(),
@@ -35,11 +38,11 @@ public class PostPersistenceAdapter implements LoadPostPort {
 
         postRepository.save(post);
 
-        PostAuthorsEntity mappingTable = new PostAuthorsEntity();
+        PostMemberJpaEntity mappingTable = new PostMemberJpaEntity();
         mappingTable.setMember(member);
         mappingTable.setPost(post);
 
-        postAuthorsRepository.save(mappingTable);
+        postMemberRepository.save(mappingTable);
     }
 
     @Override
