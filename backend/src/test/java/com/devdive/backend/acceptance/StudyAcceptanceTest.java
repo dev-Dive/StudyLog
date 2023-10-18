@@ -2,7 +2,7 @@ package com.devdive.backend.acceptance;
 
 import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import com.devdive.backend.persistance.repository.MemberRepository;
-import com.devdive.backend.study.application.dto.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateDto;
 import com.devdive.backend.study.application.port.in.StudyUseCase;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

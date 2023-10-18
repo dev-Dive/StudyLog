@@ -1,6 +1,6 @@
 package com.devdive.backend.study.adapter.in.web;
 
-import com.devdive.backend.study.application.dto.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateDto;
 import com.devdive.backend.study.application.port.in.StudyUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
