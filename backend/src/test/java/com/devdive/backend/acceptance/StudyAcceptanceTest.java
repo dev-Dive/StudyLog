@@ -2,15 +2,18 @@ package com.devdive.backend.acceptance;
 
 import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import com.devdive.backend.persistance.repository.MemberRepository;
-import com.devdive.backend.study.application.port.in.StudyCreateDto;
+import com.devdive.backend.auth.application.service.jwt.JwtProvider;
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.authentication.domain.User;
+import com.devdive.backend.security.core.AuthenticationCache;
+import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import com.devdive.backend.study.application.port.in.StudyUseCase;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeEach;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
@@ -22,25 +25,53 @@ class StudyAcceptanceTest extends AcceptanceTest {
     StudyUseCase useCase;
 
     @Autowired
-    private MemberRepository memberRepository;
+    JwtProvider accessJwtProvider;
 
-    @BeforeEach
-    @Transactional
-    public void init(){
-        memberRepository.save(new MemberJpaEntity(1L,"mail","mail@naver.com",""));
-    }
 
     @Test
     @DisplayName("회원은 스터디를 생성할 수 있다.")
-    void test() throws JsonProcessingException {
+    void test() throws JSONException {
         // given
-        ObjectMapper mapper = new ObjectMapper();
-        StudyCreateDto dto = new StudyCreateDto(1L, "name1", "desc1");
+        String mail = "rhwlgns@gmail.com";
 
+        AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
+        cache.removeAll();
+
+        cache.addAuthentication(mail, new Authentication() {
+
+            private User user = new User(mail, 1L);
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return user;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return "MEMBER";
+            }
+        });
+
+        JSONObject resquestJson = new JSONObject();
+        resquestJson.put("name", mail);
+        resquestJson.put("description", mail);
+
+        String accessToken=accessJwtProvider.createJwtToken(mail);
         // when, then
         given()
                 .log().all()
-                .body(mapper.writeValueAsString(dto))
+                .header(HttpHeaders.AUTHORIZATION,"bearer"+" "+accessToken)
+                .body(resquestJson.toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         .when()
                 .post("/api/v1/studies")

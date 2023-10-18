@@ -1,8 +1,11 @@
 package com.devdive.backend.study.adapter.in.web;
 
-import com.devdive.backend.study.application.port.in.StudyCreateDto;
+import com.devdive.backend.security.authentication.Authentication;
+import com.devdive.backend.security.authentication.domain.User;
+import com.devdive.backend.security.core.securitycontext.SecurityContext;
+import com.devdive.backend.security.core.securitycontext.SecurityContextHolder;
 import com.devdive.backend.study.application.port.in.StudyUseCase;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = StudyController.class)
@@ -29,14 +31,43 @@ class StudyControllerTest {
     @DisplayName("스터디 생성 컨트롤러 테스트")
     public void createStudy() throws Exception {
         // given
-        StudyCreateDto dto = new StudyCreateDto(1L, "name1", "desc1");
-        doNothing().when(studyUseCase).createStudy(dto);
-        ObjectMapper mapper = new ObjectMapper();
+        String mail = "rhwlgns@gmail.com";
+
+        SecurityContext securityContext =SecurityContextHolder.createEmptyContext();
+        securityContext.setAuthentication(new Authentication() {
+
+            private User user = new User(mail, 1L);
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return user;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return null;
+            }
+        });
+        SecurityContextHolder.addContext(securityContext);
+
+        JSONObject resquestJson = new JSONObject();
+        resquestJson.put("name", mail);
+        resquestJson.put("description", mail);
 
         // when
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/api/v1/studies")
-                .content(mapper.writeValueAsString(dto))
+                .content(resquestJson.toString())
                 .contentType(MediaType.APPLICATION_JSON);
 
         // then
