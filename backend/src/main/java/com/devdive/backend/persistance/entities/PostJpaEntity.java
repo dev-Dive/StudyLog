@@ -1,4 +1,4 @@
-package com.devdive.backend.post.adapter.out.persistence;
+package com.devdive.backend.persistance.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "posts")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class PostJpaEntity {
 
     @Id
@@ -38,7 +38,7 @@ public class PostJpaEntity {
     private List<String> tag;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<PostAuthorsEntity> postAuthors = new ArrayList<>();
+    private List<PostMemberJpaEntity> memberMappings = new ArrayList<>();
 
     public PostJpaEntity(Long studyId,
                          String thumbnailUrl,

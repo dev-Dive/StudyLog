@@ -42,7 +42,7 @@ class AuthAcceptanceTest extends AcceptanceTest {
                 .body(request.toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         .when()
-                .post("/api/v1/auth/mail/sendMail")
+                .post("/api/v1/auth/mail/send")
         .then()
                 .log().all()
                 .assertThat()

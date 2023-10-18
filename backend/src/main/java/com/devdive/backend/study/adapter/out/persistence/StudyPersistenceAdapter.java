@@ -1,8 +1,11 @@
 package com.devdive.backend.study.adapter.out.persistence;
 
-import com.devdive.backend.study.adapter.out.persistence.repository.MappingTableStudyMemberRepository;
-import com.devdive.backend.study.adapter.out.persistence.repository.MemberStudyRepository;
-import com.devdive.backend.study.adapter.out.persistence.repository.StudyRepository;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.persistance.entities.StudyJpaEntity;
+import com.devdive.backend.persistance.entities.StudyMemberJpaEntity;
+import com.devdive.backend.persistance.repository.StudyMemberRepository;
+import com.devdive.backend.persistance.repository.MemberRepository;
+import com.devdive.backend.persistance.repository.StudyRepository;
 import com.devdive.backend.study.application.dto.StudyCreateDto;
 import com.devdive.backend.study.application.port.out.LoadStudyPort;
 import lombok.RequiredArgsConstructor;
@@ -12,13 +15,13 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class StudyPersistenceAdapter implements LoadStudyPort {
 
-    private final MemberStudyRepository memberStudyRepository;
+    private final MemberRepository memberStudyRepository;
     private final StudyRepository studyRepository;
-    private final MappingTableStudyMemberRepository mappingTableStudyMemberRepository;
+    private final StudyMemberRepository studyMemberRepository;
 
     @Override
     public void createStudy(StudyCreateDto dto) {
-        MemberStudyJpaEntity member = memberStudyRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
+        MemberJpaEntity member = memberStudyRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
 
         StudyJpaEntity studyJpaEntity = new StudyJpaEntity();
         studyJpaEntity.setName(dto.getName());
@@ -30,6 +33,6 @@ public class StudyPersistenceAdapter implements LoadStudyPort {
         mappingTable.setMember(member);
         mappingTable.setStudy(studyJpaEntity);
 
-        mappingTableStudyMemberRepository.save(mappingTable);
+        studyMemberRepository.save(mappingTable);
     }
 }

@@ -1,10 +1,10 @@
 package com.devdive.backend.study.adapter.out;
 
-import com.devdive.backend.study.adapter.out.persistence.MemberStudyJpaEntity;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.study.adapter.out.persistence.StudyPersistenceAdapter;
-import com.devdive.backend.study.adapter.out.persistence.repository.MappingTableStudyMemberRepository;
-import com.devdive.backend.study.adapter.out.persistence.repository.MemberStudyRepository;
-import com.devdive.backend.study.adapter.out.persistence.repository.StudyRepository;
+import com.devdive.backend.persistance.repository.StudyMemberRepository;
+import com.devdive.backend.persistance.repository.StudyRepository;
 import com.devdive.backend.study.application.dto.StudyCreateDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
@@ -25,13 +25,13 @@ import static org.mockito.Mockito.when;
 class StudyPersistenceAdapterTest {
 
     @MockBean
-    MemberStudyRepository memberPostRepository;
+    MemberRepository memberRepository;
 
     @Autowired
     StudyRepository studyRepository;
 
     @Autowired
-    MappingTableStudyMemberRepository mappingTableStudyMemberRepository;
+    StudyMemberRepository studyMemberRepository;
 
     @Autowired
     EntityManager entityManager;
@@ -40,10 +40,10 @@ class StudyPersistenceAdapterTest {
     @DisplayName("게시글 및 매핑 테이블 생성 테스트")
     public void postMemberMappingTest() {
         // given
-        MemberStudyJpaEntity member1 = mock(MemberStudyJpaEntity.class);
+        MemberJpaEntity member1 = mock(MemberJpaEntity.class);
         entityManager.persist(member1); // 영속화
         when(member1.getId()).thenReturn(1L);
-        when(memberPostRepository.findById(1L)).thenReturn(Optional.of(member1));
+        when(memberRepository.findById(1L)).thenReturn(Optional.of(member1));
 
         StudyCreateDto dto1 = new StudyCreateDto(
                 member1.getId(),
@@ -56,8 +56,8 @@ class StudyPersistenceAdapterTest {
                 "desc2"
         );
 
-        StudyPersistenceAdapter adapter = new StudyPersistenceAdapter(memberPostRepository,
-                studyRepository, mappingTableStudyMemberRepository);
+        StudyPersistenceAdapter adapter = new StudyPersistenceAdapter(memberRepository,
+                studyRepository, studyMemberRepository);
 
 
         // when

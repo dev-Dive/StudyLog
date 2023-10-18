@@ -1,8 +1,7 @@
-package com.devdive.backend.study.adapter.out.persistence;
+package com.devdive.backend.persistance.entities;
 
-import com.devdive.backend.study.adapter.out.persistence.compositekey.StudyMembersId;
+import com.devdive.backend.persistance.entities.compositekey.StudyMembersId;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,14 +10,14 @@ import lombok.Setter;
 @Table(name = "study_members")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @IdClass(StudyMembersId.class)
 public class StudyMemberJpaEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "member_study_id")
-    private MemberStudyJpaEntity member;
+    @JoinColumn(name = "member_id")
+    private MemberJpaEntity member;
 
 
     @Id
