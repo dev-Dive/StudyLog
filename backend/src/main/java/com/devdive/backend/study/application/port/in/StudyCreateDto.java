@@ -1,5 +1,6 @@
 package com.devdive.backend.study.application.port.in;
 
+import com.devdive.backend.common.SelfValidating;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
