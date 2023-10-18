@@ -1,6 +1,6 @@
 package com.devdive.backend.study.application.service;
 
-import com.devdive.backend.study.application.dto.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateDto;
 import com.devdive.backend.study.application.port.in.StudyUseCase;
 import com.devdive.backend.study.application.port.out.LoadStudyPort;
 import lombok.RequiredArgsConstructor;

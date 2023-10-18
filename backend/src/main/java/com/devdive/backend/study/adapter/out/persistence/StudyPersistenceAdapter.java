@@ -1,12 +1,13 @@
 package com.devdive.backend.study.adapter.out.persistence;
 
+
 import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import com.devdive.backend.persistance.entities.StudyJpaEntity;
 import com.devdive.backend.persistance.entities.StudyMemberJpaEntity;
 import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.persistance.repository.StudyRepository;
-import com.devdive.backend.study.application.dto.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateDto;
 import com.devdive.backend.study.application.port.out.LoadStudyPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
