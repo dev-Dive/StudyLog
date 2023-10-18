@@ -1,10 +1,11 @@
 package com.devdive.backend.security.authentication.adaptor.out.persistent;
 
-import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort.UserData;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.persistance.repository.MemberRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface UserDataRepository extends JpaRepository<UserData, Long> {
+public interface UserDataRepository extends MemberRepository {
 
-    UserData findByMail(String mail);
+    MemberJpaEntity findByMail(String mail);
 }

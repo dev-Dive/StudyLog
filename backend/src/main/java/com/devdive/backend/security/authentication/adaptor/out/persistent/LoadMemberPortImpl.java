@@ -1,8 +1,10 @@
 package com.devdive.backend.security.authentication.adaptor.out.persistent;
 
-import com.devdive.backend.security.authentication.application.port.out.LoadMemberPort;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.security.authentication.application.port.out.SecurityLoadMemberPort;
+import com.devdive.backend.security.authentication.domain.User;
 
-public class LoadMemberPortImpl implements LoadMemberPort {
+public class LoadMemberPortImpl implements SecurityLoadMemberPort {
 
     private final UserDataRepository userDataRepository;
 
@@ -11,7 +13,11 @@ public class LoadMemberPortImpl implements LoadMemberPort {
     }
 
     @Override
-    public UserData findByEmail(String mail) {
-        return userDataRepository.findByMail(mail);
+    public User findByMail(String mail) {
+        MemberJpaEntity member = userDataRepository.findByMail(mail);
+        if (member == null) {
+            return null;
+        }
+        return new User(member.getMail(), member.getId());
     }
 }

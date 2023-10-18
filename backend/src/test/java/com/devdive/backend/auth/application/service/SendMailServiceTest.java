@@ -1,6 +1,7 @@
 package com.devdive.backend.auth.application.service;
 
 import com.devdive.backend.auth.application.port.out.persistence.LoadMemberPort;
+import com.devdive.backend.auth.application.port.out.persistence.UpdateMemberPort;
 import groovy.util.logging.Slf4j;
 import jakarta.mail.MessagingException;
 import org.junit.jupiter.api.Disabled;
@@ -24,6 +25,9 @@ class SendMailServiceTest {
 
     @MockBean
     private LoadMemberPort loadMemberPort;
+
+    @MockBean
+    private UpdateMemberPort updateMemberPort;
 
     @Test
     @Disabled

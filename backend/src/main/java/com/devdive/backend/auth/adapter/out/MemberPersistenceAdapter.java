@@ -3,6 +3,8 @@ package com.devdive.backend.auth.adapter.out;
 import com.devdive.backend.auth.application.port.out.persistence.LoadMemberPort;
 import com.devdive.backend.auth.application.port.out.persistence.UpdateMemberPort;
 import com.devdive.backend.auth.domain.Member;
+import com.devdive.backend.persistance.entities.MemberJpaEntity;
+import com.devdive.backend.persistance.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
