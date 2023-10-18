@@ -19,14 +19,14 @@ public class HttpConfig {
     private UserDataRepository userDataRepository;
 
     @Autowired
-    private JwtProvider mailJwtProvider;
+    private JwtProvider accessJwtProvider;
 
     @Bean
     @Scope(scopeName = "prototype")
     public HttpSecurity httpSecurity(){
         HttpSecurity http = new HttpSecurity(userDetailsService(securityLoadMemberPort()));
         http.cors().anonymous().and()
-                .securityContext().and().accessTokenValid().accessTokenProvider(mailJwtProvider).and()
+                .securityContext().and().accessTokenValid().accessTokenProvider(accessJwtProvider).and()
                 .exceptionHandling();
         return http;
     }
