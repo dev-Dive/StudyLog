@@ -17,7 +17,6 @@ import java.util.List;
 public class StudyJpaEntity {
 
     @Id
-    @Column(name = "study_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
