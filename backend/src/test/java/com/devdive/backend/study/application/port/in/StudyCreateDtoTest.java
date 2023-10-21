@@ -12,7 +12,7 @@ class StudyCreateDtoTest {
 
     @Test
     public void test(){
-        StudyCreateDto dto = StudyCreateDto.builder()
+        StudyCreateApplicationDto dto = StudyCreateApplicationDto.builder()
                 .memberId(1L)
                 .name("qwe")
                 .description("dsf")
@@ -27,7 +27,7 @@ class StudyCreateDtoTest {
     @Test
     public void fail(){
         assertThrows(ConstraintViolationException.class, () -> {
-            StudyCreateDto.builder()
+            StudyCreateApplicationDto.builder()
                     .memberId(1L)
                     .name(null)
                     .description("dsf")

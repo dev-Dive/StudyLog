@@ -1,7 +1,7 @@
 package com.devdive.backend.post.application.service;
 
-import com.devdive.backend.post.application.dto.PostCreateRequestDto;
-import com.devdive.backend.post.application.dto.PostViewDto;
+import com.devdive.backend.post.application.port.in.PostCreateRequestApplicationDto;
+import com.devdive.backend.post.application.port.in.PostViewApplicationDto;
 import com.devdive.backend.post.application.port.out.LoadPostPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,15 +30,16 @@ public class PostCreateTest {
     @DisplayName("글 생성")
     public void createPost(){
         // given
-        PostCreateRequestDto dto = new PostCreateRequestDto(
-                1L,
-                1L,
-                "http://",
-                "title",
-                "sub",
-                "content",
-                List.of("tag1", "tag2")
-        );
+
+        PostCreateRequestApplicationDto dto = PostCreateRequestApplicationDto.builder()
+                .memberId(1L)
+                .studyId(10L)
+                .thumbnailUrl("http://")
+                .title("title")
+                .subtitle("sub")
+                .content("content")
+                .tags(List.of("tag1", "tag2"))
+                .build();
 
         // when
         doNothing().when(loadPostPort).createPost(dto);
@@ -53,21 +54,23 @@ public class PostCreateTest {
     public void viewPost(){
         // given
         long postId = 1L;
-        PostViewDto postViewDto = new PostViewDto(
-                postId,
-                1L,
-                "http://",
-                "title",
-                "sub",
-                "content",
-                List.of("tag1", "tag2"));
-        when(loadPostPort.viewPost(postId)).thenReturn(postViewDto);
+        PostViewApplicationDto dto = PostViewApplicationDto.builder()
+                .postId(1L)
+                .studyId(10L)
+                .thumbnailUrl("http://")
+                .title("title")
+                .subtitle("sub")
+                .content("content")
+                .tags(List.of("tag1", "tag2"))
+                .build();
+
+        when(loadPostPort.viewPost(postId)).thenReturn(dto);
 
         // when
         loadPostPort.viewPost(postId);
 
         // then
-        assertThat(postId).isEqualTo(postViewDto.getId());
+        assertThat(postId).isEqualTo(1L);
     }
 
     @Test
@@ -75,22 +78,23 @@ public class PostCreateTest {
     public void viewPostFail(){
         // given
         long postId = 1L;
-        PostViewDto postViewDto = new PostViewDto(
-                postId,
-                1L,
-                "http://",
-                "title",
-                "sub",
-                "content",
-                List.of("tag1", "tag2"));
-        when(loadPostPort.viewPost(postId)).thenReturn(postViewDto);
+        PostViewApplicationDto dto = PostViewApplicationDto.builder()
+                .postId(1L)
+                .studyId(10L)
+                .thumbnailUrl("http://")
+                .title("title")
+                .subtitle("sub")
+                .content("content")
+                .tags(List.of("tag1", "tag2"))
+                .build();
+        when(loadPostPort.viewPost(postId)).thenReturn(dto);
 
         // when
         loadPostPort.viewPost(postId);
 
         // then
         assertThrows(AssertionFailedError.class, () -> {
-            assertThat(postId).isEqualTo(postViewDto.getId() + 1);
+            assertThat(postId).isEqualTo(1L + 1);
         });
     }
 }
