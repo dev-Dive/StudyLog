@@ -7,7 +7,7 @@ import com.devdive.backend.persistance.entities.StudyMemberJpaEntity;
 import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.persistance.repository.StudyRepository;
-import com.devdive.backend.study.application.port.in.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateApplicationDto;
 import com.devdive.backend.study.application.port.out.LoadStudyPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class StudyPersistenceAdapter implements LoadStudyPort {
     private final StudyMemberRepository studyMemberRepository;
 
     @Override
-    public void createStudy(StudyCreateDto dto) {
+    public void createStudy(StudyCreateApplicationDto dto) {
         MemberJpaEntity member = memberStudyRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
 
         StudyJpaEntity studyJpaEntity = new StudyJpaEntity();
