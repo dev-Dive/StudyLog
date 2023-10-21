@@ -9,7 +9,7 @@ import java.util.Objects;
 
 @Data
 @NoArgsConstructor
-public class PostAuthorsId implements Serializable {
+public class PostMembersId implements Serializable {
 
     private MemberJpaEntity member;
     private PostJpaEntity post;
@@ -18,7 +18,7 @@ public class PostAuthorsId implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PostAuthorsId that = (PostAuthorsId) o;
+        PostMembersId that = (PostMembersId) o;
         return Objects.equals(member, that.member) && Objects.equals(post, that.post);
     }
 

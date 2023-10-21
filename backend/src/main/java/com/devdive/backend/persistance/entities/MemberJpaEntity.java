@@ -14,7 +14,6 @@ import java.util.List;
 public class MemberJpaEntity {
 
     @Id
-    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
