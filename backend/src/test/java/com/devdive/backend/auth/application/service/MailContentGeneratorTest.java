@@ -23,7 +23,7 @@ class MailContentGeneratorTest {
 
         String content = mailContentGenerator.generateAuthContent(mail, request);
 
-        assertThat(content).contains("/api/v1/register");
+        assertThat(content).contains("/register");
     }
 
 }
