@@ -16,13 +16,11 @@ public class StudyMemberJpaEntity {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "member_id")
     private MemberJpaEntity member;
 
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "study_id")
     private StudyJpaEntity study;
 
 }

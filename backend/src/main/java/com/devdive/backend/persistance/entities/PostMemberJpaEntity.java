@@ -1,17 +1,17 @@
 package com.devdive.backend.persistance.entities;
 
-import com.devdive.backend.persistance.entities.compositekey.PostAuthorsId;
+import com.devdive.backend.persistance.entities.compositekey.PostMembersId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "post_authors")
+@Table(name = "post_members")
 @Getter
 @Setter
 @NoArgsConstructor
-@IdClass(PostAuthorsId.class)
+@IdClass(PostMembersId.class)
 public class PostMemberJpaEntity {
 
     @Id
