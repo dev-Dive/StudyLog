@@ -27,11 +27,15 @@ class StudyAcceptanceTest extends AcceptanceTest {
     @Autowired
     JwtProvider accessJwtProvider;
 
+    @Autowired
+    MemberRepository memberRepository;
+
 
     @Test
     @DisplayName("회원은 스터디를 생성할 수 있다.")
     void test() throws JSONException {
         // given
+        memberRepository.save(new MemberJpaEntity());
         String mail = "rhwlgns@gmail.com";
 
         AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
@@ -62,16 +66,16 @@ class StudyAcceptanceTest extends AcceptanceTest {
             }
         });
 
-        JSONObject resquestJson = new JSONObject();
-        resquestJson.put("name", mail);
-        resquestJson.put("description", mail);
+        JSONObject payLoad = new JSONObject();
+        payLoad.put("name", mail);
+        payLoad.put("description", mail);
 
-        String accessToken=accessJwtProvider.createJwtToken(mail);
+        String accessToken = accessJwtProvider.createJwtToken(mail);
         // when, then
         given()
                 .log().all()
-                .header(HttpHeaders.AUTHORIZATION,"bearer"+" "+accessToken)
-                .body(resquestJson.toString())
+                .header(HttpHeaders.AUTHORIZATION, "bearer" + " " + accessToken)
+                .body(payLoad.toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
         .when()
                 .post("/api/v1/studies")
