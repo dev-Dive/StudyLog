@@ -5,23 +5,21 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
-public class StudyCreateDto extends SelfValidating<StudyCreateDto> {
+public class StudyCreateApplicationDto extends SelfValidating<StudyCreateApplicationDto> {
 
     @NotNull
     private final Long memberId;
 
     @NotNull
     private final String name;
+    private final String description;
 
-    private String description;
-
-    public StudyCreateDto(@NotNull Long memberId, @NotNull String name, String description) {
+    public StudyCreateApplicationDto(Long memberId, String name, String description) {
         this.memberId = memberId;
         this.name = name;
         this.description = description;
 
         this.validateSelf();
-
     }
 
     public static StudyCreateDtoBuilder builder(){
@@ -31,9 +29,7 @@ public class StudyCreateDto extends SelfValidating<StudyCreateDto> {
     public static class StudyCreateDtoBuilder{
 
         private Long memberId;
-
         private String name;
-
         private String description;
 
         public StudyCreateDtoBuilder memberId(Long memberId) {
@@ -51,8 +47,8 @@ public class StudyCreateDto extends SelfValidating<StudyCreateDto> {
             return this;
         }
 
-        public StudyCreateDto build(){
-            return new StudyCreateDto(memberId, name, description);
+        public StudyCreateApplicationDto build(){
+            return new StudyCreateApplicationDto(memberId, name, description);
         }
     }
 }
