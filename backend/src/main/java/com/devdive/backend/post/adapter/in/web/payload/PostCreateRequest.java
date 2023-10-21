@@ -1,26 +1,16 @@
-package com.devdive.backend.post.application.dto;
+package com.devdive.backend.post.adapter.in.web.payload;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class PostCreateRequestDto {
-
-    private Long memberId;
-
+public class PostCreateRequest {
     @NotNull
     private Long studyId;
 
-    @Nullable
     private String thumbnailUrl;
 
     @NotNull
