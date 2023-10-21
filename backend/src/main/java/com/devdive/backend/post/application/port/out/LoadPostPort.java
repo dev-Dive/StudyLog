@@ -1,15 +1,13 @@
 package com.devdive.backend.post.application.port.out;
 
-import com.devdive.backend.post.application.dto.PostCreateRequestDto;
-import com.devdive.backend.post.application.dto.PostViewDto;
-
-import java.util.Optional;
+import com.devdive.backend.post.application.port.in.PostCreateRequestApplicationDto;
+import com.devdive.backend.post.application.port.in.PostViewApplicationDto;
 
 public interface LoadPostPort {
 
-    void createPost(PostCreateRequestDto dto);
+    void createPost(PostCreateRequestApplicationDto dto);
 
-    PostViewDto viewPost(Long postId);
+    PostViewApplicationDto viewPost(Long postId);
 
     void deletePost(long postId);
 }

@@ -6,8 +6,8 @@ import com.devdive.backend.persistance.entities.PostMemberJpaEntity;
 import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.persistance.repository.PostMemberRepository;
 import com.devdive.backend.persistance.repository.PostRepository;
-import com.devdive.backend.post.application.dto.PostCreateRequestDto;
-import com.devdive.backend.post.application.dto.PostViewDto;
+import com.devdive.backend.post.application.port.in.PostCreateRequestApplicationDto;
+import com.devdive.backend.post.application.port.in.PostViewApplicationDto;
 import com.devdive.backend.post.application.port.out.LoadPostPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class PostPersistenceAdapter implements LoadPostPort {
     private final PostMemberRepository postMemberRepository;
 
     @Override
-    public void createPost(PostCreateRequestDto dto) {
+    public void createPost(PostCreateRequestApplicationDto dto) {
 
         MemberJpaEntity member = memberPostRepository.findById(dto.getMemberId()).orElseThrow(IllegalArgumentException::new);
 
@@ -46,19 +46,23 @@ public class PostPersistenceAdapter implements LoadPostPort {
     }
 
     @Override
-    public PostViewDto viewPost(Long postId) {
+    public PostViewApplicationDto viewPost(Long postId) {
         PostJpaEntity entity = postRepository.findById(postId)
                 .orElseThrow(IllegalArgumentException::new);
 
-        return new PostViewDto(
-                entity.getId(),
-                entity.getStudyId(),
-                entity.getThumbnailUrl(),
-                entity.getTitle(),
-                entity.getSubtitle(),
-                entity.getContent(),
-                entity.getTag()
-        );
+
+        PostViewApplicationDto applicationViwDto =
+                PostViewApplicationDto.builder()
+                .postId(entity.getId())
+                .studyId(entity.getStudyId())
+                .thumbnailUrl(entity.getThumbnailUrl())
+                .title(entity.getTitle())
+                .subtitle(entity.getSubtitle())
+                .content(entity.getContent())
+                .tags(entity.getTag())
+                .build();
+
+        return applicationViwDto;
     }
 
     @Override
