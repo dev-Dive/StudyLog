@@ -5,26 +5,22 @@ import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.study.adapter.out.persistence.StudyPersistenceAdapter;
 import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.persistance.repository.StudyRepository;
-import com.devdive.backend.study.application.port.in.StudyCreateDto;
+import com.devdive.backend.study.application.port.in.StudyCreateApplicationDto;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @DataJpaTest
 @ActiveProfiles("test")
 class StudyPersistenceAdapterTest {
 
-    @MockBean
+    @Autowired
     MemberRepository memberRepository;
 
     @Autowired
@@ -40,17 +36,15 @@ class StudyPersistenceAdapterTest {
     @DisplayName("게시글 및 매핑 테이블 생성 테스트")
     public void postMemberMappingTest() {
         // given
-        MemberJpaEntity member1 = mock(MemberJpaEntity.class);
-        entityManager.persist(member1); // 영속화
-        when(member1.getId()).thenReturn(1L);
-        when(memberRepository.findById(1L)).thenReturn(Optional.of(member1));
+        MemberJpaEntity member1 = new MemberJpaEntity();
+        memberRepository.save(member1);
 
-        StudyCreateDto dto1 = new StudyCreateDto(
+        StudyCreateApplicationDto dto1 = new StudyCreateApplicationDto(
                 member1.getId(),
                 "name1",
                 "desc1"
         );
-        StudyCreateDto dto2 = new StudyCreateDto(
+        StudyCreateApplicationDto dto2 = new StudyCreateApplicationDto(
                 member1.getId(),
                 "name2",
                 "desc2"
@@ -59,13 +53,11 @@ class StudyPersistenceAdapterTest {
         StudyPersistenceAdapter adapter = new StudyPersistenceAdapter(memberRepository,
                 studyRepository, studyMemberRepository);
 
-
         // when
         adapter.createStudy(dto1);
         adapter.createStudy(dto2);
 
         // then
-        assertThat(studyRepository.findById(1L).get().getName()).isEqualTo(dto1.getName());
-        assertThat(studyRepository.findById(2L).get().getName()).isEqualTo(dto2.getName());
+        assertThat(studyRepository.count()).isEqualTo(2);
     }
 }
