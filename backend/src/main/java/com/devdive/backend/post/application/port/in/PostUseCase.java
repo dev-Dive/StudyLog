@@ -1,11 +1,8 @@
 package com.devdive.backend.post.application.port.in;
 
-import com.devdive.backend.post.application.dto.PostCreateRequestDto;
-import com.devdive.backend.post.application.dto.PostViewDto;
-
 public interface PostUseCase {
 
-    void createPost(PostCreateRequestDto dto);
+    void createPost(PostCreateRequestApplicationDto dto);
 
-    PostViewDto viewPost(Long postId);
+    PostViewApplicationDto viewPost(Long postId);
 }
