@@ -10,6 +10,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "jsxImportSource": "@emotion/react",
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
@@ -21,14 +22,15 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "types": ["@emotion/react"]
+    "typeRoots": ["./styles", "./node_modules/@types"]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "jest.setup.js"
+    "jest.setup.js",
+    "**/*.d.ts"
   ],
   "exclude": ["node_modules"]
 }
