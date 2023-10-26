@@ -2,8 +2,10 @@
 
 import Main from '@/components/Main/Main'
 import { useEffect } from 'react'
-import { ThemeProvider, Global } from '@emotion/react'
-import { theme } from '@/styles/theme'
+import { Global } from '@emotion/react'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import theme from '@/styles/theme'
+
 import { globalStyle } from '@/styles/global'
 
 export default function Home() {
@@ -21,7 +23,7 @@ export default function Home() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Global styles={(theme) => globalStyle(theme)} />
+        <Global styles={globalStyle} />
         <Main />
       </ThemeProvider>
     </>

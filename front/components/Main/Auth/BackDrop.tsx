@@ -1,4 +1,4 @@
-import { css } from '@emotion/react'
+import styled from '@emotion/styled'
 
 type BackDropType = {
   children: React.ReactNode
@@ -14,20 +14,20 @@ export default function BackDrop({
   }
 
   return (
-    <div css={backdropStyle} onClick={loginModalHandler}>
+    <StyledBackDrop onClick={loginModalHandler}>
       <div onClick={handleChildClick}>{children}</div>
-    </div>
+    </StyledBackDrop>
   )
 }
 
-const backdropStyle = css({
-  position: 'fixed',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '100%',
-  'background-color': 'rgba(0, 0, 0, 0.4)',
-  display: 'flex',
-  'justify-content': 'center',
-  'align-items': 'center',
-})
+const StyledBackDrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

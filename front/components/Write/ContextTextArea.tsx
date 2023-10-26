@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { color } from '@/styles/theme'
 
 interface ContextTextAreaProps {
   content: string
@@ -39,7 +38,7 @@ const StyledTextArea = styled.textarea`
     background-color: none;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: ${color.mainColor};
+    background-color: ${({ theme }) => theme.palette.primary.main};
     border-radius: 1rem;
   }
 `

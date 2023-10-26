@@ -1,6 +1,6 @@
-import { css, Theme } from '@emotion/react'
+import { css } from '@emotion/react'
 
-export const globalStyle = (theme: Theme) => css`
+export const globalStyle = css`
   html,
   body,
   div,
@@ -104,7 +104,6 @@ export const globalStyle = (theme: Theme) => css`
   }
   body {
     line-height: 1;
-    font-family: ${theme.fontFamily.nanumsquare}, sans-serif;
   }
   ol,
   ul {
@@ -127,7 +126,6 @@ export const globalStyle = (theme: Theme) => css`
   }
 
   html {
-    font-size: ${theme.fontSize.base};
   }
 
   select,
