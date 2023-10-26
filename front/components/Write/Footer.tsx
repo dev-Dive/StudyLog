@@ -2,9 +2,17 @@ import styled from '@emotion/styled'
 import { BiArrowBack } from 'react-icons/bi'
 import Link from 'next/link'
 import Button from '@mui/material/Button'
-import { useTheme } from '@mui/material/styles'
+import { createPortal } from 'react-dom'
+import useModal from '@/hooks/useModal'
+import SaveModal from './Save'
 
 export default function Footer() {
+  const [modal, setModalHandler, portalElement] = useModal()
+
+  const openModal = () => {
+    setModalHandler()
+  }
+
   return (
     <StyledFooter>
       <Link href="/" style={{ textDecoration: 'none' }}>
@@ -14,7 +22,15 @@ export default function Footer() {
         </StyledLink>
       </Link>
 
-      <Button variant="contained">저장하기</Button>
+      <Button variant="contained" onClick={openModal}>
+        저장하기
+      </Button>
+      {modal && portalElement
+        ? createPortal(
+            <SaveModal closeModal={setModalHandler} />,
+            portalElement,
+          )
+        : null}
     </StyledFooter>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import InputContextTextArea from '@/components/Write/ContextTextArea'
 import MarkDownPost from '@/components/Write/MarkDownPost'
 import React, { useState } from 'react'
@@ -14,11 +16,6 @@ import Tag from '@/components/Commmon/Tag'
 import { useRecoilState } from 'recoil'
 import { postState } from '@/states/postAtom'
 import Footer from './Footer'
-
-type TagItem = {
-  id: number
-  text: string
-}
 
 export default function WriteContainer() {
   const [post, setPost] = useRecoilState(postState)

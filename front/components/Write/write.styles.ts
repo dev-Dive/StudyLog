@@ -1,10 +1,8 @@
 import styled from '@emotion/styled'
-import { color, text } from '@/styles/theme'
 
 export const WriteWrapper = styled.div`
   width: 100%;
   height: 100vh;
-
   display: flex;
 `
 
@@ -19,7 +17,7 @@ export const LeftSide = styled.div`
   justify-content: space-between;
 `
 
-export const Inputs = styled.div`
+export const Inputs = styled('div')`
   padding: 1.5rem;
 
   display: flex;
@@ -29,19 +27,16 @@ export const Inputs = styled.div`
   > input {
     width: 100%;
 
+    font-size: 2rem;
     border: none;
-    outline: none; // 포커스 없애기
-
-    font-size: ${text.h1['font-size']};
-    font-weight: ${text.h1['font-weight']};
-    line-height: ${text.h1['line-height']};
+    outline: none;
   }
 
   hr {
     width: 10%;
     height: 10px;
 
-    background-color: ${color.mainColor};
+    background-color: ${({ theme }) => theme.palette.primary.main};
 
     border: none;
     margin-left: 0;
@@ -52,7 +47,7 @@ export const Inputs = styled.div`
 
 export const TagContainer = styled.div`
   margin-bottom: 1rem;
-  border-bottom: 1px solid ${color.gray4};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.grey[500]};
 `
 
 export const TagInput = styled.input`
@@ -61,10 +56,6 @@ export const TagInput = styled.input`
   width: 100%;
 
   margin-top: 0.5rem;
-
-  font-size: ${text.normal['font-size']};
-  font-weight: ${text.normal['font-weight']};
-  line-height: ${text.normal['line-height']};
 `
 
 export const Tags = styled.div`
@@ -78,7 +69,7 @@ export const MarkDownView = styled.div`
   padding-left: 1rem;
   overflow: auto;
 
-  background-color: ${color.gray2};
+  background-color: ${({ theme }) => theme.palette.grey[50]};
 
   ::-webkit-scrollbar-track {
     background-color: none;
@@ -88,7 +79,7 @@ export const MarkDownView = styled.div`
     background-color: none;
   }
   ::-webkit-scrollbar-thumb {
-    background-color: ${color.mainColor};
+    background-color: ${({ theme }) => theme.palette.primary.main};
     border-radius: 1rem;
   }
 `

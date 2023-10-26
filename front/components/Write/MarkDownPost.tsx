@@ -1,9 +1,10 @@
+'use client'
+
 import Markdown from 'react-markdown'
 import styled from '@emotion/styled'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { materialDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 import remarkGfm from 'remark-gfm'
-import Image from 'next/image'
 
 type postType = {
   content: string
@@ -15,7 +16,7 @@ export default function MarkDownPost({ content }: postType) {
       <style>{tableStyles}</style>
       <style>{blockQuoteStyles}</style>
       <Markdown
-        remarkPlugins={[remarkGfm]} // Allows us to have embedded HTML tags in our markdown
+        remarkPlugins={[remarkGfm]}
         components={{
           code({ node, inline, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '')
