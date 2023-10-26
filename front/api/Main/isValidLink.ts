@@ -7,7 +7,7 @@ interface ResponseType {
 
 export const isValidLink = async (token: string, type: string) => {
   try {
-    const response = await Api.post<ResponseType>(`/v1/auth/mail/${type}`, {
+    const response = await Api.post<ResponseType>(`/auth/mail/${type}`, {
       token,
     })
 
