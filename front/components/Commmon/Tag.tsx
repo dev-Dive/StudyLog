@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { color, text } from '@/styles/theme'
 import { AiFillCloseCircle } from 'react-icons/ai'
 
 type TagType = {
@@ -22,15 +21,14 @@ export default function Tag({ text, canRemove, onRemove }: TagType) {
 const StyledTag = styled.span`
   display: inline-block;
 
-  padding: 0.35rem 0.625rem;
+  padding: 3.5px 8px;
+
+  font-size: 14px;
   border-radius: 0.625rem;
   margin-right: 0.66rem;
   margin-bottom: 0.3rem;
 
-  font-size: ${text.small['font-size']};
-  font-weight: ${text.small['font-weight']};
-
-  background-color: ${color.lightMain2};
+  background-color: ${({ theme }) => theme.palette.primary.light};
 
   div {
     display: flex;
