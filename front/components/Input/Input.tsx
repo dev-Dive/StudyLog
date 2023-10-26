@@ -23,5 +23,5 @@ export default function Input({ placeHolder }: InputType) {
 }
 
 const StyledInput = styled.input`
-  border: 0;
+  border: 1;
 `
