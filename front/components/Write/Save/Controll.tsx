@@ -12,8 +12,9 @@ import {
 } from '@mui/material'
 import { SelectChangeEvent } from '@mui/material/Select'
 import styled from '@emotion/styled'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue } from 'recoil'
 import { postState } from '@/states/postAtom'
+import { savePost } from '@/api/Post/savePost'
 
 const { grey } = colors
 
@@ -30,10 +31,10 @@ export default function Controll({ closeModal }: ControllModalProps) {
     const selectedStudyName = event.target.value as string
     setStudyName(selectedStudyName)
 
-    setPost((prevState) => ({
-      ...prevState,
-      studyName: selectedStudyName,
-    }))
+    // setPost((prevState) => ({
+    //   ...prevState,
+    //   studyName: selectedStudyName,
+    // }))
   }
 
   const handleUpload = (event: ChangeEvent<HTMLInputElement>) => {
@@ -74,6 +75,11 @@ export default function Controll({ closeModal }: ControllModalProps) {
       ...prevState,
       subTitle: newSubTitle,
     }))
+  }
+
+  const handleSvaePost = async () => {
+    const currentPostState = useRecoilValue(postState)
+    await savePost(currentPostState)
   }
 
   return (
@@ -152,7 +158,9 @@ export default function Controll({ closeModal }: ControllModalProps) {
           <Button variant="outlined" onClick={closeModal}>
             취소
           </Button>
-          <Button variant="contained">글 저장하기</Button>
+          <Button variant="contained" onClick={handleSvaePost}>
+            글 저장하기
+          </Button>
         </S.Buttons>
       </S.Container>
     </>

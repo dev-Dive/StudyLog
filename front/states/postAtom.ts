@@ -11,7 +11,7 @@ export const postState = atom({
     content: '',
     title: '',
     subTitle: '',
-    studyName: '',
+    studyId: 0,
     thumNailUrl: '',
     tags: [] as TagItem[],
     tagInput: '',
