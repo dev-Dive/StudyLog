@@ -3,6 +3,7 @@ package com.devdive.backend.post.application.service;
 import com.devdive.backend.post.application.port.in.PostCreateRequestApplicationDto;
 import com.devdive.backend.post.application.port.in.PostViewApplicationDto;
 import com.devdive.backend.post.application.port.out.LoadPostPort;
+import com.devdive.backend.post.application.port.out.UpdatePostPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,6 +24,9 @@ public class PostCreateTest {
     @Mock
     LoadPostPort loadPostPort;
 
+    @Mock
+    UpdatePostPort updatePostPort;
+
     @InjectMocks
     PostService service;
 
@@ -42,11 +46,11 @@ public class PostCreateTest {
                 .build();
 
         // when
-        doNothing().when(loadPostPort).createPost(dto);
+        doNothing().when(updatePostPort).createPost(dto);
         service.createPost(dto);
 
         // then
-        verify(loadPostPort).createPost(dto);
+        verify(updatePostPort).createPost(dto);
     }
 
     @Test

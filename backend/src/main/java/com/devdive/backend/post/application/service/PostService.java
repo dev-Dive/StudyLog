@@ -4,6 +4,7 @@ import com.devdive.backend.post.application.port.in.PostCreateRequestApplication
 import com.devdive.backend.post.application.port.in.PostViewApplicationDto;
 import com.devdive.backend.post.application.port.in.PostUseCase;
 import com.devdive.backend.post.application.port.out.LoadPostPort;
+import com.devdive.backend.post.application.port.out.UpdatePostPort;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Service;
 public class PostService implements PostUseCase {
 
     private final LoadPostPort loadPostPort;
+    private final UpdatePostPort updatePostPort;
 
     @Transactional
     public void createPost(PostCreateRequestApplicationDto dto) {
-        loadPostPort.createPost(dto);
+        updatePostPort.createPost(dto);
     }
 
     @Override

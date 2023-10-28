@@ -9,12 +9,13 @@ import com.devdive.backend.persistance.repository.PostRepository;
 import com.devdive.backend.post.application.port.in.PostCreateRequestApplicationDto;
 import com.devdive.backend.post.application.port.in.PostViewApplicationDto;
 import com.devdive.backend.post.application.port.out.LoadPostPort;
+import com.devdive.backend.post.application.port.out.UpdatePostPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class PostPersistenceAdapter implements LoadPostPort {
+public class PostPersistenceAdapter implements LoadPostPort, UpdatePostPort {
 
     private final MemberRepository memberPostRepository;
 
