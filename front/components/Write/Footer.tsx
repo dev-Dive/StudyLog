@@ -15,7 +15,6 @@ export default function Footer() {
   const post = useRecoilValue(postState)
 
   const openModal = () => {
-    console.log(1)
     if (post.title === '') {
       notifyError('포스트 제목을 작성해주세요')
       return
@@ -25,12 +24,12 @@ export default function Footer() {
 
   return (
     <>
-      <StyledFooter>
+      <S.Footer>
         <Link href="/" style={{ textDecoration: 'none' }}>
-          <StyledLink>
+          <S.Link>
             <BiArrowBack size={20} />
             나가기
-          </StyledLink>
+          </S.Link>
         </Link>
 
         <Button variant="contained" onClick={openModal}>
@@ -42,7 +41,7 @@ export default function Footer() {
               portalElement,
             )
           : null}
-      </StyledFooter>
+      </S.Footer>
       <ToastContainer
         position="top-right" // 알람 위치 지정
         autoClose={3000} // 자동 off 시간
@@ -59,32 +58,32 @@ export default function Footer() {
   )
 }
 
-const StyledFooter = styled.footer`
-  box-sizing: border-box;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const S = {
+  Footer: styled.footer`
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-  border-top: 1px solid ${({ theme }) => theme.palette.primary.main};
-  padding: 1rem;
-`
+    border-top: 1px solid ${({ theme }) => theme.palette.primary.main};
+    padding: 1rem;
+  `,
+  Link: styled.div`
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+    color: ${({ theme }) => theme.palette.common.black};
+  `,
+  SubmitBtn: styled.button`
+    padding: 0.7rem 1rem;
+    background-color: ${({ theme }) => theme.palette.primary.main};
+    color: ${({ theme }) => theme.palette.common.white};
+    border-radius: 0.625rem;
 
-const StyledLink = styled.div`
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.2rem;
-  cursor: pointer;
-  color: ${({ theme }) => theme.palette.common.black};
-`
-
-const SubmitBtn = styled.button`
-  padding: 0.7rem 1rem;
-  background-color: ${({ theme }) => theme.palette.primary.main};
-  color: ${({ theme }) => theme.palette.common.white};
-  border-radius: 0.625rem;
-
-  border: none;
-`
+    border: none;
+  `,
+}

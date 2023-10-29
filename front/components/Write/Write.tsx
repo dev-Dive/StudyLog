@@ -3,15 +3,7 @@
 import InputContextTextArea from '@/components/Write/ContextTextArea'
 import MarkDownPost from '@/components/Write/MarkDownPost'
 import React, { useState } from 'react'
-import {
-  WriteWrapper,
-  Inputs,
-  MarkDownView,
-  TagInput,
-  TagContainer,
-  Tags,
-  LeftSide,
-} from './write.styles'
+import S from './write.styles'
 import Tag from '@/components/Commmon/Tag'
 import { useRecoilState } from 'recoil'
 import { postState } from '@/states/postAtom'
@@ -61,17 +53,17 @@ export default function WriteContainer() {
   }
 
   return (
-    <WriteWrapper>
-      <LeftSide>
-        <Inputs>
+    <S.WriteWrapper>
+      <S.LeftSide>
+        <S.Inputs>
           <input
             type="text"
             placeholder="제목을 입력하세요"
             onChange={onChangeTitle}
           />
           <hr />
-          <TagContainer>
-            <TagInput
+          <S.TagContainer>
+            <S.TagInput
               type="text"
               value={tagInput}
               placeholder="태그를 입력하세요"
@@ -80,7 +72,7 @@ export default function WriteContainer() {
               }
               onKeyPress={onPressTagInput}
             />
-            <Tags>
+            <S.Tags>
               {post.tags?.map((tag) => (
                 <Tag
                   key={tag.id}
@@ -89,18 +81,18 @@ export default function WriteContainer() {
                   onRemove={() => removeTag(tag.id)}
                 />
               ))}
-            </Tags>
-          </TagContainer>
+            </S.Tags>
+          </S.TagContainer>
           <InputContextTextArea
             content={post.content}
             onChange={onChangeContent}
           />
-        </Inputs>
+        </S.Inputs>
         <Footer />
-      </LeftSide>
-      <MarkDownView>
+      </S.LeftSide>
+      <S.MarkDownView>
         <MarkDownPost content={post.content} />
-      </MarkDownView>
-    </WriteWrapper>
+      </S.MarkDownView>
+    </S.WriteWrapper>
   )
 }

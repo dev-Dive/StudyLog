@@ -3,7 +3,7 @@
 import { AiOutlineClose } from 'react-icons/ai'
 import { useState } from 'react'
 import BackDrop from './BackDrop'
-import { Modal, EmailBtn, ToRegister } from './Modal.styles'
+import S from './Modal.styles'
 import { isValidEmail } from '@/utils/validation'
 import { ToastContainer } from 'react-toastify'
 import { notifyError } from '@/components/Toastify/error'
@@ -40,7 +40,7 @@ export default function LoginModal({ setModalHandler }: LoginModalProps) {
   return (
     <>
       <BackDrop loginModalHandler={setModalHandler}>
-        <Modal>
+        <S.Modal>
           <div>
             <AiOutlineClose size={23} onClick={setModalHandler} />
           </div>
@@ -54,21 +54,21 @@ export default function LoginModal({ setModalHandler }: LoginModalProps) {
                   value={input}
                   onChange={onChangeInput}
                 />
-                <EmailBtn type="submit">
+                <S.EmailBtn type="submit">
                   {authType === 'login' ? '로그인' : '회원가입'}
-                </EmailBtn>
+                </S.EmailBtn>
               </form>
             </div>
             {authType === 'login' && (
-              <ToRegister>
+              <S.ToRegister>
                 <p>
                   회원가입이 필요하신가요?
                   <button onClick={onchangeAuthType}>회원가입</button>
                 </p>
-              </ToRegister>
+              </S.ToRegister>
             )}
           </div>
-        </Modal>
+        </S.Modal>
         <ToastContainer
           position="top-right" // 알람 위치 지정
           autoClose={3000} // 자동 off 시간
