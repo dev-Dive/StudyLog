@@ -3,23 +3,32 @@ package com.devdive.backend.study.adapter.in.web;
 import com.devdive.backend.security.authentication.domain.UserDetails;
 import com.devdive.backend.security.core.resolver.AuthenticationPrincipal;
 import com.devdive.backend.study.adapter.in.web.payload.StudyCreateRequest;
+import com.devdive.backend.study.application.port.in.ReadStudyUseCase;
 import com.devdive.backend.study.application.port.in.StudyCreateApplicationDto;
-import com.devdive.backend.study.application.port.in.StudyUseCase;
+import com.devdive.backend.study.application.port.in.UpdateStudyUseCase;
+import com.devdive.backend.study.domain.Studies;
+import com.devdive.backend.study.domain.Study;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/studies")
 @RequiredArgsConstructor
 public class StudyController {
 
-    private final StudyUseCase useCase;
+    private final ReadStudyUseCase readStudyUseCase;
+    private final UpdateStudyUseCase updateStudyUseCase;
+
+    @GetMapping
+    ResponseEntity<List<Study>> readPost(@AuthenticationPrincipal UserDetails userDetails) {
+        Studies studies = readStudyUseCase.readStudies(userDetails.getId());
+        return new ResponseEntity<>(studies.getStudies(), HttpStatus.OK);
+    }
 
     @PostMapping
     ResponseEntity<Void> createPost(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid StudyCreateRequest request) {
@@ -29,9 +38,7 @@ public class StudyController {
                 .description(request.getDescription())
                 .build();
 
-        useCase.createStudy(applicationDto);
+        updateStudyUseCase.createStudy(applicationDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
-
 }
