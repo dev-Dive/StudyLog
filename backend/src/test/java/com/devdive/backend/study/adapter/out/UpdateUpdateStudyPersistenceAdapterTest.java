@@ -2,7 +2,7 @@ package com.devdive.backend.study.adapter.out;
 
 import com.devdive.backend.persistance.entities.MemberJpaEntity;
 import com.devdive.backend.persistance.repository.MemberRepository;
-import com.devdive.backend.study.adapter.out.persistence.StudyPersistenceAdapter;
+import com.devdive.backend.study.adapter.out.persistence.UpdateStudyPersistenceAdapter;
 import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.persistance.repository.StudyRepository;
 import com.devdive.backend.study.application.port.in.StudyCreateApplicationDto;
@@ -14,11 +14,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 @DataJpaTest
 @ActiveProfiles("test")
-class StudyPersistenceAdapterTest {
+class UpdateUpdateStudyPersistenceAdapterTest {
 
     @Autowired
     MemberRepository memberRepository;
@@ -33,8 +32,8 @@ class StudyPersistenceAdapterTest {
     EntityManager entityManager;
 
     @Test
-    @DisplayName("게시글 및 매핑 테이블 생성 테스트")
-    public void postMemberMappingTest() {
+    @DisplayName("스터디 및 매핑 테이블 생성 테스트")
+    public void studyMemberMappingTest() {
         // given
         MemberJpaEntity member1 = new MemberJpaEntity();
         memberRepository.save(member1);
@@ -50,7 +49,7 @@ class StudyPersistenceAdapterTest {
                 "desc2"
         );
 
-        StudyPersistenceAdapter adapter = new StudyPersistenceAdapter(memberRepository,
+        UpdateStudyPersistenceAdapter adapter = new UpdateStudyPersistenceAdapter(memberRepository,
                 studyRepository, studyMemberRepository);
 
         // when
@@ -60,4 +59,5 @@ class StudyPersistenceAdapterTest {
         // then
         assertThat(studyRepository.count()).isEqualTo(2);
     }
+
 }

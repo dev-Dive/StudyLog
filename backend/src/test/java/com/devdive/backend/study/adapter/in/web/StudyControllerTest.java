@@ -4,7 +4,9 @@ import com.devdive.backend.security.authentication.Authentication;
 import com.devdive.backend.security.authentication.domain.User;
 import com.devdive.backend.security.core.securitycontext.SecurityContext;
 import com.devdive.backend.security.core.securitycontext.SecurityContextHolder;
-import com.devdive.backend.study.application.port.in.StudyUseCase;
+import com.devdive.backend.study.application.port.in.ReadStudyUseCase;
+import com.devdive.backend.study.application.port.in.UpdateStudyUseCase;
+import com.devdive.backend.study.domain.Studies;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,13 +18,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = StudyController.class)
 class StudyControllerTest {
 
     @MockBean
-    StudyUseCase studyUseCase;
+    ReadStudyUseCase readStudyUseCase;
+
+    @MockBean
+    UpdateStudyUseCase updatestudyUseCase;
 
     @Autowired
     MockMvc mockMvc;
@@ -74,5 +83,50 @@ class StudyControllerTest {
         mockMvc.perform(request)
                 .andExpect(status().isOk());
 
+    }
+
+    @Test
+    @DisplayName("스터디 조회 컨트롤러 테스트")
+    public void readStudies() throws Exception {
+        // given
+        String mail = "rhwlgns@gmail.com";
+
+        SecurityContext securityContext =SecurityContextHolder.createEmptyContext();
+        securityContext.setAuthentication(new Authentication() {
+
+            private User user = new User(mail, 1L);
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return user;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return null;
+            }
+        });
+        SecurityContextHolder.addContext(securityContext);
+
+        when(readStudyUseCase.readStudies(eq(1L))).thenReturn(Studies.from(List.of()));
+
+        // when
+        RequestBuilder request = MockMvcRequestBuilders
+                .get("/api/v1/studies")
+                .contentType(MediaType.APPLICATION_JSON);
+
+        // then
+        mockMvc.perform(request)
+                .andExpect(status().isOk());
     }
 }
