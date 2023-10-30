@@ -1,6 +1,6 @@
 package com.devdive.backend.study.application.port.in;
 
-public interface StudyUseCase {
+public interface UpdateStudyUseCase {
 
     void createStudy(StudyCreateApplicationDto dto);
 
