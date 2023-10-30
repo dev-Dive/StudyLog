@@ -1,7 +1,7 @@
 package com.devdive.backend.study.application.service;
 
 import com.devdive.backend.study.application.port.in.StudyCreateApplicationDto;
-import com.devdive.backend.study.application.port.out.LoadStudyPort;
+import com.devdive.backend.study.application.port.out.CommandStudyPort;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,27 +13,27 @@ import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class StudyServiceTest {
+class UpdateStudyServiceTest {
 
     @Mock
-    LoadStudyPort loadStudyPort;
+    CommandStudyPort commandStudyPort;
 
     @InjectMocks
-    StudyService studyService;
+    UpdateStudyService updateStudyService;
 
 
     @Test
-    @DisplayName("스터디 생성 adapter에 요청")
-    public void createStudy(){
+    @DisplayName("스터디 생성 adapter요청 테스트")
+    public void createStudyTest(){
         // given
         StudyCreateApplicationDto dto = new StudyCreateApplicationDto(1L, "name1", "desc1");
-        doNothing().when(loadStudyPort).createStudy(dto);
+        doNothing().when(commandStudyPort).createStudy(dto);
 
         // when
-        studyService.createStudy(dto);
+        updateStudyService.createStudy(dto);
 
         // then
-        verify(loadStudyPort).createStudy(dto);
+        verify(commandStudyPort).createStudy(dto);
     }
 
 }
