@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-const useAuth = () => {
+const useIsLoggedIn = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const useAuth = () => {
   return isLoggedIn
 }
 
-export default useAuth
+export default useIsLoggedIn

@@ -1,9 +1,20 @@
 import Logo from './Logo'
+import styled from '@emotion/styled'
+import HeaderButtons from './HeaderButtons'
 
 export default function Header() {
   return (
-    <div>
+    <S.Header>
       <Logo />
-    </div>
+      <HeaderButtons />
+    </S.Header>
   )
+}
+
+const S = {
+  Header: styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 80px;
+  `,
 }

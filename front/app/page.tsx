@@ -7,6 +7,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles'
 import theme from '@/styles/theme'
 
 import { globalStyle } from '@/styles/global'
+import Header from '@/components/Header/index'
 
 export default function Home() {
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function Home() {
     <>
       <ThemeProvider theme={theme}>
         <Global styles={globalStyle} />
+        <Header />
         <Main />
       </ThemeProvider>
     </>
