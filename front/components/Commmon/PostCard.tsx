@@ -9,18 +9,18 @@ import styled from '@emotion/styled'
 
 type PostCardProps = {
   title: string
-  thumNailUrl: string
+  thumbNailUrl: string
   subTitle: string
   studyName: string
 }
 
 export default function PostCard({
   title,
-  thumNailUrl,
+  thumbNailUrl,
   subTitle,
   studyName,
 }: PostCardProps) {
-  const hasImage = thumNailUrl !== ''
+  const hasImage = thumbNailUrl !== ''
 
   const truncatedTitle =
     title.length > 11 ? `${title.substring(0, 12)}...` : title
@@ -35,10 +35,10 @@ export default function PostCard({
           component="img"
           alt="thumbnail"
           height="150"
-          image={hasImage ? thumNailUrl : '/assets/default-post-thumNail.png'}
+          image={hasImage ? thumbNailUrl : '/assets/default-post-thumNail.png'}
           sx={hasImage ? {} : { backgroundColor: '#f3f3f3' }}
         />
-        <CardContent sx={{ padding: '6px' , height: 150 }}>
+        <CardContent sx={{ padding: '6px', height: 150 }}>
           <Typography gutterBottom variant="h6" component="div">
             {truncatedTitle}
           </Typography>

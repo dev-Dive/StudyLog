@@ -1,6 +1,6 @@
 import { atom } from 'recoil'
 
-type TagItem = {
+interface TagItem {
   id: number
   text: string
 }
@@ -12,7 +12,7 @@ export const postState = atom({
     title: '',
     subTitle: '',
     studyId: 0,
-    thumNailUrl: '',
+    thumbNailUrl: '',
     tags: [] as TagItem[],
     tagInput: '',
   },

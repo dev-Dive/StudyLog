@@ -13,7 +13,7 @@ export type PostStateType = {
   title: string
   subTitle: string
   studyId: number
-  thumNailUrl: string
+  thumbNailUrl: string
   tags: TagItem[]
   tagInput: string
 }
@@ -22,7 +22,7 @@ export const savePost = async (postData: PostStateType) => {
   try {
     const requestBody = {
       studyId: postData.studyId,
-      thumbnailUrl: postData.thumNailUrl,
+      thumbNailUrl: postData.thumbNailUrl,
       title: postData.title,
       subtitle: postData.subTitle,
       content: postData.content,
