@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function useAuth() {
+const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {

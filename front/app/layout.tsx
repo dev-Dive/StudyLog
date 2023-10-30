@@ -1,8 +1,8 @@
-import { ThemeProvider } from '@emotion/react'
 import './globals.css'
 import type { Metadata } from 'next'
-// import { Inter } from 'next/font/google'
-// const inter = Inter({ subsets: ['latin'] })
+// import { Baloo_2 } from 'next/font/google'
+
+// const Balboo = Baloo_2({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,6 +19,7 @@ export default function RootLayout({
       {/* <body className={inter.className}>{children}</body> */}
       {/* <body suppressHydrationWarning={true}> {children}</body> */}
       <body>
+        {/* <main className={`${Balboo.className}`}></main> */}
         {children} <div id="portal"></div>
       </body>
     </html>
