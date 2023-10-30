@@ -2,6 +2,7 @@ package com.devdive.backend.study.adapter.in.web.payload;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class StudyCreateRequest {
@@ -10,4 +11,6 @@ public class StudyCreateRequest {
     private String name;
 
     private String description;
+
+    private MultipartFile studyImage;
 }
