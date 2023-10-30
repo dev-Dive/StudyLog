@@ -8,13 +8,13 @@ import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.persistance.repository.StudyRepository;
 import com.devdive.backend.study.application.port.in.StudyCreateApplicationDto;
-import com.devdive.backend.study.application.port.out.LoadStudyPort;
+import com.devdive.backend.study.application.port.out.CommandStudyPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class StudyPersistenceAdapter implements LoadStudyPort {
+public class UpdateStudyPersistenceAdapter implements CommandStudyPort {
 
     private final MemberRepository memberStudyRepository;
     private final StudyRepository studyRepository;
