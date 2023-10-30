@@ -26,7 +26,7 @@ class UpdateStudyServiceTest {
     @DisplayName("스터디 생성 adapter요청 테스트")
     public void createStudyTest(){
         // given
-        StudyCreateApplicationDto dto = new StudyCreateApplicationDto(1L, "name1", "desc1");
+        StudyCreateApplicationDto dto = new StudyCreateApplicationDto(1L, "name1", "desc1", null);
         doNothing().when(commandStudyPort).createStudy(dto);
 
         // when
