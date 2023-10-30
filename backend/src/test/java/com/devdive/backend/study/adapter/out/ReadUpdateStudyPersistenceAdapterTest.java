@@ -46,18 +46,18 @@ class ReadUpdateStudyPersistenceAdapterTest {
         StudyCreateApplicationDto dto1 = new StudyCreateApplicationDto(
                 member1.getId(),
                 "name1",
-                "desc1"
-        );
+                "desc1",
+                null);
         StudyCreateApplicationDto dto2 = new StudyCreateApplicationDto(
                 member1.getId(),
                 "name2",
-                "desc2"
-        );
+                "desc2",
+                null);
         StudyCreateApplicationDto dto3 = new StudyCreateApplicationDto(
                 member2.getId(),
                 "name2",
-                "desc2"
-        );
+                "desc2",
+                null);
 
         UpdateStudyPersistenceAdapter updateAdapter = new UpdateStudyPersistenceAdapter(memberRepository,
                 studyRepository, studyMemberRepository);
