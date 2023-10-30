@@ -25,17 +25,18 @@ public class StudyController {
     private final UpdateStudyUseCase updateStudyUseCase;
 
     @GetMapping
-    ResponseEntity<List<Study>> readPost(@AuthenticationPrincipal UserDetails userDetails) {
+    ResponseEntity<List<Study>> readStudies(@AuthenticationPrincipal UserDetails userDetails) {
         Studies studies = readStudyUseCase.readStudies(userDetails.getId());
         return new ResponseEntity<>(studies.getStudies(), HttpStatus.OK);
     }
 
     @PostMapping
-    ResponseEntity<Void> createPost(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Valid StudyCreateRequest request) {
+    ResponseEntity<Void> createStudy(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute @Valid StudyCreateRequest request) {
         StudyCreateApplicationDto applicationDto = StudyCreateApplicationDto.builder()
                 .memberId(userDetails.getId())
                 .name(request.getName())
                 .description(request.getDescription())
+                .studyImage(request.getStudyImage())
                 .build();
 
         updateStudyUseCase.createStudy(applicationDto);

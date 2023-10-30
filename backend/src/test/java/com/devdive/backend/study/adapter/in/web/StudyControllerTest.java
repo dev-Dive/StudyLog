@@ -14,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -124,6 +127,64 @@ class StudyControllerTest {
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/api/v1/studies")
                 .contentType(MediaType.APPLICATION_JSON);
+
+        // then
+        mockMvc.perform(request)
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("서버로 파일 전송 테스트")
+    public void fileUploadTest() throws Exception {
+        // given
+        String mail = "rhwlgns@gmail.com";
+
+        SecurityContext securityContext =SecurityContextHolder.createEmptyContext();
+        securityContext.setAuthentication(new Authentication() {
+
+            private User user = new User(mail, 1L);
+
+            @Override
+            public Object getCredentials() {
+                return null;
+            }
+
+            @Override
+            public Object getDetails() {
+                return null;
+            }
+
+            @Override
+            public Object getPrincipal() {
+                return user;
+            }
+
+            @Override
+            public String getAuthorities() {
+                return null;
+            }
+        });
+        SecurityContextHolder.addContext(securityContext);
+
+        String url = "src\\test\\resources\\img\\studyImage.jpg";
+        byte[] fileContent = Files.readAllBytes(Paths.get(url));
+        MockMultipartFile studyImage = new MockMultipartFile(
+                "studyImage",
+                "studyImage.jpg",
+                MediaType.MULTIPART_FORM_DATA_VALUE,
+                fileContent);
+
+        JSONObject resquestJson = new JSONObject();
+        resquestJson.put("name", mail);
+        resquestJson.put("description", mail);
+
+        // when
+        RequestBuilder request = MockMvcRequestBuilders
+                .multipart("/api/v1/studies")
+                .file("studyImage", studyImage.getBytes())
+                .param("name", "n")
+                .param("description", "d")
+                .contentType(MediaType.MULTIPART_FORM_DATA);
 
         // then
         mockMvc.perform(request)
