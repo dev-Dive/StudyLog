@@ -17,7 +17,7 @@ export default function View() {
       </S.Title>
       <PostCard
         title={post.title}
-        thumNailUrl={post.thumNailUrl}
+        thumbNailUrl={post.thumbNailUrl}
         subTitle={post.subTitle}
         studyName={post.studyName}
       />

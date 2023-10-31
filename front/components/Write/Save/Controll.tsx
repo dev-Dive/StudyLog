@@ -26,6 +26,7 @@ export default function Controll({ closeModal }: ControllModalProps) {
   const [post, setPost] = useRecoilState(postState)
   const [studyName, setStudyName] = useState('10')
   const [uploadedFileName, setUploadedFileName] = useState<string | null>(null)
+  // const currentPostState = useRecoilValue(postState)
 
   const handleChange = (event: SelectChangeEvent) => {
     const selectedStudyName = event.target.value as string
@@ -52,12 +53,11 @@ export default function Controll({ closeModal }: ControllModalProps) {
     const reader = new FileReader()
 
     reader.onload = (e) => {
-      console.log('File reading completed')
       const dataUrl = e.target?.result as string
 
       setPost((prevState) => ({
         ...prevState,
-        thumNailUrl: dataUrl,
+        thumbNailUrl: dataUrl,
       }))
     }
 
@@ -78,8 +78,7 @@ export default function Controll({ closeModal }: ControllModalProps) {
   }
 
   const handleSvaePost = async () => {
-    const currentPostState = useRecoilValue(postState)
-    await savePost(currentPostState)
+    await savePost(post)
   }
 
   return (
@@ -112,7 +111,11 @@ export default function Controll({ closeModal }: ControllModalProps) {
           >
             <OutlinedInput
               value={uploadedFileName || ''}
-              placeholder="선택된 파일이 없습니다."
+              placeholder={
+                post.thumbNailUrl === ''
+                  ? '선택된 썸네일을 변경하고 싶으면 변경해주세요'
+                  : '선택된 파일이 없습니다.'
+              }
               readOnly
               startAdornment={
                 <input
