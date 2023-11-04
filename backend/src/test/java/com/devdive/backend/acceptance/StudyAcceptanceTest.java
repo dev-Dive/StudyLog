@@ -7,7 +7,7 @@ import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.security.authentication.Authentication;
 import com.devdive.backend.security.authentication.domain.User;
 import com.devdive.backend.security.core.AuthenticationCache;
-import com.devdive.backend.study.application.port.in.UpdateStudyUseCase;
+import com.devdive.backend.study2.application.port.in.CreateStudyUseCase;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
