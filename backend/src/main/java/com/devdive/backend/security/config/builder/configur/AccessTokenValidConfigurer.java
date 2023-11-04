@@ -11,6 +11,10 @@ public class AccessTokenValidConfigurer extends AbstractSecurityConfigurer {
     private JwtProvider jwtProvider;
     private AuthenticationCache authenticationCache;
 
+    public AccessTokenValidConfigurer(AuthenticationCache authenticationCache) {
+        this.authenticationCache = authenticationCache;
+    }
+
     @Override
     public void init() {
         if (jwtProvider == null) {
@@ -35,11 +39,6 @@ public class AccessTokenValidConfigurer extends AbstractSecurityConfigurer {
 
     public AccessTokenValidConfigurer accessTokenProvider(String secret, int hour) {
         this.jwtProvider = new JwtProvider(secret, hour);
-        return this;
-    }
-
-    public AccessTokenValidConfigurer changeCache(AuthenticationCache authenticationCache) {
-        this.authenticationCache = authenticationCache;
         return this;
     }
 }
