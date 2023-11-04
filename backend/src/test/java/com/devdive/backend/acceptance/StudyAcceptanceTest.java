@@ -23,7 +23,7 @@ import static org.hamcrest.Matchers.equalTo;
 class StudyAcceptanceTest extends AcceptanceTest {
 
     @Autowired
-    UpdateStudyUseCase useCase;
+    CreateStudyUseCase useCase;
 
     @Autowired
     JwtProvider accessJwtProvider;

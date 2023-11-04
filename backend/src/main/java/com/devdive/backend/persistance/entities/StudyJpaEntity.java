@@ -30,5 +30,5 @@ public class StudyJpaEntity {
     private String profileUrl;
 
     @OneToMany(mappedBy = "study")
-    private List<StudyMemberJpaEntity> memberMappings = new ArrayList<>();
+    private List<StudyMemberJpaEntity> studyMembers = new ArrayList<>();
 }

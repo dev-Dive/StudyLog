@@ -23,4 +23,7 @@ public class StudyMemberJpaEntity {
     @ManyToOne
     private StudyJpaEntity study;
 
+    @Column(name = "role")
+    private String role;
+
 }
