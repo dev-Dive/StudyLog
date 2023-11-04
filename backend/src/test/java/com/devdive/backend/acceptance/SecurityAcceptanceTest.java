@@ -7,7 +7,6 @@ import com.devdive.backend.security.authentication.Authentication;
 import com.devdive.backend.security.authentication.adaptor.out.persistent.UserDataRepository;
 import com.devdive.backend.security.authentication.domain.UserDetails;
 import com.devdive.backend.security.core.*;
-import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,11 +32,14 @@ public class SecurityAcceptanceTest extends AcceptanceTest {
     @Autowired
     UserDataRepository userDataRepository;
 
+    @Autowired
+    AuthenticationCache authenticationCache;
+
     @BeforeEach
     @Transactional
     void init() {
 
-        userDataRepository.save(new MemberJpaEntity(1L,"name","email@email.com","profileUrl"));
+        userDataRepository.save(new MemberJpaEntity(1L, "name", "email@email.com", "profileUrl"));
     }
 
     @DisplayName("사용자는 로그인 인증 링크로 로그인을 할 수 있다.")
@@ -65,10 +67,9 @@ public class SecurityAcceptanceTest extends AcceptanceTest {
     void test() {
         // given
         String jwtToken = accessJwtProvider.createJwtToken("email@email.com");
-        AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
-        cache.removeAll();
+        authenticationCache.removeAll();
 
-        cache.addAuthentication("email@email.com", new Authentication() {
+        authenticationCache.addAuthentication("email@email.com", new Authentication() {
             @Override
             public Object getCredentials() {
                 return null;
@@ -117,10 +118,9 @@ public class SecurityAcceptanceTest extends AcceptanceTest {
     void givenSendAccessToken_thenAuthentication() {
         // given
         String jwtToken = accessJwtProvider.createJwtToken("email@email.com");
-        AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
-        cache.removeAll();
+        authenticationCache.removeAll();
 
-        cache.addAuthentication("email@email.com", new Authentication() {
+        authenticationCache.addAuthentication("email@email.com", new Authentication() {
             @Override
             public Object getCredentials() {
                 return null;

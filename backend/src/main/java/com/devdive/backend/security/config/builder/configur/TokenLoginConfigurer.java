@@ -18,6 +18,10 @@ public class TokenLoginConfigurer extends AbstractSecurityConfigurer {
 
     private AuthenticationCache authenticationCache;
 
+    public TokenLoginConfigurer(AuthenticationCache authenticationCache) {
+        this.authenticationCache = authenticationCache;
+    }
+
     @Override
     public void init() {
 
