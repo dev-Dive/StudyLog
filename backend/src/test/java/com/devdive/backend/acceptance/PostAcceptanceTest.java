@@ -6,7 +6,6 @@ import com.devdive.backend.persistance.repository.MemberRepository;
 import com.devdive.backend.security.authentication.Authentication;
 import com.devdive.backend.security.authentication.domain.User;
 import com.devdive.backend.security.core.AuthenticationCache;
-import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.DisplayName;
@@ -28,6 +27,9 @@ public class PostAcceptanceTest extends AcceptanceTest {
     @Autowired
     MemberRepository memberRepository;
 
+    @Autowired
+    AuthenticationCache cache;
+
     @Test
     @DisplayName("스터디원은 스터디글을 작성 후 저장할 수 있다")
     public void member_allows_to_write_And_save_Post() throws JSONException {
@@ -35,7 +37,6 @@ public class PostAcceptanceTest extends AcceptanceTest {
         memberRepository.save(new MemberJpaEntity());
         String mail = "rhwlgns@gmail.com";
 
-        AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
         cache.removeAll();
 
         cache.addAuthentication(mail, new Authentication() {

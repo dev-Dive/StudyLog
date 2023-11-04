@@ -31,7 +31,7 @@ public class StudyController {
     }
 
     @PostMapping
-    ResponseEntity<Void> createStudy(@AuthenticationPrincipal UserDetails userDetails, @ModelAttribute @Valid StudyCreateRequest request) {
+    ResponseEntity<Void> createStudy(@AuthenticationPrincipal UserDetails userDetails,@RequestBody @Valid StudyCreateRequest request) {
         StudyCreateApplicationDto applicationDto = StudyCreateApplicationDto.builder()
                 .memberId(userDetails.getId())
                 .name(request.getName())

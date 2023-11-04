@@ -135,6 +135,7 @@ class StudyControllerTest {
 
     @Test
     @DisplayName("서버로 파일 전송 테스트")
+    // Todo 컨트롤러 수정해서 성공시켜야하는 테스트
     public void fileUploadTest() throws Exception {
         // given
         String mail = "rhwlgns@gmail.com";

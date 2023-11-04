@@ -7,7 +7,6 @@ import com.devdive.backend.persistance.repository.StudyMemberRepository;
 import com.devdive.backend.security.authentication.Authentication;
 import com.devdive.backend.security.authentication.domain.User;
 import com.devdive.backend.security.core.AuthenticationCache;
-import com.devdive.backend.security.core.cache.InMemoryAuthenticationCache;
 import com.devdive.backend.study.application.port.in.UpdateStudyUseCase;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +34,9 @@ class StudyAcceptanceTest extends AcceptanceTest {
     @Autowired
     StudyMemberRepository studyMemberRepository;
 
+    @Autowired
+    AuthenticationCache cache;
+
 
     @Test
     @DisplayName("회원은 스터디를 생성할 수 있다.")
@@ -43,7 +45,6 @@ class StudyAcceptanceTest extends AcceptanceTest {
         memberRepository.save(new MemberJpaEntity());
         String mail = "rhwlgns@gmail.com";
 
-        AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
         cache.removeAll();
 
         cache.addAuthentication(mail, new Authentication() {
@@ -97,7 +98,6 @@ class StudyAcceptanceTest extends AcceptanceTest {
         memberRepository.save(new MemberJpaEntity());
         String mail = "rhwlgns@gmail.com";
 
-        AuthenticationCache cache = InMemoryAuthenticationCache.getInstance();
         cache.removeAll();
 
         cache.addAuthentication(mail, new Authentication() {
