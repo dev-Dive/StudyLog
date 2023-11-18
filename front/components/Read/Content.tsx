@@ -1,24 +1,24 @@
 import { Avatar, Typography, AvatarGroup, Button } from '@mui/material'
 import Image from 'next/image'
 
-type Props = {
-  title: 'string'
-  subtitle: 'string'
-  content: 'string'
-  date: '2023-11-01'
-  authors: [
-    {
-      id: 0
-      name: 'string'
-    },
-  ]
-  thumbnailImageUrl: 'string'
+interface PostData {
+  title: string
+  subtitle: string
+  content: string
+  date: string
+  authors: Author[]
+  thumbnailImageUrl: string
   study: {
-    id: 0
-    name: 'string'
-    profile_image_url: 'string'
-    description: 'string'
+    id: number
+    name: string
+    profileImageUrl: string
+    description: string
   }
+}
+
+interface Author {
+  id: number
+  name: string
 }
 
 export default function Content({
@@ -29,7 +29,7 @@ export default function Content({
   authors,
   thumbnailImageUrl,
   study,
-}: Props) {
+}: PostData) {
   return (
     <div>
       <div>
@@ -43,20 +43,20 @@ export default function Content({
           by {authors.map((author) => author.name).join(', ')} from {study.name}
         </p>
       </div>
-
+      {/* 
       <Image
         src={thumbnailImageUrl}
         width={250}
         height={250}
         alt="스터디 사진"
-      />
+      /> */}
       <main>{content}</main>
       <div>
-        <Avatar
+        {/* <Avatar
           alt={study.name}
-          src={study.profile_image_url}
+          src={study.profileImageUrl}
           sx={{ width: 56, height: 56 }}
-        />
+        /> */}
         <p>{study.name}</p>
         <p>{study.description}</p>
       </div>

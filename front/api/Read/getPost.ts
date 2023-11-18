@@ -1,13 +1,35 @@
 import { Api } from '../instance'
 
-export const getPost = async (id: number) => {
-  try {
-    const response = await Api.get(`/posts/${id}`)
+interface PostData {
+  title: string
+  subtitle: string
+  content: string
+  date: string
+  authors: Author[]
+  thumbnailImageUrl: string
+  study: {
+    id: number
+    name: string
+    profileImageUrl: string
+    description: string
+  }
+}
 
-    if (response.status === 200) {
+interface Author {
+  id: number
+  name: string
+}
+
+export const getPost = async (id: number): Promise<PostData> => {
+  try {
+    const response = await Api.get<PostData>(`/posts/${id}`)
+    if (response.status === 200 && response.data) {
       return response.data
+    } else {
+      throw new Error('Post not found')
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
+    throw error
   }
 }
